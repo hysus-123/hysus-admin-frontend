@@ -80,11 +80,13 @@ export default function App() {
   }
 
   return (
-    <TableContainer component={Paper}>
-      <Button variant="contained"  style={{ margin: '20px' , display:'inline-block', float:'right', backgroundColor:'#2E3B55'}} component={Link}
+  <>
+  
+      <Button variant="contained"  style={{ margin: '20px' , display:'inline', float:'right', backgroundColor:'#2E3B55'}} component={Link}
           to="/emp-form">
-        <AddIcon /> Add New Employee
+        <AddIcon /> Add 
       </Button>
+    <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -122,6 +124,7 @@ export default function App() {
         </TableBody>
       </Table>
     </TableContainer>
+    </>
   );
 }
 

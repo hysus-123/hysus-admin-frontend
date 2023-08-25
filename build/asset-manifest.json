@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.24941822.css",
+    "main.js": "/static/js/main.16ea2297.js",
+    "static/media/gourav.png": "/static/media/gourav.ab5ead98297f065d1214.png",
+    "static/media/WhatsApp Image 2023-08-24 at 3.03.39 PM.jpeg": "/static/media/WhatsApp Image 2023-08-24 at 3.03.39 PM.0ae5f0ba6261cd6be1e0.jpeg",
+    "static/media/hysus.png": "/static/media/hysus.75c64d708dd49f6cb1f8.png",
+    "index.html": "/index.html",
+    "main.24941822.css.map": "/static/css/main.24941822.css.map",
+    "main.16ea2297.js.map": "/static/js/main.16ea2297.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.24941822.css",
+    "static/js/main.16ea2297.js"
+  ]
+}

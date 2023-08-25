@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { Drawer , ListItem, ListItemText ,  List} from '@mui/material';
+// import { Drawer , ListItem, ListItemText ,  List} from '@mui/material';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -55,12 +55,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
-  const [drawer, setDrawer] = useState(false);
+  // const [drawer, setDrawer] = useState(false);
 
-  const setToggle =()=>{
-    console.log('button clicked');
-    setDrawer(!drawer);
-  }
+  // const setToggle =()=>{
+  //   console.log('button clicked');
+  //   setDrawer(!drawer);
+  // }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ background: '#2E3B55' }}>
@@ -71,7 +71,6 @@ export default function SearchAppBar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
-            onClick={setToggle}
           >
             <MenuIcon />
           </IconButton>
@@ -94,22 +93,7 @@ export default function SearchAppBar() {
           </Search>
         </Toolbar>
       </AppBar>
-      <Drawer
-        anchor="left"
-        open={drawer}
-        onClose={() => setDrawer(false)} // Close the sidebar
-      >
-        <List>
-          {/* Add your sidebar content here */}
-          <ListItem button>
-            <ListItemText primary="Sidebar Item 1" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Sidebar Item 2" />
-          </ListItem>
-          {/* ... (more sidebar items) */}
-        </List>
-      </Drawer>
+     
     </Box>
   );
 }
