@@ -12,6 +12,7 @@ import {
   MenuItem,
   Grid,
   TextField,
+  Box,
 } from '@mui/material';
 import Textarea from '@mui/joy/Textarea';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -23,6 +24,7 @@ import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { Edit } from '@mui/icons-material';
+import SideBar from './Sidebar/Sidebar';
 
 const steps = ['User Details', 'Contact Information', 'Professional Details', 'Bank Details'];
 
@@ -287,7 +289,7 @@ const EditForm = () => {
 
                   <Grid item xs={12}>
                   <TextField
-                        height = "5px"
+                      height = "5px"
                       label="Permanent Address"
                       variant="outlined"
                       name="permanent_address"
@@ -518,6 +520,9 @@ const EditForm = () => {
   };
 
   return (
+    <>
+    <Box sx={{display:'flex'}}>
+    <SideBar/>
     <Container component={Paper} maxWidth="md" sx={{ mt: 2, p: 3 }}>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
@@ -552,6 +557,9 @@ const EditForm = () => {
         )}
       </div>
     </Container>
+    
+    </Box>
+    </>
   );
 };
 

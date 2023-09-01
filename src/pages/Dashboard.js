@@ -1,9 +1,6 @@
 import React , {useEffect, useState} from 'react';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import LinearProgress from '@mui/material/LinearProgress';
-import { Container, Grid, Button } from '@mui/material';
+import { Container, Grid, Button ,CardContent, Typography, LinearProgress} from '@mui/material';
 import image from '../assets/gourav.png'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -11,6 +8,8 @@ import './css/Dashboard.css';
 import { format } from 'date-fns';
 import CustomizedSwitches from '../components/switch';
 import { Link } from 'react-router-dom';
+import Sidebar from './Sidebar/Sidebar';
+import {Box} from '@mui/material';
 
 const EmpDashboard = () => {
   const {id} = useParams();
@@ -40,8 +39,10 @@ const EmpDashboard = () => {
     })
   }
 
-
   return (
+    <>
+    <Box sx={{display:'flex'}}>
+    <Sidebar/>
     <Container>
       <div style={{display: 'flex', flexDirection:'row', justifyContent:'flex-end'}}>
       <CustomizedSwitches />
@@ -52,7 +53,7 @@ const EmpDashboard = () => {
           <Card>
             <CardContent>
               <div style={{display:"flex",flexDirection:"column", alignItems:"center", textAlign:"center"}}>
-                <img src={image} alt='Profile' style={{ height: '300px' }} />
+                <img src={data.img} alt='Profile' style={{ height: '300px' }} />
               {/* </div> */}
                 <div style={{ textAlign: 'center' }}>
                   <Typography variant='h4'>{data.name}</Typography>
@@ -99,10 +100,10 @@ const EmpDashboard = () => {
                       <Typography variant='body1'>{data.phone}</Typography>
                     </Grid>
                     <Grid item xs={12} md={3}>
-                      <Typography variant='subtitle1' sx={{fontWeight:'bold'}}>Birth Date</Typography>
+                      <Typography variant='subtitle1' sx={{fontWeight:'bold'}}>Skype Id:</Typography>
                     </Grid>
                     <Grid item xs={12} md={9}  className='paddingAdd'>
-                      <Typography variant='body1'>{formattedBirthDate}</Typography>
+                      <Typography variant='body1'>{data.skype_id}</Typography>
                     </Grid>
                     <Grid item xs={12} md={3}>
                       <Typography variant='subtitle1' sx={{fontWeight:'bold'}}>Address</Typography>
@@ -145,6 +146,8 @@ const EmpDashboard = () => {
         </Grid>
       </Grid>
     </Container>
+    </Box>
+    </>
   );
 };
 

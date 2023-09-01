@@ -1,17 +1,21 @@
 import React from 'react';
 import Table from '../components/Table';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Box} from '@mui/material';
+import SideBar from './Sidebar/Sidebar';
+
 
 const EmployeeList = () => {
   return (
     <>
-
+      <Box sx={{display:'flex'}}>
+        <SideBar/>
         <Container sx={{marginTop:'10px'}}>
             <Typography variant='h5' sx={{textAlign:'center'}}>
                 EmployeeList
             </Typography>
             <Table sx={{marginTop:'10px'}}/>
         </Container>
+      </Box>
     </>
   );
 }

@@ -76,7 +76,7 @@ export default function App() {
 
   const handlePreviewClick =(id)=>{
     console.log('preview button clicked');
-    navigate(`/emp-profile/${id}`)
+    navigate(`/emp-profile/${id}`);
   }
 
   return (
@@ -90,7 +90,7 @@ export default function App() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align='center'>EmpId</StyledTableCell>
+            <StyledTableCell align='center'>Id</StyledTableCell>
             <StyledTableCell align='center'>Full Name</StyledTableCell>
             <StyledTableCell align='center'>Phone No.</StyledTableCell>
             <StyledTableCell align='center'>Email Id</StyledTableCell>

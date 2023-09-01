@@ -3,25 +3,22 @@ import { styled, useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
+// import MuiAppBar from '@mui/material/AppBar';
+// import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-// import { Home } from '@mui/icons-material';
-import Home from '../../components/Home';
-import EmployeeList from '../EmployeeList';
+import PeopleIcon from '@mui/icons-material/People';
+import HomeIcon from '@mui/icons-material/Home';
+import BookIcon from '@mui/icons-material/Book';
+import DraftsIcon from '@mui/icons-material/Drafts';
+// import MenuIcon from '@mui/icons-material/Menu';
 
 const drawerWidth = 240;
 
@@ -55,24 +52,24 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-    backgroundColor:'#2E3B55',
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
+// const AppBar = styled(MuiAppBar, {
+//   shouldForwardProp: (prop) => prop !== 'open',
+// })(({ theme, open }) => ({
+//     backgroundColor:'#2E3B55',
+//   zIndex: theme.zIndex.drawer + 1,
+//   transition: theme.transitions.create(['width', 'margin'], {
+//     easing: theme.transitions.easing.sharp,
+//     duration: theme.transitions.duration.leavingScreen,
+//   }),
+//   ...(open && {
+//     marginLeft: drawerWidth,
+//     width: `calc(100% - ${drawerWidth}px)`,
+//     transition: theme.transitions.create(['width', 'margin'], {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.enteringScreen,
+//     }),
+//   }),
+// }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -94,21 +91,21 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [menudata, setMenudata] = useState('Home');
+  // const [menudata, setMenudata] = useState('Home');
   const navigate = useNavigate();
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  // const handleDrawerOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  // const handleDrawerClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      {/* <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -127,19 +124,21 @@ export default function MiniDrawer() {
             HYSUS
           </Typography>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          <IconButton onClick={()=>setOpen(!open)}>
+            {theme.direction === 'rtl' ? <MenuIcon /> : <MenuIcon />}
           </IconButton>
         </DrawerHeader>
+
         <Divider />
+
         <List>
           {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => ( */}
             <ListItem primary="Home" disablePadding sx={{ display: 'block' }} onClick={()=>{
-              setMenudata('Home');
-              navigate('/auth/home')
+              // setMenudata('Home');
+              navigate('/home');
             }}>
               <ListItemButton 
                 sx={{
@@ -156,14 +155,14 @@ export default function MiniDrawer() {
                   }}
                 >
                   {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                  <InboxIcon/> 
+                  <HomeIcon/> 
                 </ListItemIcon>
                 <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
             <ListItem primary="Employees" disablePadding sx={{ display: 'block' }} onClick={()=>{
-              setMenudata('Employee');
-              navigate('/auth/emp-list');
+              // setMenudata('Employee');
+              navigate('/emp-list');
             }}>
               <ListItemButton 
                 sx={{
@@ -180,35 +179,101 @@ export default function MiniDrawer() {
                   }}
                 >
                   {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                  <InboxIcon/> 
+                  <PeopleIcon/> 
                 </ListItemIcon>
                 <ListItemText primary="Employees" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
+            <ListItem primary="Blogs" disablePadding sx={{ display: 'block' }} onClick={()=>{
+              // setMenudata('Blog');
+              navigate('/blogs');
+            }}>
+              <ListItemButton 
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                  <BookIcon/> 
+                </ListItemIcon>
+                <ListItemText primary="Blogs" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem primary="Issue LetterHead" disablePadding sx={{ display: 'block' }} onClick={()=>{
+              // setMenudata('Blog');
+              navigate('/letterhead');
+            }}>
+              <ListItemButton 
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                  <DraftsIcon/> 
+                </ListItemIcon>
+                <ListItemText primary="Issue LetterHead" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
           {/* ))} */}
         </List>
+
         <Divider />
         
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        {/* <DrawerHeader /> */}
-        {/* <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography> */}
-        {menudata == 'Home' && <Home/>}
-        {menudata == 'Employee' && <EmployeeList/>}
+      <Box component="main" sx={{ flexGrow: 1, }}>
         
+        {/* {menudata == 'Home' && <Home/>}
+        {menudata == 'Employee' && <EmployeeList/>}
+        {menudata == 'Blog' && <Blog/>} */}
+        
+          {/* <Routes>
+            <Route
+              path='/auth/emp-dashboard/:id' element={<EmpDashboard/>}>
+            </Route>
+          </Routes> */}
+
+          {/* <Routes>
+            <Route>
+              <Route path="home" element={<Home />}/>
+              <Route path="emp-list" element={<EmployeeList />}/>
+              <Route path="blogs" element={<Blog />} />
+              <Route path="emp-dashboard" element={<EmpDashboard />} />
+              <Route path="emp-dashboard/:id" element={<EmpDashboard />} />
+              <Route path="emp-form" element={<Form />}/>
+              <Route path="emp-editForm/:id" element={<EditForm />}/>
+              <Route path="emp-fulldetails/:id" element={<FullDetails />}/>
+              <Route path="emp-profile/:id" element={<NewPage />}/>
+            </Route>
+          </Routes> */}
+          {/* <Routes>
+          <Route path="/auth/home" element={<Home />} />
+          <Route path="/auth/emp-list" element={<EmployeeList />} />
+          <Route path="/auth/blogs" element={<Blog />} />
+          <Route path="/auth/emp-dashboard" element={<EmpDashboard />} />
+          <Route path="/auth/emp-dashboard/:id" element={<EmpDashboard />} />
+          <Route path="/auth/emp-form" element={<Form />} />
+          <Route path="/auth/emp-editForm/:id" element={<EditForm />} />
+          <Route path="/auth/emp-fulldetails/:id" element={<FullDetails />} />
+          <Route path="/auth/emp-profile/:id" element={<NewPage />} />
+        </Routes> */}
       </Box>
     </Box>
   );

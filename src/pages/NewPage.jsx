@@ -1,14 +1,18 @@
 import React, {useState, useEffect} from 'react'
-import {Paper, Container, Grid, Typography, Button , Card} from '@mui/material';
+import {Paper, Container, Grid, Typography, Button } from '@mui/material';
 import hysusLogo from '../assets/hysus.png';
-import gouravImg from '../assets/gourav.png';
 import newImage from '../assets/WhatsApp Image 2023-08-24 at 3.03.39 PM.jpeg';
 import './NewPage.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { LinkedIn } from '@mui/icons-material';
+import { Box } from '@mui/material';
+import SideBar from './Sidebar/Sidebar';
+import illustrateImge from '../assets/istockphoto-1325079945-612x612.jpg';
 
 const NewPage = () => {
     const {id} = useParams();
+    const [data , setData] = useState('');
 
     useEffect(()=>{
         employeeProfile(id);
@@ -19,53 +23,71 @@ const NewPage = () => {
         axios.get(`https://hysus-admin-backend-production.up.railway.app/api/employee/${id}`)
         .then(response =>{
             console.log(response,"data fetched");
+            console.log(response.data.status);
+            setData(response.data);
+            
         })
         .catch(err =>{
             console.log(err, "errr");
         })
     }
   return (
+    <>
+    <Box sx={{display:'flex'}}>
+        
+    <SideBar/>
     <Paper elevation={2}>
        <div style={{textAlign:'center'}}>
-            <img src={hysusLogo} alt="hysusLogo" width={200} />
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                <div style={{display:'flex', flexWrap:'wrap', }}>
+                    <img src={hysusLogo} alt="hysusLogo" width={200} />
+                    <div style={{textAlign:'center', marginRight:'20px', display:'flex', alignItems:'center'}}>
+                            <input type="radio" style={{accentColor: data.status === 'active' ? 'green' : 'red'}}  defaultChecked={data.status === 'active'} />
+                            <Typography variant='body1' sx={{fontWeight:'bold'}}> {data.status ==='active'?'Active':'Inactive'} Profile</Typography>
+                    </div>
+                </div>
+                <div>
+                    <Button variant='contained' color='primary' sx={{marginRight:'20px'}}>Login</Button>
+                </div>
+            </div>
        </div>
-       <div style={{textAlign:'center'}}>
-            <Typography variant='body1' sx={{fontWeight:'bold'}}> Active Profile</Typography>
-       </div>
+       {/* <div style={{textAlign:'center'}}>
+            <Typography variant='body1' sx={{fontWeight:'bold'}}> {data.status ==='active'?'Active':'Inactive'} Profile</Typography>
+       </div> */}
        <Grid container spacing={2} >
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
                 <Container>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start' }}>
                         <div style={{ marginBottom: '20px',  }} >
                             {/* <div style={{border:'2px solid black', borderRadius:'240px', width:'280px' }}> */}
-                                <img src={gouravImg} alt="" width="100%" style={{ maxWidth: '200px' }} />
+                                <img src={data.img} alt="" width="100%" style={{ maxWidth: '200px' , filter: 'drop-shadow(5px 5px 4px gray)'}} />
 
                             {/* </div> */}
                         </div>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>Gourav Shrivastav</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>{data.name}</Typography>
 
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '8px' }}>
                             <Typography sx={{ fontWeight: 'bold' }}>Id:</Typography>
                             <Typography>HYS-87465</Typography>
                         </div>
 
-                        <Typography sx={{ fontWeight: 'bold', mt: 1 }}>Digital Marketing Manager</Typography>
+                        <Typography sx={{ fontWeight: 'bold', mt: 1 }}>{data.as_designation?.position}</Typography>
 
                         <Typography sx={{ fontWeight: 'bold', mt: 2 }}>Official Phone Numbers:</Typography>
-                        <Typography><span style={{ fontWeight: 'bold' }}>India:</span> 8757785767</Typography>
+                        <Typography><span style={{ fontWeight: 'bold' }}>India:</span> {data.phone}</Typography>
                         <Typography><span style={{ fontWeight: 'bold' }}>USA:</span> 8757785767</Typography>
-                        <Typography sx={{ mt: 2 }}><span style={{ fontWeight: 'bold' }}>Zoom/Skype:</span> hysus@skype.com</Typography>
-                        <Typography sx={{ mt: 2 }}><span style={{ fontWeight: 'bold' }}>Email Id:</span> hysus@gmail.com</Typography>
+                        <Typography sx={{ mt: 2 }}><span style={{ fontWeight: 'bold' }}>Zoom/Skype:</span>{data.skype_id}</Typography>
+                        <Typography sx={{ mt: 2 }}><span style={{ fontWeight: 'bold' }}> Email Id:</span> {data.email}</Typography>
                         <Button variant='contained' sx={{ backgroundColor: '#325094', marginTop: '20px' }}>Add Contact</Button>
                     </div>
                 </Container>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={8}>
                 <Container>
-                    <div style={{ marginTop: '80px' }}>
-                        <Typography variant='h4' sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ paddingLeft: '' }}>what we offer</span>
+                    <div style={{ marginTop: '40px' }}>
+                        <Typography variant='h4' sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column' , justifyContent:'start'}}>
+                            <span style={{ paddingLeft: '' , fontFamily:'cursive'}}>what we offer</span>
                         </Typography>
 
                         <Grid container spacing={1}>
@@ -84,11 +106,12 @@ const NewPage = () => {
                             Top Skills:
                         </Typography>
                         <Typography>
-                            Google AdSense, Google Analytics, Google Tag Manager, Search Engine Marketing, E-commerce SEO
+                            {data.skills}
                         </Typography>
 
-                        <Typography sx={{ fontWeight: 'bold', mt: '20px' }}>
-                            LinkedIn: Check
+                        <Typography sx={{  mt: '20px' }}>
+                            {/* <span style={{fontWeight: 'bold', }}>LinkedIn:</span> */}
+                            <a href= {data.linkedin_link} style={{color:'blue'}}> <LinkedIn/></a>
                         </Typography>
 
                         <div style={{ marginTop: '20px' }}>
@@ -126,6 +149,10 @@ const NewPage = () => {
        </Grid>
 
     </Paper>
+    
+    </Box>
+    
+    </>
   )
 }
 

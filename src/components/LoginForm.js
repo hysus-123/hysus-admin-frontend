@@ -27,7 +27,7 @@ export default function SignIn() {
     });
 
     if(data.get('email') === 'user@gmail.com' && data.get('password')=== 'user'){
-      navigate('/emp-list');
+      navigate('/home');
     }
     else{
       alert('admin authentication failed');
@@ -75,10 +75,7 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
+            
             <Button
               type="submit"
               fullWidth
@@ -87,18 +84,7 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            {/* <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid> */}
+            
           </Box>
         </Box>
       </Container>

@@ -24,16 +24,20 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { DropzoneArea } from 'material-ui-dropzone';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import Box from '@mui/material/Box';
+import SideBar from '../pages/Sidebar/Sidebar'
 
 const steps = ['User Details', 'Contact Information', 'Professional Details', 'Bank Details'];
-
-
 
 const StepperForm = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [departments, setdepartments] = useState([]);
   const [designations, setdesignations] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
+  const [img , setImg] = useState([]);
   const [userData, setUserData] = useState({
     name:'',
     email:'',
@@ -83,7 +87,7 @@ const StepperForm = () => {
 
     console.log('handleChange:', name, value);
 
-    const newValue = name === 'account_num' ? parseFloat(value) : value;
+    const newValue = name === 'account_num' ? value : value;
 
     if (name === 'birth_date' || name === 'joining_date') {
       const isoDate = new Date(value).toISOString();
@@ -156,8 +160,23 @@ const StepperForm = () => {
   const handleFormSubmit = async() => {
     console.log(userData,"userData");
     try{
-      // await validationSchema.validate(userData, { abortEarly: false });
-      const response = await axios.post(`https://hysus-admin-backend-production.up.railway.app/api/employee`, userData);
+      const formData = new FormData();
+      formData.append('img', img[0]);
+  
+      // Append the rest of the user data fields
+      for (const key in userData) {
+        if (key !== 'img') {
+          formData.append(key, userData[key]);
+        }
+      }
+      console.log(formData, "formData");
+      console.log(formData.getAll('department'));
+      console.log(formData.getAll('img'));
+      const response = await axios.post(`https://hysus-admin-backend-production.up.railway.app/api/employee`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Set the content type for FormData
+        },
+      });
       console.log(response, "data for storing");
       return true;
     }
@@ -175,7 +194,7 @@ const StepperForm = () => {
             <Grid item xs={12} sm={3}>
               <div style={{
                 width: '150px',
-                height: '150px',
+                height: '100%',
                 borderRadius: '50px',
                 cursor: 'pointer',
                 opacity: '0.5',
@@ -188,17 +207,20 @@ const StepperForm = () => {
                   onAlert={(message, variant) => console.log(`${variant}: ${message}`)}
                 /> */}
                 {/* <MDBFileupload /> */}
-                {/* <DropzoneArea
+                <DropzoneArea
                   acceptedFiles={['image/*']}
                   dropzoneText={"Drag and drop an image here or click"}
-                  onChange={(files) => console.log('Files:', files)}
+                  onChange={(files) => {
+                    console.log('Files:', files)
+                    setImg(files);
+                  }}
                   onAlert={(message, variant) => console.log(`${variant}: ${message}`)}
                   // xs={{padding:'0px'}}
                   styles={{
                       maxWidth: '100%',
                       maxHeight: '100%',
                   }}
-                /> */}
+                />
             
               
               </div>
@@ -509,6 +531,9 @@ const StepperForm = () => {
   };
 
   return (
+    <>
+    {/* <Box sx={{display: 'flex'}}>
+    <SideBar/> */}
     <Container component={Paper} maxWidth="md" sx={{ mt: 2, p: 3 }}>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
@@ -546,6 +571,9 @@ const StepperForm = () => {
         )}
       </div>
     </Container>
+    
+    {/* </Box> */}
+    </>
   );
 };
 
