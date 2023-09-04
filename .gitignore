@@ -7,9 +7,6 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-build/*
-build
-
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -39,12 +36,10 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
-build/*
+
 
 # Dependency directories
 node_modules/
-build
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -55,8 +50,7 @@ b
 
 # Optional npm cache directory
 .npm
-build/*
-/build
+
 
 # Optional eslint cache
 .eslintcache
@@ -135,3 +129,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+/build

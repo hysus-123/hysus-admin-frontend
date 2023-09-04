@@ -14,6 +14,8 @@ import NewPage from './pages/NewPage';
 import EmpPage from './pages/Employee/EmpPage';
 import EmployeePage from './pages/Employees/EmpPage';
 import LetterHead from './components/LetterHead';
+import LetterHeadIssue from './components/LetterHeadIssue';
+import EmpLetterHead from './components/EmpLetterHead';
 // import { Navigate } from 'react-router-dom';
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
           <Route path="/emp-fulldetails/:id" element={<FullDetails />} />
           <Route path="/emp-profile/:id" element={<NewPage />} />
           <Route path="/letterhead" element={<LetterHead />} />
+          <Route path="/letterheadissue" element={<LetterHeadIssue />} />
+          <Route path="/emp-letterhead/:id" element={<EmpLetterHead />} />
           <Route path="/emp-page" element={<EmpPage />} />
           <Route path="/employee-page" element={<EmployeePage />} />
         {/* <Route path="*" element={<Navigate to="/home" />} /> */}

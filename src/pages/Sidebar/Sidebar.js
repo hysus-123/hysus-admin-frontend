@@ -210,7 +210,7 @@ export default function MiniDrawer() {
             </ListItem>
             <ListItem primary="Issue LetterHead" disablePadding sx={{ display: 'block' }} onClick={()=>{
               // setMenudata('Blog');
-              navigate('/letterhead');
+              navigate('/letterheadissue');
             }}>
               <ListItemButton 
                 sx={{
