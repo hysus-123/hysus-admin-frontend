@@ -52,7 +52,6 @@ export default function App() {
     .get(`https://hysus-admin-backend-production.up.railway.app/api/employee`)
     .then(response =>{
       console.log(response.data, 'response'); 
-      console.log(response.data.as_designation, "as_desdfsdfd");
       setEmployeeData(response.data);
     })
     .catch(err=>{
@@ -109,7 +108,7 @@ export default function App() {
               <StyledTableCell align="center">{employee.name}</StyledTableCell>
               <StyledTableCell align="center">{employee.phone}</StyledTableCell>
               <StyledTableCell align="center">{employee.email}</StyledTableCell>
-              <StyledTableCell align="center">{employee.department}</StyledTableCell>
+              <StyledTableCell align="center">{employee.as_department?.department}</StyledTableCell>
               <StyledTableCell align="center">
                 <Button  onClick={() => handleDetailsClick(employee.id)}><VisibilityIcon color='success'/></Button>
               </StyledTableCell>

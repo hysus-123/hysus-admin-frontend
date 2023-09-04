@@ -238,43 +238,7 @@ export default function MiniDrawer() {
         <Divider />
         
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, }}>
-        
-        {/* {menudata == 'Home' && <Home/>}
-        {menudata == 'Employee' && <EmployeeList/>}
-        {menudata == 'Blog' && <Blog/>} */}
-        
-          {/* <Routes>
-            <Route
-              path='/auth/emp-dashboard/:id' element={<EmpDashboard/>}>
-            </Route>
-          </Routes> */}
-
-          {/* <Routes>
-            <Route>
-              <Route path="home" element={<Home />}/>
-              <Route path="emp-list" element={<EmployeeList />}/>
-              <Route path="blogs" element={<Blog />} />
-              <Route path="emp-dashboard" element={<EmpDashboard />} />
-              <Route path="emp-dashboard/:id" element={<EmpDashboard />} />
-              <Route path="emp-form" element={<Form />}/>
-              <Route path="emp-editForm/:id" element={<EditForm />}/>
-              <Route path="emp-fulldetails/:id" element={<FullDetails />}/>
-              <Route path="emp-profile/:id" element={<NewPage />}/>
-            </Route>
-          </Routes> */}
-          {/* <Routes>
-          <Route path="/auth/home" element={<Home />} />
-          <Route path="/auth/emp-list" element={<EmployeeList />} />
-          <Route path="/auth/blogs" element={<Blog />} />
-          <Route path="/auth/emp-dashboard" element={<EmpDashboard />} />
-          <Route path="/auth/emp-dashboard/:id" element={<EmpDashboard />} />
-          <Route path="/auth/emp-form" element={<Form />} />
-          <Route path="/auth/emp-editForm/:id" element={<EditForm />} />
-          <Route path="/auth/emp-fulldetails/:id" element={<FullDetails />} />
-          <Route path="/auth/emp-profile/:id" element={<NewPage />} />
-        </Routes> */}
-      </Box>
+      
     </Box>
   );
 }

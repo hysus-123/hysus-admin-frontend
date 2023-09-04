@@ -70,7 +70,6 @@ export default function App() {
     .get(`https://hysus-admin-backend-production.up.railway.app/api/letterhead`)
     .then(response =>{
       console.log(response.data, 'response'); 
-      console.log(response, "as_desdfsdfd");
       setLetterHeadData(response.data);
     })
     .catch(err=>{
