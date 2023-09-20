@@ -9,7 +9,7 @@ import SideBar from './Sidebar/Sidebar';
 const FullDetails = () => {
     
   const [data, setData] = useState([]);
-//   const [formattedBirthDate, setFormattedBirthDate] = useState('');
+  const [formattedBirthDate, setFormattedBirthDate] = useState('');
 //   const [formattedJoiningDate, setFormattedJoiningDate] = useState('');
 
     const {id} = useParams();
@@ -17,16 +17,17 @@ const FullDetails = () => {
         fetchAllData(id);
     }, [id]);
 
+    const base_url = process.env.REACT_APP_BASE_URL
     const fetchAllData = (id)=>{
         console.log(id, "id");
         axios
-        .get(`https://hysus-admin-backend-production.up.railway.app/api/employee/${id}`)
+        .get(`${base_url}/employee/${id}`)
         .then(response =>{
-            console.log(response.data, "data");
+            console.log(response.data.as_designation.as_department.department, "data");
             const formattedDate = format(new Date(response.data.birth_date), 'MMMM d, yyyy');
-            // setFormattedBirthDate(formattedDate);
+            setFormattedBirthDate(formattedDate);
 
-            const formattedJoiningDate = format(new Date(response.data.joining_date), 'MMMM d, yyyy');
+            // const formattedJoiningDate = format(new Date(response.data.joining_date), 'MMMM d, yyyy');
             // setFormattedJoiningDate(formattedJoiningDate);
             setData(response.data);
         })
@@ -53,7 +54,7 @@ const FullDetails = () => {
                                         <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Employee Id:</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={8}>
-                                        <Typography variant='body1' >{data.emp_id}</Typography>
+                                        <Typography variant='body1' >HYS-{data.emp_id}</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={4}>
                                         <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Full Name:</Typography>
@@ -65,7 +66,7 @@ const FullDetails = () => {
                                         <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Department:</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={8}>
-                                        <Typography variant='body1'> {data.as_department?.department}</Typography>
+                                        <Typography variant='body1'> {data.as_designation?.as_department?.department}</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={4}>
                                         <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Designation:</Typography>
@@ -129,7 +130,7 @@ const FullDetails = () => {
                                         <Typography variant='body1'>{data.phone}</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={4}>
-                                        <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Current Address:</Typography>
+                                        <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Correspondence Address:</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={8}>
                                         <Typography variant='body1'>{data.current_address}</Typography>

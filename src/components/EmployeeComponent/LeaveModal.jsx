@@ -23,9 +23,6 @@ export default function BasicModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-//   const handleChange = () =>{
-//     setOpen(false);
-//   }
   return (
     <div>
       <Button onClick={handleOpen} variant='contained' color='success'>Apply For leave</Button>

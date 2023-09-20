@@ -16,7 +16,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     // backgroundColor: theme.palette.common.black,
@@ -40,7 +39,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function App() {
-
+  const base_url = process.env.REACT_APP_BASE_URL
+  console.log(base_url, "base_url")
   const navigate = useNavigate();
   const [employeeData, setEmployeeData] = useState([])
   useEffect(()=>{
@@ -49,9 +49,9 @@ export default function App() {
 
   function getAllEmployee(){
     axios
-    .get(`https://hysus-admin-backend-production.up.railway.app/api/employee`)
+    .get(`${base_url}/employee`)
     .then(response =>{
-      console.log(response.data, 'response'); 
+      console.log(response, 'responseeeee'); 
       setEmployeeData(response.data);
     })
     .catch(err=>{
@@ -60,7 +60,7 @@ export default function App() {
   }
   const handleDetailsClick = (id) => {
     console.log(id, 'id');
-    axios.get(`https://hysus-admin-backend-production.up.railway.app/api/employee/${id}`)
+    axios.get(`${base_url}/employee/${id}`)
     .then(response =>{
       console.log(response,"response..");
       navigate(`/emp-dashboard/${id}`);
@@ -103,12 +103,12 @@ export default function App() {
           {employeeData.map((employee) => (
             <StyledTableRow key={employee.id}>
               <StyledTableCell component="th" scope="row" align='center'>
-                {employee.id}
+                HYS-{employee.emp_id}
               </StyledTableCell>
               <StyledTableCell align="center">{employee.name}</StyledTableCell>
               <StyledTableCell align="center">{employee.phone}</StyledTableCell>
               <StyledTableCell align="center">{employee.email}</StyledTableCell>
-              <StyledTableCell align="center">{employee.as_department?.department}</StyledTableCell>
+              <StyledTableCell align="center">{employee.as_designation?.as_department?.department}</StyledTableCell>
               <StyledTableCell align="center">
                 <Button  onClick={() => handleDetailsClick(employee.id)}><VisibilityIcon color='success'/></Button>
               </StyledTableCell>

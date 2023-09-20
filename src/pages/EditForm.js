@@ -62,15 +62,18 @@ const EditForm = () => {
   useEffect(()=>{
     employeeEditForm(id);
     clickDepartment();
-    clickDesignation();
+    // clickDesignation();
   },[id])
   const navigate = useNavigate();
 
+  const base_url = process.env.REACT_APP_BASE_URL
+
   const employeeEditForm = (id)=>{
     console.log(id, "id");
-    axios.get(`https://hysus-admin-backend-production.up.railway.app/api/employee/${id}`)
+    axios.get(`${base_url}/employee/${id}`)
     .then(response =>{
         console.log(response.data, "from edit form");
+        console.log(response.data.designation, "designation");
         const fetchedEmpData = response.data; // Assuming the response contains employee details
         setUserData({
           name: fetchedEmpData.name,
@@ -79,8 +82,8 @@ const EditForm = () => {
           birth_date: fetchedEmpData.birth_date,
           current_address: fetchedEmpData.current_address,
           permanent_address: fetchedEmpData.permanent_address,
-          department: fetchedEmpData.department,
-          designation: fetchedEmpData.designation,
+          department: fetchedEmpData.designation,
+          // designation: fetchedEmpData.as_designation,
           blood_group: fetchedEmpData.blood_group,
           spouse_name: fetchedEmpData.spouse_name,
           office_number: fetchedEmpData.office_number,
@@ -95,6 +98,7 @@ const EditForm = () => {
           ifsc_num: fetchedEmpData.ifsc_num
 
         });
+        setdesignations(fetchedEmpData.designation);
     })
     .catch(err =>{
         console.log(err);
@@ -102,19 +106,20 @@ const EditForm = () => {
   }
 
   const clickDepartment=()=>{
-    axios.get(`https://hysus-admin-backend-production.up.railway.app/api/department`)
+    axios.get(`${base_url}/department`)
     .then(response=>{
       console.log(response, "response");
       setdepartments(response.data);
     })
   }
-  const clickDesignation=()=>{
-    axios.get(`https://hysus-admin-backend-production.up.railway.app/api/designation`)
-    .then(response=>{
-      console.log(response, "response");
-      setdesignations(response.data);
-    })
-  }
+  // const clickDesignation=()=>{
+  //   axios.get(`${base_url}/designation`)
+  //   .then(response=>{
+  //     console.log(response, "response..........");
+  //     setdesignations(response.data);
+  //     setdepartments(response.data);
+  //   })
+  // }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -167,7 +172,7 @@ const EditForm = () => {
   const handlePatchRequest = async () => {
     console.log(userData, "userData for edit");
     try {
-      const response = await axios.patch(`https://hysus-admin-backend-production.up.railway.app/api/employee/${id}`, userData);
+      const response = await axios.patch(`${base_url}/employee/${id}`, userData);
       console.log(response.data, "Updated employee data");
       return true; // Indicate success
     } catch (error) {

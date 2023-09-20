@@ -12,7 +12,6 @@ import {
   MenuItem,
   Grid,
   TextField,
- 
   Alert
 } from '@mui/material';
 import Textarea from '@mui/joy/Textarea';
@@ -25,17 +24,20 @@ import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { DropzoneArea } from 'material-ui-dropzone';
+import ProjectModal from './ProjectModal';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Box from '@mui/material/Box';
 import SideBar from '../pages/Sidebar/Sidebar'
 
-const steps = ['User Details', 'Contact Information', 'Professional Details', 'Bank Details'];
+const steps = ['User Details', 'Contact Information',  'Bank Details'];
 
 const StepperForm = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [departments, setdepartments] = useState([]);
   const [designations, setdesignations] = useState([]);
+  const [reportedTo, setReportedTo] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
   const [img , setImg] = useState([]);
   const [userData, setUserData] = useState({
@@ -47,41 +49,63 @@ const StepperForm = () => {
     birth_date:'',
     blood_group:'',
     spouse_name:'',
-    department: '',
     joining_date: '',
+    reported_to:'',
     designation: '',
     skype_id: '',
-    emp_id: '',
     office_number: '',
     alternative_number: '',
     skills:'',
+    personal_email:'',
     linkedin_link: '',
     bank_name:'',
+    applicant_name:'',
+    branch_name:'',
     ifsc_num:'',
     account_num: '',
   });
 
+  const base_url = process.env.REACT_APP_BASE_URL;
+
   useEffect(()=>{
     clickDepartment();
-    clickDesignation();
+    // clickDesignation();
   },[])
   const navigate = useNavigate();
 
   const clickDepartment=()=>{
-    axios.get(`https://hysus-admin-backend-production.up.railway.app/api/department`)
+    axios.get(`${base_url}/department`)
     .then(response=>{
-      console.log(response, "response");
+      console.log(response, "response dept");
       setdepartments(response.data);
     })
   }
-  const clickDesignation=()=>{
-    axios.get(`https://hysus-admin-backend-production.up.railway.app/api/designation`)
-    .then(response=>{
-      console.log(response, "response");
-      setdesignations(response.data);
-    })
-  }
-
+  const clickDesignation = (value) => {
+    // const queryParam = selectedDepartment ? `` : '';
+    const newVal = value;
+    
+    axios.get(`${base_url}/designation?department=${newVal}`)
+      .then(response => {
+        console.log(response, "response designation");
+        setdesignations(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching designations:", error);
+      });
+  };
+  const clickReportedTo = (value) => {
+    const newVal = value;
+    axios.get(`${base_url}/employee?level=4&dept=${newVal}`)
+      .then(response => {
+        console.log(response, "response reported to");
+        // console.log(response.data[0], "as_reported");
+        setReportedTo(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching reported:", error);
+      });
+  };
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -103,6 +127,13 @@ const StepperForm = () => {
         [name]: newValue,
       }));
       console.log(newValue, "newValue");
+      
+      if (name === 'department') {
+        console.log(value, 'value of department');
+        setSelectedDepartment(value);
+        clickDesignation(value);
+        clickReportedTo(value);
+      }
     }
   };
 
@@ -115,9 +146,11 @@ const StepperForm = () => {
 
       case 1:
         // Add validation logic for step 1 fields
-        return !!userData.designation && !!userData.linkedin_link && !! userData.emp_id && !! userData.joining_date ;
+        return !!userData.designation && !!userData.linkedin_link && !! userData.joining_date ;
 
       // Add similar validation logic for other steps
+      case 2: 
+        return !!userData.bank_name && !!userData.account_num && !!userData.ifsc_num;
 
       default:
         return true;
@@ -125,11 +158,12 @@ const StepperForm = () => {
   };
 
   const handleNext = () => {
+    
     if (isStepValid()) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       setAlertOpen(false);
     } else {
-      // alert('Please fill out all required fields before proceeding.');
+      alert('Please fill out all required fields before proceeding.');
       setAlertOpen(true);
     }
   };
@@ -150,6 +184,7 @@ const StepperForm = () => {
 
       }else{
         console.log("something is wrong");
+        
       }
     }catch(err){
       console.log(err);
@@ -172,7 +207,7 @@ const StepperForm = () => {
       console.log(formData, "formData");
       console.log(formData.getAll('department'));
       console.log(formData.getAll('img'));
-      const response = await axios.post(`https://hysus-admin-backend-production.up.railway.app/api/employee`, formData, {
+      const response = await axios.post(`${base_url}/employee`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data', // Set the content type for FormData
         },
@@ -182,8 +217,11 @@ const StepperForm = () => {
     }
     catch (error) {
         console.log('An error occurred during form submission:', error);
+        alert(error.response.data[0].constraints.isEmail || error.response.data[0].constraints.isUrl || error.response.data[0].constraints.minLength || error.response?.data?.error)
     }
   };
+
+  
 
   const renderStepContent = (step) => {
     switch (step) {
@@ -246,7 +284,7 @@ const StepperForm = () => {
                   
                 <TextField
                   height = "5px"
-                  label="Email"
+                  label="Hysus Email"
                   variant="outlined"
                   name="email"
                   required
@@ -318,7 +356,7 @@ const StepperForm = () => {
             <Grid item xs={12} sm={4}>
                 <TextField
                 height = "5px"
-              label="Spouse Name"
+              label="Spouse/Gaurdian Name"
               variant="outlined"
               name="spouse_name"
               
@@ -330,20 +368,47 @@ const StepperForm = () => {
             </Grid>
 
             <Grid item xs={12} sm={4}>
-                <TextField
-                height = "5px"
-              label="Blood Group"
-              variant="outlined"
-              name="blood_group"
-              
-              value={userData.blood_group}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
+              <FormControl fullWidth margin="normal" variant="outlined">
+                <InputLabel id="departmentLabel">Blood Group</InputLabel>
+                <Select
+                  labelId="bloodgroupId"
+                  label="Blood Group"
+                  name="blood_group"
+                  required
+                  value={userData.blood_group}
+                  onChange={handleChange}
+                >
+                <MenuItem value="A+">A Positive</MenuItem>
+                <MenuItem value="A-">A Negative</MenuItem>
+                <MenuItem value="B+">B Positive</MenuItem>
+                <MenuItem value="B-">B Negative</MenuItem>
+                <MenuItem value="AB+">AB Positive</MenuItem>
+                <MenuItem value="AB-">AB Negative</MenuItem>
+                <MenuItem value="O+">O Positive</MenuItem>
+                <MenuItem value="O-">O Negative</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
             
-            
+            {/* <Grid item xs={12} sm={4} >
+              <FormControl fullWidth margin="normal" variant="outlined">
+              <InputLabel id="designationLabel">Designation</InputLabel>
+              <Select
+                labelId="designationLabel"
+                label="Designation"
+                name="designation"
+                required
+                value={userData.designation}
+                onChange={handleChange}
+              >
+                {designations.map(designation => (
+                <MenuItem key={designation.id} value={designation.id}>
+                  {designation.position}
+                </MenuItem>
+              ))}
+              </Select>
+            </FormControl>
+            </Grid> */}
 
             <Grid item xs={12} sm={4}>
             <FormControl fullWidth margin="normal" variant="outlined" 
@@ -362,8 +427,6 @@ const StepperForm = () => {
                   {department.department}
                 </MenuItem>
               ))}
-                {/* <MenuItem value={1}>Developer</MenuItem> */}
-                {/* Add more country codes as needed */}
               </Select>
             </FormControl>
             </Grid>
@@ -415,19 +478,27 @@ const StepperForm = () => {
               </Select>
             </FormControl>
             </Grid>
-
-            <Grid item xs={12} sm={4}> 
-              <TextField
-                label="Employee Id"
-                variant="outlined"
-                name="emp_id"
+            <Grid item xs={12} sm={4} >
+              <FormControl fullWidth margin="normal" variant="outlined">
+              <InputLabel id="reportedTo">Reported To</InputLabel>
+              <Select
+                labelId="reportedTo"
+                label="reported_to"
+                name="reported_to"
                 required
-                value={userData.emp_id}
+                value={userData.reported_to}
                 onChange={handleChange}
-                fullWidth
-                margin="normal"
-              />
+              >
+                {reportedTo.map(reported => (
+                <MenuItem key={reported.id} value={reported.id}>
+                  {reported.name}
+                </MenuItem>
+              ))}
+              </Select>
+            </FormControl>
             </Grid>
+
+            
             <Grid item xs={12} sm={4}>
               <TextField
                 label="Skype Id"
@@ -453,6 +524,22 @@ const StepperForm = () => {
                 </LocalizationProvider>
             </Grid>
 
+            <Grid item xs={12} sm={4} >
+                  
+                <TextField
+                  height = "5px"
+                  label="Personal Email"
+                  variant="outlined"
+                  name="personal_email"
+                  required
+                  value={userData.personal_email}
+                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                />
+                
+            </Grid>
+
             <Grid item xs={12} sm={8}>
               <TextField
                 label="LinkedIn Profile"
@@ -467,24 +554,8 @@ const StepperForm = () => {
             </Grid>
           </Grid>
         );
+     
       case 2:
-        return (
-          <Container sx={{mt:4}}>
-
-            <Grid container spacing={2}>
-              <Button
-            type="button"
-            variant="contained"
-            color="primary"
-            >
-              <AddIcon/>
-            Add Project
-          </Button>
-            </Grid>
-            <Textarea minRows={2} sx={{mt:4}} name ="skills" value={userData.skills} placeholder='write your skills' onChange={handleChange}/>
-          </Container>
-        );
-      case 3:
         return (
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -501,10 +572,34 @@ const StepperForm = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                  label="Name of Applicant"
+                  variant="outlined"
+                  name="applicant_name"
+                  required
+                  value={userData.applicant_name}
+                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                  label="Bank Branch Name"
+                  variant="outlined"
+                  name="branch_name"
+                  required
+                  value={userData.branch_name}
+                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
                   label="Account Number"
                   variant="outlined"
                   name="account_num"
-                  
+                  required
                   value={userData.account_num}
                   onChange={handleChange}
                   fullWidth

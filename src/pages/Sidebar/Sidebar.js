@@ -3,8 +3,6 @@ import { styled, useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
-// import MuiAppBar from '@mui/material/AppBar';
-// import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
@@ -18,7 +16,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import HomeIcon from '@mui/icons-material/Home';
 import BookIcon from '@mui/icons-material/Book';
 import DraftsIcon from '@mui/icons-material/Drafts';
-// import MenuIcon from '@mui/icons-material/Menu';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const drawerWidth = 240;
 
@@ -52,24 +50,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-// const AppBar = styled(MuiAppBar, {
-//   shouldForwardProp: (prop) => prop !== 'open',
-// })(({ theme, open }) => ({
-//     backgroundColor:'#2E3B55',
-//   zIndex: theme.zIndex.drawer + 1,
-//   transition: theme.transitions.create(['width', 'margin'], {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   ...(open && {
-//     marginLeft: drawerWidth,
-//     width: `calc(100% - ${drawerWidth}px)`,
-//     transition: theme.transitions.create(['width', 'margin'], {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.enteringScreen,
-//     }),
-//   }),
-// }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -184,30 +164,6 @@ export default function MiniDrawer() {
                 <ListItemText primary="Employees" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
-            <ListItem primary="Blogs" disablePadding sx={{ display: 'block' }} onClick={()=>{
-              // setMenudata('Blog');
-              navigate('/blogs');
-            }}>
-              <ListItemButton 
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                  <BookIcon/> 
-                </ListItemIcon>
-                <ListItemText primary="Blogs" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
             <ListItem primary="Issue LetterHead" disablePadding sx={{ display: 'block' }} onClick={()=>{
               // setMenudata('Blog');
               navigate('/letterheadissue');
@@ -230,6 +186,30 @@ export default function MiniDrawer() {
                   <DraftsIcon/> 
                 </ListItemIcon>
                 <ListItemText primary="Issue LetterHead" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem primary="Attendence" disablePadding sx={{ display: 'block' }} onClick={()=>{
+              // setMenudata('Blog');
+              navigate('/attendance');
+            }}>
+              <ListItemButton 
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                  <CalendarMonthIcon/> 
+                </ListItemIcon>
+                <ListItemText primary="Attendence" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           {/* ))} */}

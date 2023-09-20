@@ -22,17 +22,20 @@ const EmpDashboard = () => {
     showUserDetails(id);
   },[id])
 
+  const base_url = process.env.REACT_APP_BASE_URL
+
   function showUserDetails(id){
-    axios.get(`https://hysus-admin-backend-production.up.railway.app/api/employee/${id}`)
+    axios.get(`${base_url}/employee/${id}`)
     .then(response =>{
-      console.log(response);
-      console.log(response.data.as_department.department, "response.as_department");
+      console.log(response, 'response from backend');
+      console.log(response.data.as_designation, "response.as_designation");
       const formattedDate = format(new Date(response.data.birth_date), 'MMMM d, yyyy');
       setFormattedBirthDate(formattedDate);
 
-      // const formattedJoiningDate = format(new Date(response.data.joining_date), 'MMMM d, yyyy');
+      // const formattedJoiningDate = format(new Date(response.data.joining_date), 'MM, dd, yyyy');
       // setFormattedJoiningDate(formattedJoiningDate);
       setData(response.data);
+      console.log(setData(response.data), "hii");
     })
     .catch(err=>{
       console.log(err);
@@ -57,17 +60,10 @@ const EmpDashboard = () => {
               {/* </div> */}
                 <div style={{ textAlign: 'center' }}>
                   <Typography variant='h4'>{data.name}</Typography>
-                  <Typography variant='body1'>{data.emp_id}</Typography>
+                  <Typography variant='body1'>HYS-{data.emp_id}</Typography>
                   <Typography variant='body1'>{data.as_designation?.position}</Typography>
-                  <Typography variant='body1'>{data.as_department?.department}</Typography>
-                  <div style={{marginTop:"10px"}}>
-                    <Button variant='contained' color='primary'>
-                      Follow
-                    </Button>
-                    <Button variant='contained' color='primary' style={{ marginLeft: 8 }}>
-                      Message
-                    </Button>
-                  </div>
+                  {/* <Typography variant='body1'>{data.as_department?.department}</Typography> */}
+                  
                 </div>
               </div>
             </CardContent>

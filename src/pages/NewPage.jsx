@@ -18,9 +18,11 @@ const NewPage = () => {
         employeeProfile(id);
     },[id])
 
+    const base_url = process.env.REACT_APP_BASE_URL
+
     const employeeProfile=(id)=>{
         console.log(id,"id");
-        axios.get(`https://hysus-admin-backend-production.up.railway.app/api/employee/${id}`)
+        axios.get(`${base_url}/employee/${id}`)
         .then(response =>{
             console.log(response,"data fetched");
             console.log(response.data.status);
@@ -42,8 +44,8 @@ const NewPage = () => {
                 <div style={{display:'flex', flexWrap:'wrap', }}>
                     <img src={hysusLogo} alt="hysusLogo" width={200} />
                     <div style={{textAlign:'center', marginRight:'20px', display:'flex', alignItems:'center'}}>
-                            <input type="radio" style={{accentColor: data.status === 'active' ? 'green' : 'red'}}  defaultChecked={data.status === 'active'} />
-                            <Typography variant='body1' sx={{fontWeight:'bold'}}> {data.status ==='active'?'Active':'Inactive'} Profile</Typography>
+                            {/* <input type="radio" style={{accentColor: data.status === 'active' ? 'green' : 'red'}}  defaultChecked={data.status === 'active'} /> */}
+                            <Typography variant='body1' sx={{fontWeight:'bold'}}> {data.status ==='active'?'Active':'Inactive'} Employee</Typography>
                     </div>
                 </div>
                 <div>
@@ -68,7 +70,7 @@ const NewPage = () => {
 
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '8px' }}>
                             <Typography sx={{ fontWeight: 'bold' }}>Id:</Typography>
-                            <Typography>HYS-87465</Typography>
+                            <Typography>{data.emp_id}</Typography>
                         </div>
 
                         <Typography sx={{ fontWeight: 'bold', mt: 1 }}>{data.as_designation?.position}</Typography>
@@ -78,7 +80,7 @@ const NewPage = () => {
                         <Typography><span style={{ fontWeight: 'bold' }}>USA:</span> 8757785767</Typography>
                         <Typography sx={{ mt: 2 }}><span style={{ fontWeight: 'bold' }}>Zoom/Skype:</span>{data.skype_id}</Typography>
                         <Typography sx={{ mt: 2 }}><span style={{ fontWeight: 'bold' }}> Email Id:</span> {data.email}</Typography>
-                        <Button variant='contained' sx={{ backgroundColor: '#325094', marginTop: '20px' }}>Add Contact</Button>
+                        
                     </div>
                 </Container>
             </Grid>
@@ -92,7 +94,8 @@ const NewPage = () => {
 
                         <Grid container spacing={1}>
                             <Grid item xs={12}>
-                                <img className="responsive-image" src={newImage} alt="" />
+                                {/* <img className="responsive-image" src={newImage} alt="" /> */}
+                                <img src={hysusLogo} alt="" width="100%"/>
                             </Grid>
                         </Grid>
                     </div>

@@ -65,9 +65,10 @@ export default function App() {
     getAllLetterHead();
   },[])
 
+  const base_url = process.env.REACT_APP_BASE_URL
   function getAllLetterHead(){
     axios
-    .get(`https://hysus-admin-backend-production.up.railway.app/api/letterhead`)
+    .get(`${base_url}/letterhead`)
     .then(response =>{
       console.log(response.data, 'response'); 
       setLetterHeadData(response.data);
@@ -81,7 +82,7 @@ export default function App() {
     e.preventDefault();
     console.log("hii");
     console.log(value, "random value");
-    axios.get(`https://hysus-admin-backend-production.up.railway.app/api/letterhead/${value}`)
+    axios.get(`${base_url}/letterhead/${value}`)
     .then((response)=>{
       console.log(response, 'response');
       navigate(`/emp-letterhead/${value}`);
@@ -110,6 +111,7 @@ export default function App() {
             <StyledTableCell align='center'>Serial No.</StyledTableCell>
             <StyledTableCell align='center'>Name</StyledTableCell>
             <StyledTableCell align='center'>Purpose</StyledTableCell>
+            <StyledTableCell align='center'>Description</StyledTableCell>
             <StyledTableCell align='center'>Issued By</StyledTableCell>
             <StyledTableCell align='center'>Details</StyledTableCell>
           </TableRow>
@@ -121,6 +123,7 @@ export default function App() {
               <StyledTableCell align="center">{letterhead.random5DigitValue}</StyledTableCell>
               <StyledTableCell align="center">{letterhead.name}</StyledTableCell>
               <StyledTableCell align="center">{letterhead.purpose}</StyledTableCell>
+              <StyledTableCell align="center">{letterhead.values}</StyledTableCell>
               <StyledTableCell align="center">{letterhead.issued_by?.name}</StyledTableCell>
               <StyledTableCell align="center">
                 <Button  onClick={handleOpen}><VisibilityIcon color='success'/></Button>

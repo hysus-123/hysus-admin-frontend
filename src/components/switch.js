@@ -16,8 +16,10 @@ export default function CustomizedSwitches() {
       fetchData(id);
     },[id]);
 
+    const base_url = process.env.REACT_APP_BASE_URL
+
     const fetchData = () =>{
-      axios.get(`https://hysus-admin-backend-production.up.railway.app/api/employee/${id}`)
+      axios.get(`${base_url}/employee/${id}`)
       .then(response =>{
         console.log(response.data.status);
         setStatus(response.data.status);
@@ -29,7 +31,7 @@ export default function CustomizedSwitches() {
     }
     
     const handleChange = () => {
-      axios.put(`https://hysus-admin-backend-production.up.railway.app/api/employee/${id}`)
+      axios.put(`${base_url}/employee/${id}`)
       .then(response =>{
         console.log(response.status , "response");
         if(response.status === 200){
@@ -46,17 +48,12 @@ export default function CustomizedSwitches() {
   return (
     <FormGroup>
       
-      
         <Button variant='contained'  value={status === 'active'? 'Active' :'Inactive'}
          onClick={handleChange } 
          size='small'
          style={{backgroundColor: checkboxColor}}>
           {status ==='active'? 'Active':'Inactive'}
           </Button>
-
-      
-      
     </FormGroup>
   );
 }
-

@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Sidebar from './pages/Sidebar/Sidebar';
 import Home from './components/Home';
 import EmployeeList from './pages/EmployeeList';
-import Blog from './components/Blog';
+// import Blog from './components/Blog';
 import EmpDashboard from './pages/Dashboard';
 import Form from './pages/Form';
 import EditForm from './pages/EditForm';
@@ -16,7 +16,10 @@ import EmployeePage from './pages/Employees/EmpPage';
 import LetterHead from './components/LetterHead';
 import LetterHeadIssue from './components/LetterHeadIssue';
 import EmpLetterHead from './components/EmpLetterHead';
-// import { Navigate } from 'react-router-dom';
+import CountryApi from './components/countries/country';
+import Attendance from './pages/Attendance';
+import HorizontalDropdown from './components/HorizontalDropDown';
+import NewCalendar from './components/NewCalendar';
 
 function App() {
   return (
@@ -28,7 +31,7 @@ function App() {
           <Route path="/" element={<Login/>}/>
           <Route path="/home" element={<Home />} />
           <Route path="/emp-list" element={<EmployeeList />} />
-          <Route path="/blogs" element={<Blog />} />
+          {/* <Route path="/blogs" element={<Blog />} /> */}
           <Route path="/emp-dashboard" element={<EmpDashboard />} />
           <Route path="/emp-dashboard/:id" element={<EmpDashboard />} />
           <Route path="/emp-form" element={<Form />} />
@@ -37,10 +40,13 @@ function App() {
           <Route path="/emp-profile/:id" element={<NewPage />} />
           <Route path="/letterhead" element={<LetterHead />} />
           <Route path="/letterheadissue" element={<LetterHeadIssue />} />
+          <Route path="/attendance" element={<Attendance/>} />
           <Route path="/emp-letterhead/:id" element={<EmpLetterHead />} />
           <Route path="/emp-page" element={<EmpPage />} />
           <Route path="/employee-page" element={<EmployeePage />} />
-        {/* <Route path="*" element={<Navigate to="/home" />} /> */}
+          <Route path="/country-api" element={<CountryApi />} />
+          <Route path="/horizontal" element={<HorizontalDropdown />} />
+          <Route path="/newCalendar" element={<NewCalendar />} />
         </Route>
       </Routes>
     </BrowserRouter>

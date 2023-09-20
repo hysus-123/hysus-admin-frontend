@@ -10,8 +10,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const defaultTheme = createTheme();
 
 export default function SignIn() {
@@ -33,8 +31,6 @@ export default function SignIn() {
       alert('admin authentication failed');
     }
   };
-
-
 
   return (
     <ThemeProvider theme={defaultTheme}>

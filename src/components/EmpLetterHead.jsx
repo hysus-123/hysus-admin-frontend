@@ -6,13 +6,13 @@ import axios from 'axios';
 const EmpLetterHead = () => {
     const {id} = useParams();
     const [data, setData] = useState('');
-
+    const base_url = process.env.REACT_APP_BASE_URL
     useEffect(()=>{
         getLetterHead(id)
     }, [id])
 
     const getLetterHead = () =>{
-        axios.get(`https://hysus-admin-backend-production.up.railway.app/api/letterhead/${id}`)
+        axios.get(`${base_url}/letterhead/${id}`)
         .then((response)=>{
             console.log(response);
             setData(response.data);
