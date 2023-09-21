@@ -11,15 +11,16 @@ import Form from './pages/Form';
 import EditForm from './pages/EditForm';
 import FullDetails from './pages/FullDetails';
 import NewPage from './pages/NewPage';
-import EmpPage from './pages/Employee/EmpPage';
-import EmployeePage from './pages/Employees/EmpPage';
+// import EmpPage from './pages/Employee/EmpPage';
+// import EmployeePage from './pages/Employees/EmpPage';
 import LetterHead from './components/LetterHead';
 import LetterHeadIssue from './components/LetterHeadIssue';
 import EmpLetterHead from './components/EmpLetterHead';
 import CountryApi from './components/countries/country';
 import Attendance from './pages/Attendance';
-import HorizontalDropdown from './components/HorizontalDropDown';
-import NewCalendar from './components/NewCalendar';
+import EmpForm from './pages/EmployeeForm/EmpForm';
+// import HorizontalDropdown from './components/HorizontalDropDown';
+// import NewCalendar from './components/NewCalendar';
 
 function App() {
   return (
@@ -42,11 +43,12 @@ function App() {
           <Route path="/letterheadissue" element={<LetterHeadIssue />} />
           <Route path="/attendance" element={<Attendance/>} />
           <Route path="/emp-letterhead/:id" element={<EmpLetterHead />} />
-          <Route path="/emp-page" element={<EmpPage />} />
-          <Route path="/employee-page" element={<EmployeePage />} />
+          <Route path="/employee-form" element={<EmpForm />} />
+          {/* <Route path="/emp-page" element={<EmpPage />} />
+          <Route path="/employee-page" element={<EmployeePage />} /> */}
           <Route path="/country-api" element={<CountryApi />} />
-          <Route path="/horizontal" element={<HorizontalDropdown />} />
-          <Route path="/newCalendar" element={<NewCalendar />} />
+          {/* <Route path="/horizontal" element={<HorizontalDropdown />} />
+          <Route path="/newCalendar" element={<NewCalendar />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>
