@@ -102,7 +102,7 @@ export default function CustomizedTables() {
         <TableBody>
         {rows.map((row, index) => (
           <StyledTableRow key={row.id} size="small">
-            <StyledTableCell>{row.name}</StyledTableCell>
+            <StyledTableCell>{row?.as_basicInfo.name}</StyledTableCell>
             <StyledTableCell>
               <Select
                 value={presentStatus[index] || ""}

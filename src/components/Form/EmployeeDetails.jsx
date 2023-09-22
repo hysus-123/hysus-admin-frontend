@@ -9,6 +9,7 @@ import {Button} from '@mui/material';
 import axios from 'axios';
 
 const validationSchema = yup.object({
+  employee_name: yup.string().required('Employee name is required'),
   email: yup
     .string()
     .email('Invalid email address')
@@ -31,6 +32,7 @@ function EmployeeDetails({ formData, onFormDataChange }) {
 
   const formik = useFormik({
     initialValues: {
+      employee_name: formData.employee_name || '',
       email: formData.email || '', // Initialize with formData if available
       designation: formData.designation || '', // Initialize with formData if available
       employee_type: formData.employee_type || '', // Initialize with formData if available
@@ -53,19 +55,25 @@ function EmployeeDetails({ formData, onFormDataChange }) {
   const base_url = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
     // Fetch designation options from the backend API
-    axios.get(`${base_url}/designation`).then((response) => {
-      setDesignationOptions(response.data);
-    });
+    getDesignation();
+    
 
     // Fetch reportTo options from the backend API
     // axios.get('/api/reporttos').then((response) => {
     //   setReportToOptions(response.data);
     // });
-  }, [base_url]);
+  }, []);
+
+  const getDesignation = () =>{
+    axios.get(`${base_url}/designation`).then((response) => {
+      setDesignationOptions(response.data);
+    });
+  }
 
   // Update the shared form data when this form step is changed
   useEffect(() => {
     onFormDataChange({
+      employee_name: formik.values.employee_name,
       email: formik.values.email,
       designation: formik.values.designation,
       employee_type: formik.values.employee_type,
@@ -90,6 +98,17 @@ function EmployeeDetails({ formData, onFormDataChange }) {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              label="Employee Name"
+              name="employee_name"
+              value={formik.values.employee_name}
+              onChange={formik.handleChange}
+              error={formik.touched.employee_name && Boolean(formik.errors.employee_name)}
+              helperText={formik.touched.employee_name && formik.errors.employee_name}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
               label="Hysus Email"
               name="email"
               value={formik.values.email}
@@ -99,28 +118,34 @@ function EmployeeDetails({ formData, onFormDataChange }) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Autocomplete
-              fullWidth
-              options={designationOptions}
-              getOptionLabel={(option) => option.label}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Designation"
-                  name="designation"
-                  value={formik.values.designation}
-                  onChange={formik.handleChange}
-                  error={formik.touched.designation && Boolean(formik.errors.designation)}
-                  helperText={formik.touched.designation && formik.errors.designation}
-                />
-              )}
-            />
+          <Autocomplete
+            fullWidth
+            options={designationOptions}
+            getOptionLabel={(option) => option.label}
+            isOptionEqualToValue={(option, value) => option.label === value}
+            value={formik.values.designation}
+            onChange={(event, newValue) => {
+              onFormDataChange({ designation: newValue ? newValue.label : '' });
+              formik.setFieldValue('designation', newValue ? newValue.label : '');
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Designation"
+                name="designation"
+                error={formik.touched.designation && Boolean(formik.errors.designation)}
+                helperText={formik.touched.designation && formik.errors.designation}
+              />
+            )}
+          />
+
           </Grid>
           <Grid item xs={12} sm={6}>
             <Autocomplete
               fullWidth
               options={['permanent', 'temporary']} // Employee Type dropdown options
-              value={formik.values.employee_type}
+              isOptionEqualToValue={(option, value) => option.label === value}
+              value={formik.values.employee_type ||''}
               onChange={(event, newValue)=>{
                 onFormDataChange({employee_type: newValue})
                 formik.setFieldValue('employee_type',newValue)
@@ -194,14 +219,14 @@ function EmployeeDetails({ formData, onFormDataChange }) {
               fullWidth
               label="Reported To"
               name="reported_to"
-              value={formik.values.reported_to}
+              value={formik.values.reported_to || ''}
               onChange={formik.handleChange}
               error={formik.touched.reported_to && Boolean(formik.errors.reported_to)}
               helperText={formik.touched.reported_to && formik.errors.reported_to}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            {/* 
+          {/* <Grid item xs={12} sm={6}>
+            
               <TextField
                 fullWidth
                 label="Employee ID"
@@ -209,8 +234,8 @@ function EmployeeDetails({ formData, onFormDataChange }) {
                 value={formik.values.emp_id}
                 onChange={formik.handleChange}
               />
-            */}
-          </Grid>
+           
+          </Grid> */}
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -236,9 +261,11 @@ function EmployeeDetails({ formData, onFormDataChange }) {
               name="image"
               accept="image/*"
               onChange={(event) => {
-                formik.setFieldValue('image', event.currentTarget.files[0]);
+                const selectedImage = event.currentTarget.files[0];
+                console.log('Selected Image:', selectedImage);
+                formik.setFieldValue('image', selectedImage);
+                console.log(formik.values);
               }}
-              style={{ display: 'none' }}
             />
             <label htmlFor="image">
               <Button component="span" variant="contained" color="primary">

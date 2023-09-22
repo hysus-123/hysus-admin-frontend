@@ -124,7 +124,7 @@ export default function App() {
               <StyledTableCell align="center">{letterhead.name}</StyledTableCell>
               <StyledTableCell align="center">{letterhead.purpose}</StyledTableCell>
               <StyledTableCell align="center">{letterhead.values}</StyledTableCell>
-              <StyledTableCell align="center">{letterhead.issued_by?.name}</StyledTableCell>
+              <StyledTableCell align="center">{letterhead.issued_by?.employee_name}</StyledTableCell>
               <StyledTableCell align="center">
                 <Button  onClick={handleOpen}><VisibilityIcon color='success'/></Button>
                   

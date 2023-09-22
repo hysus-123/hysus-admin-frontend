@@ -43,14 +43,14 @@ export default function BasicModal() {
         
         axios.get(`${base_url}/employee`)
           .then((response) => {
-    
+            console.log(response.data, 'letterhead response');
             const names = response.data.map((employee) => {
               return {
-                name: employee.name,
+                name: employee.employee_name,
                 id: employee.id
               }
             })
-            console.log(names);
+            console.log(names, 'names letterhead');
             setAllName(names);
           })
           .catch(err => console.log(err));

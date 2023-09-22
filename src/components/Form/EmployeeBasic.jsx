@@ -135,7 +135,8 @@ function EmployeeBasic({ formData, onFormDataChange }) {
           <Autocomplete
             fullWidth
             options={bloodGroups}
-            value={formik.values.blood_group}
+            isOptionEqualToValue={(option, value) => option.label === value}
+            value={formik.values.blood_group || ''}
             onChange={(event, newValue) => {
                 onFormDataChange({ blood_group: newValue }); // Manually update formData
                 formik.setFieldValue('blood_group', newValue); // Update formik state
@@ -156,7 +157,8 @@ function EmployeeBasic({ formData, onFormDataChange }) {
             <Autocomplete
               fullWidth
               options={qualification}
-              value={formik.values.qualification}
+              isOptionEqualToValue={(option, value) => option.label === value}
+              value={formik.values.qualification || ''}
               onChange={(event, newValue)=>{
                 onFormDataChange({qualification: newValue});
                 formik.setFieldValue('qualification', newValue);

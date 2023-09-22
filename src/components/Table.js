@@ -93,7 +93,7 @@ export default function App() {
             <StyledTableCell align='center'>Full Name</StyledTableCell>
             <StyledTableCell align='center'>Phone No.</StyledTableCell>
             <StyledTableCell align='center'>Email Id</StyledTableCell>
-            <StyledTableCell align='center'>Department</StyledTableCell>
+            <StyledTableCell align='center'>Status</StyledTableCell>
             <StyledTableCell align='center'>Details</StyledTableCell>
             <StyledTableCell align='center'>Preview</StyledTableCell>
             <StyledTableCell align='center'>Edit</StyledTableCell>
@@ -105,10 +105,10 @@ export default function App() {
               <StyledTableCell component="th" scope="row" align='center'>
                 HYS-{employee.emp_id}
               </StyledTableCell>
-              <StyledTableCell align="center">{employee.name}</StyledTableCell>
-              <StyledTableCell align="center">{employee.phone}</StyledTableCell>
+              <StyledTableCell align="center">{employee?.as_basicInfo?.name}</StyledTableCell>
+              <StyledTableCell align="center">{employee?.as_basicInfo?.phone}</StyledTableCell>
               <StyledTableCell align="center">{employee.email}</StyledTableCell>
-              <StyledTableCell align="center">{employee.as_designation?.as_department?.department}</StyledTableCell>
+              <StyledTableCell align="center">{employee.status}</StyledTableCell>
               <StyledTableCell align="center">
                 <Button  onClick={() => handleDetailsClick(employee.id)}><VisibilityIcon color='success'/></Button>
               </StyledTableCell>

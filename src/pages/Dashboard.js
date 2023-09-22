@@ -29,8 +29,8 @@ const EmpDashboard = () => {
     .then(response =>{
       console.log(response, 'response from backend');
       console.log(response.data.as_designation, "response.as_designation");
-      const formattedDate = format(new Date(response.data.birth_date), 'MMMM d, yyyy');
-      setFormattedBirthDate(formattedDate);
+      // const formattedDate = format(new Date(response.data.birth_date), 'MMMM d, yyyy');
+      // setFormattedBirthDate(formattedDate);
 
       // const formattedJoiningDate = format(new Date(response.data.joining_date), 'MM, dd, yyyy');
       // setFormattedJoiningDate(formattedJoiningDate);
@@ -59,7 +59,7 @@ const EmpDashboard = () => {
                 <img src={data.img} alt='Profile' style={{ height: '300px' }} />
               {/* </div> */}
                 <div style={{ textAlign: 'center' }}>
-                  <Typography variant='h4'>{data.name}</Typography>
+                  <Typography variant='h4'>{data?.as_basicInfo?.name}</Typography>
                   <Typography variant='body1'>HYS-{data.emp_id}</Typography>
                   <Typography variant='body1'>{data.as_designation?.position}</Typography>
                   {/* <Typography variant='body1'>{data.as_department?.department}</Typography> */}
@@ -81,7 +81,7 @@ const EmpDashboard = () => {
                       <Typography variant='subtitle1' sx={{fontWeight:'bold'}}>Full Name</Typography>
                     </Grid>
                     <Grid item xs={12} md={9}  className='paddingAdd'>
-                      <Typography variant='body1' > {data.name}</Typography>
+                      <Typography variant='body1' > {data?.as_basicInfo?.name}</Typography>
                     </Grid>
                     <Grid item xs={12} md={3} >
                       <Typography variant='subtitle1' sx={{fontWeight:'bold'}}>Email</Typography>
@@ -93,7 +93,7 @@ const EmpDashboard = () => {
                       <Typography variant='subtitle1' sx={{fontWeight:'bold'}}>Phone</Typography>
                     </Grid>
                     <Grid item xs={12} md={9}  className='paddingAdd'>
-                      <Typography variant='body1'>{data.phone}</Typography>
+                      <Typography variant='body1'>{data?.as_basicInfo?.phone}</Typography>
                     </Grid>
                     <Grid item xs={12} md={3}>
                       <Typography variant='subtitle1' sx={{fontWeight:'bold'}}>Skype Id:</Typography>
@@ -105,7 +105,7 @@ const EmpDashboard = () => {
                       <Typography variant='subtitle1' sx={{fontWeight:'bold'}}>Address</Typography>
                     </Grid>
                     <Grid item xs={12} md={9}  className='paddingAdd'>
-                      <Typography variant='body1'>{data.current_address}</Typography>
+                      <Typography variant='body1'>{data?.as_basicInfo?.employee_addresses[0]?.line1} </Typography>
                     </Grid>
                     <Grid item xs={3}></Grid>
                     <Grid item xs={9}>

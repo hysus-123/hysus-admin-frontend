@@ -4,6 +4,7 @@ import EmployeeDetails from './EmployeeDetails';
 import EmployeeBasic from './EmployeeBasic';
 import BankDetails from './BankDetails';
 import EmployeeAddress from './EmployeeAddress';
+import axios from 'axios';
 
 const steps = ['Basic Information', 'Employee Details', 'Bank Details', 'Employee Address'];
 
@@ -94,16 +95,28 @@ export default function HorizontalLinearStepper() {
     }));
   };
 
+  const base_url = process.env.REACT_APP_BASE_URL
   const handleSubmit = () => {
     // Send formData to your API
     console.log('Form Data:', formData);
+
+    axios.post(`${base_url}/employee`, formData)
+    .then((response)=>{
+      console.log(response);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
     // You can use Axios, fetch, or any other method to send the data to your API
     // Reset the form or perform any other necessary actions
   };
 
   return (
-    <Container sx={{ marginTop: '5%' }}>
+    <Container >
       <Box sx={{ width: '100%' }}>
+        <div style={{textAlign:'center', fontWeight:'bold', }}>
+          <h2 style={{textDecoration:'underline',marginBottom:'3%'}}>Employee Form</h2>
+        </div>
         <Stepper activeStep={activeStep}>
           {steps.map((label, index) => {
             const stepProps = {};
