@@ -23,6 +23,7 @@ export default function HorizontalLinearStepper() {
     linkedin_link: '',
     qualification: '',
     linkedin_link:'',
+    department:'',
     email: '',
     designation:'',
     employee_type:'',

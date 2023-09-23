@@ -29,6 +29,7 @@ const validationSchema = yup.object({
 function EmployeeDetails({ formData, onFormDataChange }) {
   const [designationOptions, setDesignationOptions] = useState([]);
   const [reportToOptions, setReportToOptions] = useState([]);
+  const department = formData.department || '';
 
   const formik = useFormik({
     initialValues: {
@@ -44,6 +45,7 @@ function EmployeeDetails({ formData, onFormDataChange }) {
       office_number: formData.office_number || '', // Initialize with formData if available
       skills: formData.skills || '', // Initialize with formData if available
       image: null, // Image upload
+      
     },
     validationSchema: validationSchema,
     onSubmit: () => {
@@ -65,9 +67,14 @@ function EmployeeDetails({ formData, onFormDataChange }) {
   }, []);
 
   const getDesignation = () =>{
-    axios.get(`${base_url}/designation`).then((response) => {
+    axios.get(`${base_url}/designation`)
+    .then((response) => {
+      console.log(response.data,"designation");
       setDesignationOptions(response.data);
-    });
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
   }
 
   // Update the shared form data when this form step is changed
@@ -119,32 +126,29 @@ function EmployeeDetails({ formData, onFormDataChange }) {
           </Grid>
           <Grid item xs={12} sm={6}>
           <Autocomplete
-            fullWidth
-            options={designationOptions}
-            getOptionLabel={(option) => option.label}
-            isOptionEqualToValue={(option, value) => option.label === value}
-            value={formik.values.designation}
-            onChange={(event, newValue) => {
-              onFormDataChange({ designation: newValue ? newValue.label : '' });
-              formik.setFieldValue('designation', newValue ? newValue.label : '');
-            }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Designation"
-                name="designation"
-                error={formik.touched.designation && Boolean(formik.errors.designation)}
-                helperText={formik.touched.designation && formik.errors.designation}
-              />
-            )}
-          />
-
+              fullWidth
+              options={designationOptions.map((designation) => designation.position)} // Assuming each department object has a 'name' field
+              value={formik.values.designation || ''}
+              isOptionEqualToValue={(option, value) => option.value === value.value}
+              onChange={(event, newValue) => {
+                formik.setFieldValue('designation', newValue);
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Designation"
+                  name="designation"
+                  error={formik.touched.designation && Boolean(formik.errors.designation)}
+                  helperText={formik.touched.designation && formik.errors.designation}
+                />
+              )}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
             <Autocomplete
               fullWidth
               options={['permanent', 'temporary']} // Employee Type dropdown options
-              isOptionEqualToValue={(option, value) => option.label === value}
+              isOptionEqualToValue={(option, value) => option.value === value.value}
               value={formik.values.employee_type ||''}
               onChange={(event, newValue)=>{
                 onFormDataChange({employee_type: newValue})
@@ -201,7 +205,7 @@ function EmployeeDetails({ formData, onFormDataChange }) {
               <Autocomplete
                 fullWidth
                 options={reportToOptions}
-                getOptionLabel={(option) => option.label}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -253,6 +257,10 @@ function EmployeeDetails({ formData, onFormDataChange }) {
               value={formik.values.skills}
               onChange={formik.handleChange}
             />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {/* Access the department value here */}
+            <div>Department: {department}</div>
           </Grid>
           <Grid item xs={12} sm={6}>
             <input

@@ -196,7 +196,7 @@ const StepperForm = () => {
     console.log(userData,"userData");
     try{
       const formData = new FormData();
-      formData.append('img', img[0]);
+      formData.append('img', img[0]); 
   
       // Append the rest of the user data fields
       for (const key in userData) {

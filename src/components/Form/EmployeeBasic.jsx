@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
 import { Container } from '@mui/material';
+import axios from 'axios';
 
 const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 const qualification = ['10', '10+2','Graduation', 'Post Graduation','others']
@@ -22,9 +23,28 @@ const validationSchema = yup.object({
   blood_group: yup.string().required('Blood Group is required'),
   linkedin_link: yup.string().url('Invalid LinkedIn URL'),
   qualification: yup.string(),
+  department: yup.string().required('Department is required'),
 });
 
 function EmployeeBasic({ formData, onFormDataChange }) {
+
+  const [departments, setDepartments] = useState([]);
+
+  const base_url = process.env.REACT_APP_BASE_URL
+  
+  // Fetch departments from your backend API when the component mounts
+  useEffect(() => {
+    // Replace 'yourApiEndpoint' with the actual API endpoint to fetch departments
+    axios.get(`${base_url}/department`)
+      .then((response) =>{
+        console.log(response.data);
+        setDepartments(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching departments:', error);
+      });
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       name: formData.name || '',
@@ -36,6 +56,7 @@ function EmployeeBasic({ formData, onFormDataChange }) {
       blood_group: formData.blood_group || '',
       linkedin_link: formData.linkedin_link || '',
       qualification: formData.qualification || '',
+      department: formData.department || '',
     },
     validationSchema: validationSchema,
     onSubmit: () => {
@@ -56,6 +77,7 @@ function EmployeeBasic({ formData, onFormDataChange }) {
       blood_group: formik.values.blood_group,
       linkedin_link: formik.values.linkedin_link,
       qualification: formik.values.qualification,
+      department: formik.values.department,
       // Don't include other fields in the formData to prevent unnecessary re-renders
     });
   }, [
@@ -135,8 +157,8 @@ function EmployeeBasic({ formData, onFormDataChange }) {
           <Autocomplete
             fullWidth
             options={bloodGroups}
-            isOptionEqualToValue={(option, value) => option.label === value}
             value={formik.values.blood_group || ''}
+            isOptionEqualToValue={(option, value) => option.value === value.value}
             onChange={(event, newValue) => {
                 onFormDataChange({ blood_group: newValue }); // Manually update formData
                 formik.setFieldValue('blood_group', newValue); // Update formik state
@@ -157,7 +179,7 @@ function EmployeeBasic({ formData, onFormDataChange }) {
             <Autocomplete
               fullWidth
               options={qualification}
-              isOptionEqualToValue={(option, value) => option.label === value}
+              isOptionEqualToValue={(option, value) => option.value === value.value}
               value={formik.values.qualification || ''}
               onChange={(event, newValue)=>{
                 onFormDataChange({qualification: newValue});
@@ -174,7 +196,7 @@ function EmployeeBasic({ formData, onFormDataChange }) {
               )}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
               label="LinkedIn Link"
@@ -183,6 +205,26 @@ function EmployeeBasic({ formData, onFormDataChange }) {
               onChange={formik.handleChange}
               error={formik.touched.linkedin_link && Boolean(formik.errors.linkedin_link)}
               helperText={formik.touched.linkedin_link && formik.errors.linkedin_link}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Autocomplete
+              fullWidth
+              options={departments.map((department) => department.department)} // Assuming each department object has a 'name' field
+              value={formik.values.department || ''}
+              isOptionEqualToValue={(option, value) => option.value === value.value}
+              onChange={(event, newValue) => {
+                formik.setFieldValue('department', newValue);
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Department"
+                  name="department"
+                  error={formik.touched.department && Boolean(formik.errors.department)}
+                  helperText={formik.touched.department && formik.errors.department}
+                />
+              )}
             />
           </Grid>
         </Grid>
