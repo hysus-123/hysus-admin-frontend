@@ -26,7 +26,7 @@ const validationSchema = yup.object({
   img: yup.mixed().required('img is required'), // Added img validation
 });
 
-function EmployeeDetails({ formData, onFormDataChange }) {
+function EmployeeDetails({ formData, onFormDataChange, onImageChange}) {
   const [designationOptions, setDesignationOptions] = useState([]);
   const [reportToOptions, setReportToOptions] = useState([]);
   const department = formData.department || '';
@@ -73,7 +73,10 @@ function EmployeeDetails({ formData, onFormDataChange }) {
     console.log('Selected img:', selectedimg);
     formik.setFieldValue('img', selectedimg);
     console.log(formik.values);
-    setSelectedImg(selectedimg)
+    // setSelectedImg(selectedimg);
+
+    // Call the parent component's function to update the selected image
+    onImageChange(selectedimg);
   };
 
   const getDesignation = () =>{
@@ -269,12 +272,14 @@ function EmployeeDetails({ formData, onFormDataChange }) {
               //   formik.setFieldValue('img', selectedimg);
               //   console.log(formik.values);
               // }}
-            />
-            <label htmlFor="img">
+              />
+              {formik.errors.img && formik.touched.img && formik.errors.img}
+
+            {/* <label htmlFor="img">
               <Button component="span" variant="contained" color="primary">
                 Upload img
               </Button>
-            </label>
+            </label> */}
             <span>{formik.errors.img && formik.touched.img && formik.errors.img}</span>
           </Grid>
         </Grid>

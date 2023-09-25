@@ -82,7 +82,7 @@ export default function App() {
   <>
   
       <Button variant="contained"  style={{ margin: '20px' , display:'inline', float:'right', backgroundColor:'#2E3B55'}} component={Link}
-          to="/emp-form">
+          to="/employee-form">
         <AddIcon /> Add 
       </Button>
     <TableContainer component={Paper}>

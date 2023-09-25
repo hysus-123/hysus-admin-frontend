@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const steps = ['Basic Information', 'Employee Details', 'Bank Details', 'Employee Address'];
 
-export default function HorizontalLinearStepper({selectedimg}) {
+export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
   const [formData, setFormData] = useState({
@@ -47,6 +47,7 @@ export default function HorizontalLinearStepper({selectedimg}) {
     zip_code:''
     // Add fields from other form steps as needed
   });
+  const [selectedimg, setSelectedImg] = useState(null);
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -96,6 +97,11 @@ export default function HorizontalLinearStepper({selectedimg}) {
     }));
   };
 
+  const handleImageChange = (img) => {
+    // Update the selected image state
+    setSelectedImg(img);
+  };
+
   const base_url = process.env.REACT_APP_BASE_URL
   const handleSubmit = () => {
     // Send formData to your API
@@ -105,15 +111,15 @@ export default function HorizontalLinearStepper({selectedimg}) {
     console.log(selectedimg, 'selectedImg')
     formDataToSend.append('img', selectedimg);
 
-    // for (const key in formData) {
-    //   if (key !== 'img') {
-    //     formData.append(key, formData[key]);
-    //   }
-    // }
-
     for (const key in formData) {
-      formDataToSend.append(key, formData[key]);
+      if (key !== 'img') {
+        formDataToSend.append(key, formData[key]);
+      }
     }
+
+    // for (const key in formData) {
+    //   formDataToSend.append(key, formData[key]);
+    // }
   
     // Log the formDataToSend object to check if the image is included
     console.log('FormData to Send:', formDataToSend);
@@ -178,13 +184,14 @@ export default function HorizontalLinearStepper({selectedimg}) {
                 <EmployeeBasic
                   formData={formData}
                   onFormDataChange={handleFormDataChange}
-                />
+                                  />
               )}
               {activeStep === 1 && (
                 <EmployeeDetails
                   formData={formData}
                   onFormDataChange={handleFormDataChange}
-                />
+                  onImageChange={handleImageChange}                
+                  />
               )}
               {activeStep === 2 && (
                 <BankDetails
