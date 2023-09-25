@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
 import { Container } from '@mui/material';
-import {Button} from '@mui/material';
+import {Button, MenuItem, FormControl, InputLabel, Select} from '@mui/material';
 import axios from 'axios';
 
 const validationSchema = yup.object({
@@ -23,7 +23,7 @@ const validationSchema = yup.object({
   emp_id: yup.string(),
   office_number: yup.string(),
   skills: yup.string(),
-  image: yup.mixed().required('Image is required'), // Added image validation
+  img: yup.mixed().required('img is required'), // Added img validation
 });
 
 function EmployeeDetails({ formData, onFormDataChange }) {
@@ -44,7 +44,7 @@ function EmployeeDetails({ formData, onFormDataChange }) {
       emp_id: formData.emp_id || '', // Initialize with formData if available
       office_number: formData.office_number || '', // Initialize with formData if available
       skills: formData.skills || '', // Initialize with formData if available
-      image: null, // Image upload
+      img: null, // img upload
       
     },
     validationSchema: validationSchema,
@@ -66,8 +66,19 @@ function EmployeeDetails({ formData, onFormDataChange }) {
     // });
   }, []);
 
+  const [selectedimg, setSelectedImg] = useState(null);
+
+  const handleImageChange = (event) => {
+    const selectedimg = event.currentTarget.files[0];
+    console.log('Selected img:', selectedimg);
+    formik.setFieldValue('img', selectedimg);
+    console.log(formik.values);
+    setSelectedImg(selectedimg)
+  };
+
   const getDesignation = () =>{
-    axios.get(`${base_url}/designation`)
+    const newVal = department;
+    axios.get(`${base_url}/designation?department=${newVal}`)
     .then((response) => {
       console.log(response.data,"designation");
       setDesignationOptions(response.data);
@@ -91,7 +102,7 @@ function EmployeeDetails({ formData, onFormDataChange }) {
       emp_id: formik.values.emp_id,
       office_number: formik.values.office_number,
       skills: formik.values.skills,
-      // Don't include image data in the formData to prevent unnecessary re-renders
+      // Don't include img data in the formData to prevent unnecessary re-renders
     });
   }, [
     formik.values,
@@ -125,45 +136,46 @@ function EmployeeDetails({ formData, onFormDataChange }) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-          <Autocomplete
+          <FormControl fullWidth  variant="outlined">
+            <InputLabel id="designation">Designation</InputLabel>
+            <Select
               fullWidth
-              options={designationOptions.map((designation) => designation.position)} // Assuming each department object has a 'name' field
+              label="Designation"
+              name="designation"
               value={formik.values.designation || ''}
-              isOptionEqualToValue={(option, value) => option.value === value.value}
-              onChange={(event, newValue) => {
-                formik.setFieldValue('designation', newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Designation"
-                  name="designation"
-                  error={formik.touched.designation && Boolean(formik.errors.designation)}
-                  helperText={formik.touched.designation && formik.errors.designation}
-                />
-              )}
-            />
+              onChange={formik.handleChange}
+              error={formik.touched.designation && Boolean(formik.errors.designation)}
+              helperText={formik.touched.designation && formik.errors.designation}
+            >
+              {designationOptions.map((designation) => (
+              <MenuItem key={designation.id} value={designation.id}>
+                {designation.position}
+              </MenuItem>
+            ))}
+            </Select>
+            </FormControl>
+          
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Autocomplete
+          <FormControl fullWidth  variant="outlined">
+            <InputLabel id="employee_type">Employee Type</InputLabel>
+            <Select
               fullWidth
-              options={['permanent', 'temporary']} // Employee Type dropdown options
-              isOptionEqualToValue={(option, value) => option.value === value.value}
-              value={formik.values.employee_type ||''}
-              onChange={(event, newValue)=>{
-                onFormDataChange({employee_type: newValue})
-                formik.setFieldValue('employee_type',newValue)
-              } }
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Employee Type"
-                  name="employee_type"
-                  error={formik.touched.employee_type && Boolean(formik.errors.employee_type)}
-                  helperText={formik.touched.employee_type && formik.errors.employee_type}
-                />
-              )}
-            />
+              label="Employee Type"
+              name="employee_type"
+              value={formik.values.employee_type || ''}
+              onChange={formik.handleChange}
+              error={formik.touched.employee_type && Boolean(formik.errors.employee_type)}
+              helperText={formik.touched.employee_type && formik.errors.employee_type}
+            >
+              {['permanent', 'temporary'].map((type) => (
+                <MenuItem key={type} value={type}>
+                  {type}
+                </MenuItem>
+              ))}
+            </Select>
+            </FormControl>
+            
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -201,25 +213,9 @@ function EmployeeDetails({ formData, onFormDataChange }) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {/* 
-              <Autocomplete
-                fullWidth
-                options={reportToOptions}
-                isOptionEqualToValue={(option, value) => option.value === value.value}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Reported To"
-                    name="reported_to"
-                    value={formik.values.reported_to}
-                    onChange={formik.handleChange}
-                    error={formik.touched.reported_to && Boolean(formik.errors.reported_to)}
-                    helperText={formik.touched.reported_to && formik.errors.reported_to}
-                  />
-                )}
-              />
-            */}
-            <TextField
+          <FormControl fullWidth  variant="outlined">
+            <InputLabel id="reported_to">Reported To</InputLabel>
+            <Select
               fullWidth
               label="Reported To"
               name="reported_to"
@@ -227,19 +223,17 @@ function EmployeeDetails({ formData, onFormDataChange }) {
               onChange={formik.handleChange}
               error={formik.touched.reported_to && Boolean(formik.errors.reported_to)}
               helperText={formik.touched.reported_to && formik.errors.reported_to}
-            />
-          </Grid>
-          {/* <Grid item xs={12} sm={6}>
+            >
+              {['permanent', 'temporary'].map((type) => (
+                <MenuItem key={type} value={type}>
+                  {type}
+                </MenuItem>
+              ))}
+            </Select>
+            </FormControl>
             
-              <TextField
-                fullWidth
-                label="Employee ID"
-                name="emp_id"
-                value={formik.values.emp_id}
-                onChange={formik.handleChange}
-              />
-           
-          </Grid> */}
+          </Grid>
+          
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -265,22 +259,23 @@ function EmployeeDetails({ formData, onFormDataChange }) {
           <Grid item xs={12} sm={6}>
             <input
               type="file"
-              id="image"
-              name="image"
-              accept="image/*"
-              onChange={(event) => {
-                const selectedImage = event.currentTarget.files[0];
-                console.log('Selected Image:', selectedImage);
-                formik.setFieldValue('image', selectedImage);
-                console.log(formik.values);
-              }}
+              id="img"
+              name="img"
+              accept="img/*"
+              onChange={handleImageChange}
+              // onChange={(event) => {
+              //   const selectedimg = event.currentTarget.files[0];
+              //   console.log('Selected img:', selectedimg);
+              //   formik.setFieldValue('img', selectedimg);
+              //   console.log(formik.values);
+              // }}
             />
-            <label htmlFor="image">
+            <label htmlFor="img">
               <Button component="span" variant="contained" color="primary">
-                Upload Image
+                Upload img
               </Button>
             </label>
-            <span>{formik.errors.image && formik.touched.image && formik.errors.image}</span>
+            <span>{formik.errors.img && formik.touched.img && formik.errors.img}</span>
           </Grid>
         </Grid>
       </form>

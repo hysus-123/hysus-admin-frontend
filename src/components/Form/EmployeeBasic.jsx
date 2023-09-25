@@ -6,6 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
 import { Container } from '@mui/material';
 import axios from 'axios';
+import {Select, MenuItem, InputLabel, FormControl} from '@mui/material';
 
 const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 const qualification = ['10', '10+2','Graduation', 'Post Graduation','others']
@@ -154,47 +155,42 @@ function EmployeeBasic({ formData, onFormDataChange }) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-          <Autocomplete
-            fullWidth
-            options={bloodGroups}
-            value={formik.values.blood_group || ''}
-            isOptionEqualToValue={(option, value) => option.value === value.value}
-            onChange={(event, newValue) => {
-                onFormDataChange({ blood_group: newValue }); // Manually update formData
-                formik.setFieldValue('blood_group', newValue); // Update formik state
-            }}
-            renderInput={(params) => (
-                <TextField
-                {...params}
-                label="Blood Group"
-                name="blood_group"
-                error={formik.touched.blood_group && Boolean(formik.errors.blood_group)}
-                helperText={formik.touched.blood_group && formik.errors.blood_group}
-                />
-            )}
-            />
-
+            <FormControl fullWidth variant='outlined'>
+              <InputLabel id="bloodgroup">Blood Group</InputLabel>
+          <Select
+              fullWidth
+              label="Blood Group"
+              name="blood_group"
+              value={formik.values.blood_group || ''}
+              onChange={formik.handleChange}
+              error={formik.touched.blood_group && Boolean(formik.errors.blood_group)}
+            >
+              {bloodGroups.map((group) => (
+                <MenuItem key={group} value={group}>
+                  {group}
+                </MenuItem>
+              ))}
+            </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Autocomplete
+            <FormControl fullWidth  variant="outlined">
+            <InputLabel id="qualification">Qualification</InputLabel>
+            <Select
               fullWidth
-              options={qualification}
-              isOptionEqualToValue={(option, value) => option.value === value.value}
+              label="Qualification"
+              name="qualification"
               value={formik.values.qualification || ''}
-              onChange={(event, newValue)=>{
-                onFormDataChange({qualification: newValue});
-                formik.setFieldValue('qualification', newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Qualification"
-                  name="qualification"
-                  error={formik.touched.qualification && Boolean(formik.errors.qualification)}
-                  helperText={formik.touched.qualification && formik.errors.qualification}
-                />
-              )}
-            />
+              onChange={formik.handleChange}
+              error={formik.touched.qualification && Boolean(formik.errors.qualification)}
+            >
+              {qualification.map((qual) => (
+                <MenuItem key={qual} value={qual}>
+                  {qual}
+                </MenuItem>
+              ))}
+            </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -208,24 +204,25 @@ function EmployeeBasic({ formData, onFormDataChange }) {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Autocomplete
+            <FormControl fullWidth variant='outlined'>
+              <InputLabel id="department">Department</InputLabel>
+            <Select
               fullWidth
-              options={departments.map((department) => department.department)} // Assuming each department object has a 'name' field
+              label="Department"
+              labelId='Department'
+              name="department"
               value={formik.values.department || ''}
-              isOptionEqualToValue={(option, value) => option.value === value.value}
-              onChange={(event, newValue) => {
-                formik.setFieldValue('department', newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Department"
-                  name="department"
-                  error={formik.touched.department && Boolean(formik.errors.department)}
-                  helperText={formik.touched.department && formik.errors.department}
-                />
-              )}
-            />
+              onChange={formik.handleChange}
+              error={formik.touched.department && Boolean(formik.errors.department)}
+            >
+              {departments.map((department) => (
+                <MenuItem key={department.id} value={department.id}>
+                  {department.department}
+                </MenuItem>
+              ))}
+            </Select>
+            
+            </FormControl>
           </Grid>
         </Grid>
       </form>

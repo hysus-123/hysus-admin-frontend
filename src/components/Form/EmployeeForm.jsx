@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const steps = ['Basic Information', 'Employee Details', 'Bank Details', 'Employee Address'];
 
-export default function HorizontalLinearStepper() {
+export default function HorizontalLinearStepper({selectedimg}) {
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
   const [formData, setFormData] = useState({
@@ -101,7 +101,29 @@ export default function HorizontalLinearStepper() {
     // Send formData to your API
     console.log('Form Data:', formData);
 
-    axios.post(`${base_url}/employee`, formData)
+    const formDataToSend = new FormData();
+    console.log(selectedimg, 'selectedImg')
+    formDataToSend.append('img', selectedimg);
+
+    // for (const key in formData) {
+    //   if (key !== 'img') {
+    //     formData.append(key, formData[key]);
+    //   }
+    // }
+
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+  
+    // Log the formDataToSend object to check if the image is included
+    console.log('FormData to Send:', formDataToSend);
+  
+
+    axios.post(`${base_url}/employee`, formDataToSend, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Set the content type for FormData
+      },
+    })
     .then((response)=>{
       console.log(response);
     })
