@@ -17,6 +17,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import BookIcon from '@mui/icons-material/Book';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import hysusLogo from '../../assets/hysus.png';
 
 const drawerWidth = 240;
 
@@ -70,7 +71,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   // const [menudata, setMenudata] = useState('Home');
   const navigate = useNavigate();
 
@@ -107,9 +108,16 @@ export default function MiniDrawer() {
       </AppBar> */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton onClick={()=>setOpen(!open)}>
-            {theme.direction === 'rtl' ? <MenuIcon /> : <MenuIcon />}
-          </IconButton>
+          <div style={{display:'flex'}}>
+            
+            <div style={{textAlign:'center', width:'100%'}}>
+            <img src={hysusLogo} alt='hysus logo'width={150} />
+            </div>
+            <IconButton onClick={()=>setOpen(!open)}>
+              {theme.direction === 'rtl' ? <MenuIcon /> : <MenuIcon />}
+            </IconButton>
+          
+          </div>
         </DrawerHeader>
 
         <Divider />

@@ -80,11 +80,20 @@ export default function App() {
 
   return (
   <>
-  
-      <Button variant="contained"  style={{ margin: '20px' , display:'inline', float:'right', backgroundColor:'#2E3B55'}} component={Link}
-          to="/employee-form">
-        <AddIcon /> Add 
-      </Button>
+    <div style={{display:'flex', justifyContent:'space-between', margin:'10px'}}>
+      <div>
+        <Button variant='contained' style={{backgroundColor:'#2E3B55', marginRight:'10px'}}>Active Employees</Button>
+        <Button variant='contained' style={{backgroundColor:'#2E3B55'}}>Inactive Employees</Button>
+      </div>
+      <div>
+        <Button variant='contained' style={{ backgroundColor:'#2E3B55',marginLeft:'10px'}}>Export To Excel</Button>
+        <Button variant="contained"  style={{ backgroundColor:'#2E3B55',marginLeft:'10px'}} component={Link}
+            to="/employee-form">
+          <AddIcon /> Add 
+        </Button>
+      </div>
+    </div>
+      
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>

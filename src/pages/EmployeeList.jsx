@@ -10,8 +10,8 @@ const EmployeeList = () => {
       <Box sx={{display:'flex'}}>
         <SideBar/>
         <Container sx={{marginTop:'10px'}}>
-            <Typography variant='h5' sx={{textAlign:'center'}}>
-                EmployeeList
+            <Typography variant='h5' sx={{textAlign:'center',fontFamily:'cursive'}}>
+                Employee List
             </Typography>
             <Table sx={{marginTop:'10px'}}/>
         </Container>

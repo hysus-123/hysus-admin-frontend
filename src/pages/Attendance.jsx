@@ -12,11 +12,11 @@ const Attendance = () => {
       <Box sx={{display:'flex'}}>
         <SideBar/>
         <Grid container spacing={1} sx={{ml:2}}>
-            <Grid item xs={12} sm={2.3}>
+            {/* <Grid item xs={12} sm={2.3}>
                 <p>Attendance</p>
                 <Calendar/>
-            </Grid>
-            <Grid item xs={12} sm={7} sx={{ml:2, mt:5, margin:'auto'}}>
+            </Grid> */}
+            <Grid item xs={12} sm={10} sx={{ml:2, mt:5, margin:'auto'}}>
                 <AttendanceTable style={{marginTop:'20px'}}/>
             </Grid>
         </Grid>
