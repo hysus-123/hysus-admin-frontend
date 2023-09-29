@@ -84,7 +84,7 @@ export default function MiniDrawer() {
   // };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', }}>
       <CssBaseline />
       {/* <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -107,7 +107,7 @@ export default function MiniDrawer() {
         </Toolbar>
       </AppBar> */}
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
+        <DrawerHeader >
           <div style={{display:'flex'}}>
             
             <div style={{textAlign:'center', width:'100%'}}>
@@ -122,7 +122,7 @@ export default function MiniDrawer() {
 
         <Divider />
 
-        <List>
+        <List >
           {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => ( */}
             <ListItem primary="Home" disablePadding sx={{ display: 'block' }} onClick={()=>{
               // setMenudata('Home');

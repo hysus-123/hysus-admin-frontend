@@ -6,7 +6,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import {Paper, Button, MenuItem, Select} from '@mui/material';
+import {Paper, Button, MenuItem, Select, Typography} from '@mui/material';
 import HorizontalDropdown from './HorizontalDropDown';
 import './HorizontalDropDown.css';
 import axios from 'axios';
@@ -90,6 +90,10 @@ export default function CustomizedTables() {
 
 
   return (
+    <>
+    <div style={{textAlign:'center', padding:'6px'}}>
+      Employee Attendance
+    </div>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
@@ -137,5 +141,6 @@ export default function CustomizedTables() {
         </TableBody>
       </Table>
     </TableContainer>
+    </>
   );
 }

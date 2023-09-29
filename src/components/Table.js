@@ -15,6 +15,7 @@ import { Link , useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
+import SearchIcon from '@mui/icons-material/Search';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -82,14 +83,29 @@ export default function App() {
   <>
     <div style={{display:'flex', justifyContent:'space-between', margin:'10px'}}>
       <div>
+        <Button variant='contained' style={{backgroundColor:'#2E3B55', marginRight:'10px'}}>All</Button>
         <Button variant='contained' style={{backgroundColor:'#2E3B55', marginRight:'10px'}}>Active Employees</Button>
         <Button variant='contained' style={{backgroundColor:'#2E3B55'}}>Inactive Employees</Button>
       </div>
-      <div>
-        <Button variant='contained' style={{ backgroundColor:'#2E3B55',marginLeft:'10px'}}>Export To Excel</Button>
-        <Button variant="contained"  style={{ backgroundColor:'#2E3B55',marginLeft:'10px'}} component={Link}
-            to="/employee-form">
-          <AddIcon /> Add 
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ position: 'relative' }}>
+          <input
+            style={{ padding: '5px', borderRadius: '5px', paddingLeft: '30px' }}
+            placeholder="Search"
+          />
+          <SearchIcon
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '10px',
+              transform: 'translateY(-50%)',
+              color: 'gray',
+            }}
+          />
+        </div>
+        <Button variant='contained' style={{ backgroundColor: '#2E3B55', marginLeft: '10px' }}>Export To Excel</Button>
+        <Button variant="contained" style={{ backgroundColor: '#2E3B55', marginLeft: '10px' }} component={Link} to="/employee-form">
+          <AddIcon /> Add
         </Button>
       </div>
     </div>

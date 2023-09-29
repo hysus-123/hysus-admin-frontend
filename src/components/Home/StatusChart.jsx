@@ -1,62 +1,64 @@
-import * as React from 'react';
-import { BarPlot } from '@mui/x-charts/BarChart';
-import { LinePlot } from '@mui/x-charts/LineChart';
-import { ChartContainer } from '@mui/x-charts/ChartContainer';
+import React from 'react';
+import { Card, Container } from '@mui/material';
+import {
+  BarChart,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  Bar,
+  CartesianGrid,
+  ResponsiveContainer,
+} from 'recharts';
 
-import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
-import { ChartsYAxis } from '@mui/x-charts/ChartsYAxis';
-
-const series = [
+const dataset = [
   {
-    type: 'bar',
-    stack: '',
-    yAxisKey: 'eco',
-    data: [2, 5, 3, 4, 1],
+    department: 'HR',
+    employee: 21
   },
   {
-    type: 'bar',
-    stack: '',
-    yAxisKey: 'eco',
-    data: [5, 6, 2, 8, 9],
+    department: 'Development',
+    employee: 21
   },
   {
-    type: 'line',
-    yAxisKey: 'pib',
-    color: 'red',
-    data: [1000, 1500, 3000, 5000, 10000],
+    department: 'Mr',
+    employee: 25
   },
+  {
+    department: 'Graphics',
+    employee: 33
+  },
+  {
+    department: 'Bussiness',
+    employee: 18
+  },
+  {
+    department: 'Sales',
+    employee: 29
+  },
+  {
+    department: 'CEO',
+    employee: 27
+  },
+  // ... (your dataset)
 ];
 
-export default function Combining() {
+export default function VerticalBars() {
   return (
-    <ChartContainer
-      series={series}
-      width={500}
-      height={400}
-      xAxis={[
-        {
-          id: 'years',
-          data: [2010, 2011, 2012, 2013, 2014],
-          scaleType: 'band',
-          valueFormatter: (value) => value.toString(),
-        },
-      ]}
-      yAxis={[
-        {
-          id: 'eco',
-          scaleType: 'linear',
-        },
-        {
-          id: 'pib',
-          scaleType: 'log',
-        },
-      ]}
-    >
-      <BarPlot />
-      <LinePlot />
-      <ChartsXAxis label="Years" position="bottom" axisId="years" />
-      <ChartsYAxis label="Results" position="left" axisId="eco" />
-      <ChartsYAxis label="PIB" position="right" axisId="pib" />
-    </ChartContainer>
+    <Card sx={{ opacity: '0.75',filter: 'drop-shadow(5px 5px 4px gray)' }}>
+      <Container>
+        <ResponsiveContainer width="100%" height='100%'>
+          <BarChart data={dataset} >
+            <XAxis dataKey="department" angle={-45} textAnchor="end" interval={0} style={{fontSize:'10px'}}/>
+            <YAxis label={{ value: 'No. of Employees', angle: -90, position: 'insideLeft' }} />
+            <Tooltip />
+            <Legend />
+            <CartesianGrid/>
+            <Bar dataKey="employee" fill="#8884d8" name="No. of Employees" />
+            {/* Add more Bar components for other cities if needed */}
+          </BarChart>
+        </ResponsiveContainer>
+      </Container>
+    </Card>
   );
 }
