@@ -4,6 +4,7 @@ import Avatar from 'react-avatar';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import BirthdayImage from '../../assets/birthdayImage.webp'
 
+
 const upcomingBirthdays = [
   { name: 'Aayush Kumar', date: '12 October 2023' },
   { name: 'Gaurav Shrivastav', date: '12 October 2023' },
@@ -22,7 +23,7 @@ const UpcomingBirthDay = () => {
   return (
     <>
       <Card sx={{ ...cardStyle , filter: 'drop-shadow(5px 5px 4px gray)' }} >
-        <Container sx={{marginBottom:'5%',marginTop:'4%'}}>
+        <Container sx={{mt:2, mb:2}}>
           <Typography variant='h6' sx={{textAlign:'center', fontFamily:'poppins'}}>
             <NotificationsActiveIcon style={{color:'#e2a600', }} />
             UPCOMING BIRTHDAYS</Typography> 

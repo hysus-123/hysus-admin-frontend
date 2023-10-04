@@ -25,25 +25,25 @@ export default function CustomTimeFormat() {
                 Break Time Set
                 </Typography>
                 <LiveTimeClock/>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer components={['TimeField', 'TimeField', 'TimeField']} sx={{display: 'flex' ,mt:2,boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', transition: 'box-shadow 0.3s ease'}}>
-            <TimeField
-            label="Select Time"
-            value={value}
-            onChange={(newValue) => setValue(newValue)}
-            format="HH:mm:ss"
-            size='small'
-            sx={{width:'40%',fontFamily:'poppins'}}
-            />
-            <Button variant='contained' size='small' sx={{width:'20%', borderRadius:'40px',fontFamily:'poppins', backgroundColor:'black', white:'white'}}>Select</Button>
-            {/* Display the selected time in "1 hour 15 min" format */}
-            <Typography variant="body1" sx={{fontFamily:'poppins', textAlign:'center', fontSize:'14px'}}>
-            Selected Break Time: {hours} hour {minutes} min
-            </Typography>
-        </DemoContainer>
-    </LocalizationProvider>
-    </Container>
-              </Card>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={['TimeField', 'TimeField', 'TimeField']} sx={{display: 'flex' ,mt:1, transition: 'box-shadow 0.3s ease'}}>
+                      <TimeField
+                      label="Select Time"
+                      value={value}
+                      onChange={(newValue) => setValue(newValue)}
+                      format="HH:mm:ss"
+                      size='small'
+                      sx={{width:'40%',fontFamily:'poppins'}}
+                      />
+                      <Button variant='contained' size='small' sx={{width:'20%', borderRadius:'40px',fontFamily:'poppins', backgroundColor:'black', white:'white'}}>Select</Button>
+                      {/* Display the selected time in "1 hour 15 min" format */}
+                      <Typography variant="body1" sx={{fontFamily:'poppins', textAlign:'center', fontSize:'14px'}}>
+                      Selected Break Time: {hours} hour {minutes} min
+                      </Typography>
+                  </DemoContainer>
+              </LocalizationProvider>
+            </Container>
+        </Card>
     </>
 
   );

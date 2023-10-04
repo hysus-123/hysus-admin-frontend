@@ -19,6 +19,8 @@ import EmpLetterHead from './components/EmpLetterHead';
 import CountryApi from './components/countries/country';
 import Attendance from './pages/Attendance';
 import EmpForm from './pages/EmployeeForm/EmpForm';
+import Holiday from './components/Holidays/Holiday';
+import Department from './components/Department/Department';
 // import HorizontalDropdown from './components/HorizontalDropDown';
 // import NewCalendar from './components/NewCalendar';
 
@@ -43,6 +45,8 @@ function App() {
           <Route path="/letterheadissue" element={<LetterHeadIssue />} />
           <Route path="/attendance" element={<Attendance/>} />
           <Route path="/emp-letterhead/:id" element={<EmpLetterHead />} />
+          <Route path="/holidays" element={<Holiday />} />
+          <Route path="/department" element={<Department />} />
           <Route path="/employee-form" element={<EmpForm />} />
           {/* <Route path="/emp-page" element={<EmpPage />} />
           <Route path="/employee-page" element={<EmployeePage />} /> */}

@@ -46,14 +46,14 @@ const UpdateInfo = () => {
             <Container sx={{mt:2}}>
                   
               <Typography variant='h6' sx={{fontFamily:'cursive', mb:2,textAlign:'center',fontFamily:'poppins'}} ><NotificationsActiveIcon style={{color:'#e2a600', }}/>Important Updates</Typography>
-              <TextareaAutosize style={{display:'block', width:'80%', height:'50px',fontFamily:'poppins' }} placeholder="  write a new update" required value={data} onChange={(e)=>
+              <TextareaAutosize style={{display:'block', width:'80%', height:'50px',fontFamily:'poppins', mt:1 }} placeholder="  write a new update" required value={data} onChange={(e)=>
                   setData(e.target.value)}/>
                   <div style={{textAlign:'center'}}>
 
               <Button variant='contained' sx={{width:'20%',mt:2, borderRadius:'40px', fontFamily:'poppins', backgroundColor:'black', white:'white'}} size='small' onClick={sendData}>Submit</Button>
                   </div>
               
-              <Container sx={{mt:2}}>
+              <Container sx={{mt:4}}>
                 {/* <Typography variant='h6' sx={{textDecoration:'underline'}}>All Important Updates</Typography> */}
                   <ListUpdate value ={data}/>
               </Container>

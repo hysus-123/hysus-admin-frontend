@@ -12,7 +12,6 @@ import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import { Link , useNavigate } from 'react-router-dom';
-import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import SearchIcon from '@mui/icons-material/Search';
@@ -44,6 +43,8 @@ export default function App() {
   console.log(base_url, "base_url")
   const navigate = useNavigate();
   const [employeeData, setEmployeeData] = useState([])
+  const [searchInput, setSearchInput] = useState("");
+
   useEffect(()=>{
     getAllEmployee();
   },[])
@@ -79,19 +80,61 @@ export default function App() {
     navigate(`/emp-profile/${id}`);
   }
 
+  const fetchActiveEmployee = () =>{
+    axios.get(`${base_url}/employee?status=active`)
+    .then((response)=>{
+      setEmployeeData(response.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
+  const fetchInactiveEmployee = ()=>{
+    axios.get(`${base_url}/employee?status=inactive`)
+    .then((response)=>{
+      setEmployeeData(response.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
+  const handleChange = (e) =>{
+    setSearchInput(e.target.value);
+
+    const searchTerm = searchInput;
+
+    if(searchInput.length < 1){
+      getAllEmployee();
+    }
+
+    axios.get(`${base_url}/employee?search=${searchTerm}`)
+    .then((response) => {
+      console.log(response.data,"searchFilter");
+      setEmployeeData(response.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+
   return (
   <>
     <div style={{display:'flex', justifyContent:'space-between', margin:'10px'}}>
       <div>
-        <Button variant='contained' style={{backgroundColor:'#2E3B55', marginRight:'10px'}}>All</Button>
-        <Button variant='contained' style={{backgroundColor:'#2E3B55', marginRight:'10px'}}>Active Employees</Button>
-        <Button variant='contained' style={{backgroundColor:'#2E3B55'}}>Inactive Employees</Button>
+        <Button variant='contained' style={{backgroundColor:'#2E3B55', marginRight:'10px'}} onClick={getAllEmployee}>All</Button>
+        <Button variant='contained' style={{backgroundColor:'#2E3B55', marginRight:'10px'}} onClick={fetchActiveEmployee}>Active Employees</Button>
+        <Button variant='contained' style={{backgroundColor:'#2E3B55'}} onClick={fetchInactiveEmployee}>Inactive Employees</Button>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div style={{ position: 'relative' }}>
           <input
             style={{ padding: '5px', borderRadius: '5px', paddingLeft: '30px' }}
             placeholder="Search"
+            // onClick={searchEmployee}
+            onChange={handleChange}
           />
           <SearchIcon
             style={{
@@ -130,7 +173,7 @@ export default function App() {
               <StyledTableCell component="th" scope="row" align='center'>
                 HYS-{employee.emp_id}
               </StyledTableCell>
-              <StyledTableCell align="center">{employee?.as_basicInfo?.name}</StyledTableCell>
+              <StyledTableCell align="center">{employee?.employee_name}</StyledTableCell>
               <StyledTableCell align="center">{employee?.as_basicInfo?.phone}</StyledTableCell>
               <StyledTableCell align="center">{employee.email}</StyledTableCell>
               <StyledTableCell align="center">{employee.status}</StyledTableCell>
