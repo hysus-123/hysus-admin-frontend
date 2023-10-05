@@ -15,6 +15,7 @@ import { Link , useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import SearchIcon from '@mui/icons-material/Search';
+import * as XLSX from 'xlsx';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -119,7 +120,21 @@ export default function App() {
     });
   }
 
-
+  const exportToExcel = () => {
+    const data = employeeData.map((employee) => ({
+      'Id': `HYS-${employee.emp_id}`,
+      'Full Name': employee?.employee_name || '',
+      'Phone No.': employee?.as_basicInfo?.phone || '',
+      'Email Id': employee.email || '',
+      'Status': employee.status || '',
+    }));
+  
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Employee Data');
+    XLSX.writeFile(wb, 'employee_data.xlsx');
+  };
+  
   return (
   <>
     <div style={{display:'flex', justifyContent:'space-between', margin:'10px'}}>
@@ -146,7 +161,7 @@ export default function App() {
             }}
           />
         </div>
-        <Button variant='contained' style={{ backgroundColor: '#2E3B55', marginLeft: '10px' }}>Export To Excel</Button>
+        <Button variant='contained' style={{ backgroundColor: '#2E3B55', marginLeft: '10px' }} onClick={exportToExcel}>Export To Excel</Button>
         <Button variant="contained" style={{ backgroundColor: '#2E3B55', marginLeft: '10px' }} component={Link} to="/employee-form">
           <AddIcon /> Add
         </Button>

@@ -11,7 +11,6 @@ const Form = () => {
       <Container component={Paper} maxWidth="md" sx={{ mt: 2, p: 3 }}>
         <EmpForm/>
       </Container>
-      
     </Box>
     </>
   );

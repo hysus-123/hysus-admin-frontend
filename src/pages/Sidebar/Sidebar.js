@@ -14,6 +14,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PeopleIcon from '@mui/icons-material/People';
 import HomeIcon from '@mui/icons-material/Home';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
+import LanIcon from '@mui/icons-material/Lan';
+import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import BookIcon from '@mui/icons-material/Book';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -190,14 +194,34 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
                   <DraftsIcon/> 
                 </ListItemIcon>
                 <ListItemText primary="Issue LetterHead" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
+            <ListItem primary="leave Status" disablePadding sx={{ display: 'block' }} onClick={()=>{
+              navigate('/leaves');
+            }}>
+              <ListItemButton 
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <HolidayVillageIcon/> 
+                </ListItemIcon>
+                <ListItemText primary="Leave Status" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
             <ListItem primary="Holidays" disablePadding sx={{ display: 'block' }} onClick={()=>{
-              // setMenudata('Blog');
               navigate('/holidays');
             }}>
               <ListItemButton 
@@ -214,8 +238,7 @@ export default function MiniDrawer() {
                     justifyContent: 'center',
                   }}
                 >
-                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                  <CalendarMonthIcon/> 
+                  <HolidayVillageIcon/> 
                 </ListItemIcon>
                 <ListItemText primary="Holidays" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -239,9 +262,9 @@ export default function MiniDrawer() {
                   }}
                 >
                   {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                  <CalendarMonthIcon/> 
+                  <LanIcon/> 
                 </ListItemIcon>
-                <ListItemText primary="department" sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary="Department" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
             <ListItem primary="Attendence" disablePadding sx={{ display: 'block' }} onClick={()=>{
@@ -266,6 +289,30 @@ export default function MiniDrawer() {
                   <CalendarMonthIcon/> 
                 </ListItemIcon>
                 <ListItemText primary="Attendence" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem primary="PayRoll" disablePadding sx={{ display: 'block' }} onClick={()=>{
+              // setMenudata('Blog');
+              navigate('/payroll');
+            }}>
+              <ListItemButton 
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                  <PaymentsIcon/> 
+                </ListItemIcon>
+                <ListItemText primary="PayRoll" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           {/* ))} */}

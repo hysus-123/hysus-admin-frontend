@@ -27,7 +27,7 @@ const Holiday = () => {
                         <Typography>Title</Typography>
                         <TextField placeholder="Enter Title" size='small'/>
                         <Typography>Comment</Typography>
-                        <TextField placeholder="Enter Comment" size='small'/>
+                        <TextField placeholder="Enter Comment" size='small' />
                         <Typography >
                             <Button variant="contained">Save</Button>
                         </Typography>
