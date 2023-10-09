@@ -1,10 +1,31 @@
 import React from 'react'
 import { Box, Container, Typography, Card, Button, Grid} from '@mui/material'
 import SideBar from '../../pages/Sidebar/Sidebar';
-import Add from '@mui/icons-material/Add';
 import DeptTable from './DeptTable';
+import axios from 'axios';
+import { useEffect } from 'react';
+import DeptDropDown from './DeptDropDown';
+import { useState } from 'react';
 
 const Department = () => {
+  const base_url = process.env.REACT_APP_BASE_URL
+  const [department, setDepartment] = useState([])
+
+  useEffect(()=>{
+    fetchDepartment();
+  },[])
+
+  const fetchDepartment = () =>{
+    axios.get(`${base_url}/department`)
+    .then((response)=>{
+      console.log(response.data);
+      setDepartment(response.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
   return (
     <>
       <Box sx={{display: 'flex', backgroundColor:'#ded9d9'}}>
@@ -14,45 +35,22 @@ const Department = () => {
           <Card>
             <Typography sx={{textAlign:'center', fontFamily:'poppins'}} variant='h5'>Departments</Typography>
             <div style={{display:'flex', justifyContent:'end'}}>
-              <Button variant="contained" sx={{backgroundColor :'#2E3B55',  borderRadius:'20px', marginRight:'10px'}} size='small'><Add/> ADD Department</Button>
+              <DeptDropDown/>
             </div>
             
             <div style={{padding:'4%'}}>
               Departments Names
-              <div style={{display:'flex', justifyContent:'space-around'}}>
-                <Button variant='contained' sx={{ backgroundColor:'#2E3B55'}}>Web Developer</Button>
-                <Button variant='contained' sx={{ backgroundColor:'#2E3B55'}}>Marketing</Button>
-                <Button variant='contained' sx={{ backgroundColor:'#2E3B55'}}>Graphics</Button>
-                <Button variant='contained' sx={{ backgroundColor:'#2E3B55'}}>Bussiness Development</Button>
-                <Button variant='contained' sx={{ backgroundColor:'#2E3B55'}}>Human Resource</Button>
+              <div style={{display:'flex', justifyContent:'space-around', flexWrap:'wrap'}}>
+              {department.map((dept) => (
+                <Button key={dept.id} variant='contained' sx={{ backgroundColor: '#2E3B55' }}>
+                  {dept.department}
+                </Button>
+              ))}
+                
               </div>
             </div>
           </Card>
 
-          {/* <Grid container spacing={2} sx={{marginTop:2}}>
-            <Grid item xs={12} sm={4}>
-              <Card sx={{opacity:'0.75'}}>
-                <Typography textAlign="center" variant='h6' fontFamily="poppins">Web Developer</Typography>
-                <Typography>Employees: 34</Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Card>
-                <Typography textAlign="center" variant='h6' fontFamily="poppins">Marketing</Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Card>
-                <Typography textAlign="center" variant='h6' fontFamily="poppins">Graphics</Typography>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-            <Card>
-                <Typography textAlign="center" variant='h6' fontFamily="poppins">Bussiness Development</Typography>
-              </Card>
-            </Grid>
-
-          </Grid> */}
           <Card sx={{mt:2}}>
             <DeptTable/> 
           </Card>

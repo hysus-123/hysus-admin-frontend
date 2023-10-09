@@ -21,10 +21,10 @@ const Home = () => {
         <Container sx={{mt:2}}>
           <Typography variant="h4" sx={{textAlign: 'center', fontFamily:'poppins'}}>Overview</Typography>
           <Grid container spacing={2} sx={{mt:2}}>
-          <Grid item xs={12} sm={6}>
-              
-                  <SelectTime />
-            </Grid>
+            <Grid item xs={12} sm={6}>
+                
+                    <SelectTime />
+              </Grid>
 
             {/* <Grid item xs={12} sm={4}>
               <ManageHoliday/>

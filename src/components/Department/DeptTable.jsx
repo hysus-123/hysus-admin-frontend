@@ -50,7 +50,7 @@ export default function CustomizedTables() {
             <StyledTableCell align="right">Employement Type</StyledTableCell>
             <StyledTableCell align="right">Report To</StyledTableCell>
             <StyledTableCell align="right">Joining Date</StyledTableCell>
-            <StyledTableCell align="right">Basic Salary</StyledTableCell>
+            <StyledTableCell align="right">Provision Period End</StyledTableCell>
             <StyledTableCell align="right">Details</StyledTableCell>
           </TableRow>
         </TableHead>

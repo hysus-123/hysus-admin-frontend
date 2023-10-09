@@ -20,10 +20,11 @@ const Holiday = () => {
                     Select Holiday Date
                 </Typography>
                 <div style={{display:"flex"}}>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <StaticDatePicker orientation="landscape" />
-                    </LocalizationProvider>
-                    <div style={{margin:'auto', display:'flex', flexDirection:'column', gap:4}}>
+                    </LocalizationProvider> */}
+                    <HolidayCalendar/>
+                    {/* <div style={{margin:'auto', display:'flex', flexDirection:'column', gap:4}}>
                         <Typography>Title</Typography>
                         <TextField placeholder="Enter Title" size='small'/>
                         <Typography>Comment</Typography>
@@ -31,7 +32,7 @@ const Holiday = () => {
                         <Typography >
                             <Button variant="contained">Save</Button>
                         </Typography>
-                    </div>
+                    </div> */}
                 </div>
                 <HolidayCalendar/>
             </Card>
