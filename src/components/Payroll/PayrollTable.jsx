@@ -61,8 +61,10 @@ export default function CustomizedTables() {
           <TableRow>
             <StyledTableCell>Employee Name</StyledTableCell>
             <StyledTableCell align="center">Package(in lpa)</StyledTableCell>
+            <StyledTableCell align="center">Gross Salary(monthly)</StyledTableCell>
             <StyledTableCell align="center">Basic Pay(in month)</StyledTableCell>
-            <StyledTableCell align="center">Joining Bonus(in thsd.)</StyledTableCell>
+            <StyledTableCell align="center">HRA</StyledTableCell>
+            <StyledTableCell align="center">SP allowance</StyledTableCell>
             <StyledTableCell align="center">Assets</StyledTableCell>
             <StyledTableCell align="center">Add</StyledTableCell>
           </TableRow>
@@ -74,8 +76,10 @@ export default function CustomizedTables() {
                 {row?.as_employee_details?.employee_name}
               </StyledTableCell>
               <StyledTableCell align="center">{row.annual_package}</StyledTableCell>
+              <StyledTableCell align="center">{row.gross_salary}</StyledTableCell>
               <StyledTableCell align="center">{row.basic_salary}</StyledTableCell>
-              <StyledTableCell align="center">{row.joining_bonus}</StyledTableCell>
+              <StyledTableCell align="center">{row.hra}</StyledTableCell>
+              <StyledTableCell align="center">{row.sp_allowance}</StyledTableCell>
               <StyledTableCell align="center">{row.assets}</StyledTableCell>
               <StyledTableCell align="center"><PayrollModal passId={row.id} newrow={row}/></StyledTableCell>
             </StyledTableRow>

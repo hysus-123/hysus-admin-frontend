@@ -23,9 +23,10 @@ const base_url = process.env.REACT_APP_BASE_URL
 export default function BasicModal(props) {
   const newrow = props.newrow;
   const [open, setOpen] = useState(false);
-  const [annual_package, setAnnual_package] = useState(newrow ? newrow.annual_package : 0);
-  const [basic_salary, setBasic_salary] = useState(newrow ? newrow.basic_salary : 0);
-  const [joining_bonus, setJoining_bonus] = useState(newrow ? newrow.joining_bonus : 0);
+  const [gross_salary, setGross_salary] = useState(newrow ? newrow.annual_package : 0);
+  // const [annual_package, setAnnual_package] = useState(newrow ? newrow.annual_package : 0);
+  // const [basic_salary, setBasic_salary] = useState(newrow ? newrow.basic_salary : 0);
+  // const [joining_bonus, setJoining_bonus] = useState(newrow ? newrow.joining_bonus : 0);
   const [assets, setAssets] = useState(newrow ? newrow.assets : '');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -35,9 +36,10 @@ export default function BasicModal(props) {
 
   const addSalary = (id) =>{
     const payrollData = {
-        annual_package,
-        basic_salary,
-        joining_bonus,
+        gross_salary,
+        // annual_package,
+        // basic_salary,
+        // joining_bonus,
         assets
       }
     axios.patch(`${base_url}/payroll/${id}`, payrollData)
@@ -62,30 +64,38 @@ export default function BasicModal(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-package" sx={{ mt: 2 }}>
+          <Typography id="modal-modal-salary" sx={{ mt: 2 }}>
+            <TextField
+              label="Enter Gross Salary(in months)"
+              style={{ width: '100%' }}
+              value={gross_salary}
+              onChange={(e) => setGross_salary(e.target.value)}
+            />
+          </Typography>
+          {/* <Typography id="modal-modal-package" sx={{ mt: 2 }}>
             <TextField
               label="Enter Annual Package"
               style={{ width: '100%' }}
               value={annual_package}
               onChange={(e) => setAnnual_package(e.target.value)}
             />
-          </Typography>
-          <Typography id="modal-modal-basic-salary" sx={{ mt: 2 }}>
+          </Typography> */}
+          {/* <Typography id="modal-modal-basic-salary" sx={{ mt: 2 }}>
             <TextField
               label="Enter Basic Pay(in month)"
               style={{ width: '100%' }}
               value={basic_salary}
               onChange={(e) => setBasic_salary(e.target.value)}
             />
-          </Typography>
-          <Typography id="modal-modal-joining_bonus" sx={{ mt: 2 }}>
+          </Typography> */}
+          {/* <Typography id="modal-modal-joining_bonus" sx={{ mt: 2 }}>
             <TextField
               label="Enter Joining Bonus"
               style={{ width: '100%' }}
               value={joining_bonus}
               onChange={(e) => setJoining_bonus(e.target.value)}
             />
-          </Typography>
+          </Typography> */}
           <Typography id="modal-modal-assets" sx={{ mt: 2 }}>
             <TextField
               label="Enter Any Assets"

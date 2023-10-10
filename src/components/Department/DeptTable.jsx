@@ -40,7 +40,7 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9, 5.4),
 ];
 
-export default function CustomizedTables() {
+export default function CustomizedTables(props) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -55,7 +55,7 @@ export default function CustomizedTables() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {props.employee.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
                 {row.name}
