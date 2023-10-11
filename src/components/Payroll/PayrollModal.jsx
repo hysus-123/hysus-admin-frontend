@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {Modal, TextField} from '@mui/material';
+import {Modal, TextField , FormControlLabel, FormGroup, Checkbox} from '@mui/material';
 import Add from '@mui/icons-material/Add';
 import axios from 'axios';
 
@@ -23,7 +23,9 @@ const base_url = process.env.REACT_APP_BASE_URL
 export default function BasicModal(props) {
   const newrow = props.newrow;
   const [open, setOpen] = useState(false);
-  const [gross_salary, setGross_salary] = useState(newrow ? newrow.annual_package : 0);
+  const [includePF, setIncludePF] = useState(false);
+  const [includeESIC, setIncludeESIC] = useState(false);
+  const [gross_salary, setGross_salary] = useState(newrow ? newrow.gross_salary : 0);
   // const [annual_package, setAnnual_package] = useState(newrow ? newrow.annual_package : 0);
   // const [basic_salary, setBasic_salary] = useState(newrow ? newrow.basic_salary : 0);
   // const [joining_bonus, setJoining_bonus] = useState(newrow ? newrow.joining_bonus : 0);
@@ -37,11 +39,11 @@ export default function BasicModal(props) {
   const addSalary = (id) =>{
     const payrollData = {
         gross_salary,
-        // annual_package,
-        // basic_salary,
-        // joining_bonus,
-        assets
+        assets,
+        includePF, 
+        includeESIC
       }
+      console.log(payrollData);
     axios.patch(`${base_url}/payroll/${id}`, payrollData)
     .then((response)=>{
         console.log(response);
@@ -104,6 +106,23 @@ export default function BasicModal(props) {
               onChange={(e) => setAssets(e.target.value)}
             />
           </Typography>
+
+          <FormGroup>
+            <FormControlLabel control={<Checkbox 
+            checked={includePF} // Bind the checked property to the state variable
+            onChange={(e) => setIncludePF(e.target.checked)}
+            /> 
+            }
+            label="want to include PF" />
+          </FormGroup>
+          <FormGroup>
+            <FormControlLabel control={<Checkbox 
+            checked={includeESIC} // Bind the checked property to the state variable
+            onChange={(e) => setIncludeESIC(e.target.checked)}
+            /> 
+            }
+            label="want to include EXIC" />
+          </FormGroup>
 
           <Button
             variant="contained"

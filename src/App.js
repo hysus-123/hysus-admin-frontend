@@ -22,6 +22,7 @@ import EmpForm from './pages/EmployeeForm/EmpForm';
 import Holiday from './components/Holidays/Holiday';
 import Department from './components/Department/Department';
 import Payroll from './components/Payroll/Payroll';
+import ParticularPayroll from './components/Payroll/ParticularPayroll';
 // import HorizontalDropdown from './components/HorizontalDropDown';
 // import NewCalendar from './components/NewCalendar';
 
@@ -49,6 +50,7 @@ function App() {
           <Route path="/holidays" element={<Holiday />} />
           <Route path="/department" element={<Department />} />
           <Route path="/payroll" element={<Payroll />} />
+          <Route path="/payroll/:id" element={<ParticularPayroll />} />
           <Route path="/employee-form" element={<EmpForm />} />
           {/* <Route path="/emp-page" element={<EmpPage />} />
           <Route path="/employee-page" element={<EmployeePage />} /> */}

@@ -11,7 +11,8 @@ import { Button } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
 import PayrollModal from './PayrollModal';
-
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,6 +37,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function CustomizedTables() {
 
     const[data, setData] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         fetchEmpData();
@@ -52,7 +54,10 @@ export default function CustomizedTables() {
         })
     }
 
-    
+    const handlePayRollClick = (id) =>{
+      console.log("payroll details");
+      navigate(`/payroll/${id}`)
+    }
 
   return (
     <TableContainer component={Paper}>
@@ -66,6 +71,7 @@ export default function CustomizedTables() {
             <StyledTableCell align="center">HRA</StyledTableCell>
             <StyledTableCell align="center">SP allowance</StyledTableCell>
             <StyledTableCell align="center">Assets</StyledTableCell>
+            <StyledTableCell align="center">View</StyledTableCell>
             <StyledTableCell align="center">Add</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -81,6 +87,7 @@ export default function CustomizedTables() {
               <StyledTableCell align="center">{row.hra}</StyledTableCell>
               <StyledTableCell align="center">{row.sp_allowance}</StyledTableCell>
               <StyledTableCell align="center">{row.assets}</StyledTableCell>
+              <StyledTableCell align="center" ><Button onClick={() => handlePayRollClick(row.id)}><RemoveRedEyeIcon sx={{color:'green'}} /></Button></StyledTableCell>
               <StyledTableCell align="center"><PayrollModal passId={row.id} newrow={row}/></StyledTableCell>
             </StyledTableRow>
           ))}
