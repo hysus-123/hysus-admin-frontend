@@ -1,0 +1,17 @@
+/* Add this to your CSS file */
+.absent {
+    background-color: rgb(219 56 56);
+  }
+  
+  .present {
+    background-color: rgb(85 169 85); /* Change this to your desired color */
+  }
+  
+  .halfday {
+    background-color: #e5e533; /* Change this to your desired color */
+  }
+  
+  .leave {
+    background-color: #5197ff; /* Change this to your desired color */
+  }
+  

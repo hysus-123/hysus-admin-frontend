@@ -1,0 +1,7 @@
+#body{
+    background-color: #ded9d9;
+    
+}
+*, #body, #root{
+    font-family: 'poppins';
+}
