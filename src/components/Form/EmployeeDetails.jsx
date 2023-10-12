@@ -222,12 +222,12 @@ function EmployeeDetails({ formData, onFormDataChange, onImageChange}) {
               fullWidth
               label="Reported To"
               name="reported_to"
-              value={formik.values.reported_to || ''}
+              value={formik.values.reported_to || 5}
               onChange={formik.handleChange}
               error={formik.touched.reported_to && Boolean(formik.errors.reported_to)}
               helperText={formik.touched.reported_to && formik.errors.reported_to}
             >
-              {['permanent', 'temporary'].map((type) => (
+              {[5, 4].map((type) => (
                 <MenuItem key={type} value={type}>
                   {type}
                 </MenuItem>

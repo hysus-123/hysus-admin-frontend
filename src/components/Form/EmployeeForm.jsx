@@ -5,10 +5,12 @@ import EmployeeBasic from './EmployeeBasic';
 import BankDetails from './BankDetails';
 import EmployeeAddress from './EmployeeAddress';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const steps = ['Basic Information', 'Employee Details', 'Bank Details', 'Employee Address'];
 
 export default function HorizontalLinearStepper() {
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
   const [formData, setFormData] = useState({
@@ -132,6 +134,7 @@ export default function HorizontalLinearStepper() {
     })
     .then((response)=>{
       console.log(response);
+      navigate('/emp-list');
     })
     .catch((err)=>{
       console.log(err);

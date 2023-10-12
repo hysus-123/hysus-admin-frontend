@@ -11,6 +11,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import DeptDropDown from './DeptDropDown';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -74,6 +75,7 @@ const Department = () => {
             <Typography sx={{ textAlign: 'center', fontFamily: 'poppins' }} variant='h5'>Departments</Typography>
             <div style={{ display: 'flex', justifyContent: 'end' }}>
               {/* Add your DeptDropDown component here */}
+              <DeptDropDown/>
             </div>
             <div style={{ padding: '4%' }}>
               Departments Names
