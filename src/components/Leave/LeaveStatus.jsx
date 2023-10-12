@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '@mui/material'
+import { Box, Card } from '@mui/material'
 import SideBar from '../../pages/Sidebar/Sidebar';
 
 const LeaveStatus = () => {
