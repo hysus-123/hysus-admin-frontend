@@ -78,13 +78,6 @@ const ParticularPayroll = () => {
                                         <Typography variant='body1'>{payroll.sp_allowance} </Typography>
                                     </Grid>
                                     
-                                    <Grid item xs={12} sm={4}>
-                                        <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Net Payable:</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant='body1'>{payroll.net_payable}</Typography>
-                                    </Grid>
-                                    
                                 </Grid>
 
 
@@ -98,16 +91,8 @@ const ParticularPayroll = () => {
                                     Payroll
                                 </Typography>
                                 <Grid container spacing={2}>
-                                    
-                                    
                                     <Grid item xs={12} sm={4}>
-                                        <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Deduct LWF:</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={8}>
-                                        <Typography variant='body1'>{payroll.deduct_LWF}</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={4}>
-                                        <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Deduct PF:</Typography>
+                                        <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Deduct EPF:</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={8}>
                                         <Typography variant='body1'>{payroll.deduct_PF} </Typography>
@@ -118,6 +103,14 @@ const ParticularPayroll = () => {
                                     <Grid item xs={12} sm={8}>
                                         <Typography variant='body1'>{payroll.deduct_ESIC} </Typography>
                                     </Grid>
+                                    <Grid item xs={12} sm={4}>
+                                        <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Deduct LWF:</Typography>
+                                    </Grid>
+                                    <Grid item xs={12} sm={8}>
+                                        <Typography variant='body1'>{payroll.deduct_LWF}</Typography>
+                                    </Grid>
+                                    
+                                    
                                     <Grid item xs={12} sm={4}>
                                         <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Total Deduct Amount:</Typography>
                                     </Grid>

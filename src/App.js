@@ -23,6 +23,7 @@ import Holiday from './components/Holidays/Holiday';
 import Department from './components/Department/Department';
 import Payroll from './components/Payroll/Payroll';
 import ParticularPayroll from './components/Payroll/ParticularPayroll';
+import LeaveStatus from './components/Leave/LeaveStatus';
 // import HorizontalDropdown from './components/HorizontalDropDown';
 // import NewCalendar from './components/NewCalendar';
 
@@ -49,6 +50,7 @@ function App() {
           <Route path="/emp-letterhead/:id" element={<EmpLetterHead />} />
           <Route path="/holidays" element={<Holiday />} />
           <Route path="/department" element={<Department />} />
+          <Route path="/leave" element={<LeaveStatus />} />
           <Route path="/payroll" element={<Payroll />} />
           <Route path="/payroll/:id" element={<ParticularPayroll />} />
           <Route path="/employee-form" element={<EmpForm />} />

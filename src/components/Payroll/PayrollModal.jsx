@@ -56,8 +56,8 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="contained" sx={{backgroundColor:'#2E3B55',borderRadius:'20px', marginRight:'10px'}}>
-      <Add/>Add 
+      <Button onClick={handleOpen} variant="contained" sx={{backgroundColor:'#2E3B55',borderRadius:'20px', marginRight:'10px'}} size='small'>
+      <Add/>Edit 
       </Button>
       <Modal
         open={open}

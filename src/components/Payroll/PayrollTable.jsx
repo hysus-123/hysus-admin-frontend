@@ -13,6 +13,7 @@ import { useState } from 'react';
 import PayrollModal from './PayrollModal';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { useNavigate } from 'react-router-dom';
+import SalaryModal from './SalaryModal';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,7 +42,7 @@ export default function CustomizedTables() {
 
     useEffect(()=>{
         fetchEmpData();
-    },[])
+    },[fetchEmpData])
     const base_url = process.env.REACT_APP_BASE_URL
     const fetchEmpData = () =>{
         axios.get(`${base_url}/payroll`)
@@ -70,9 +71,9 @@ export default function CustomizedTables() {
             <StyledTableCell align="center">Basic Pay(in month)</StyledTableCell>
             <StyledTableCell align="center">HRA</StyledTableCell>
             <StyledTableCell align="center">SP allowance</StyledTableCell>
-            <StyledTableCell align="center">Assets</StyledTableCell>
             <StyledTableCell align="center">View</StyledTableCell>
-            <StyledTableCell align="center">Add</StyledTableCell>
+            <StyledTableCell align="center">Create</StyledTableCell>
+            <StyledTableCell align="center">Salary</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -86,9 +87,9 @@ export default function CustomizedTables() {
               <StyledTableCell align="center">{row.basic_salary}</StyledTableCell>
               <StyledTableCell align="center">{row.hra}</StyledTableCell>
               <StyledTableCell align="center">{row.sp_allowance}</StyledTableCell>
-              <StyledTableCell align="center">{row.assets}</StyledTableCell>
               <StyledTableCell align="center" ><Button onClick={() => handlePayRollClick(row.id)}><RemoveRedEyeIcon sx={{color:'green'}} /></Button></StyledTableCell>
               <StyledTableCell align="center"><PayrollModal passId={row.id} newrow={row}/></StyledTableCell>
+              <StyledTableCell align="center"><SalaryModal passId={row.id} newrow={row}/></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
-import { Container } from '@mui/material';
+import { Container, Button } from '@mui/material';
 
 const validationSchema = yup.object({
   address_type: yup.string().required('Address Type is required'),
@@ -15,53 +15,37 @@ const validationSchema = yup.object({
   zip_code: yup.string().required('Zip Code is required'),
 });
 
-function EmployeeAddress({ formData, onFormDataChange }) {
+function EmployeeAddress({onFormSubmit, employeeId }) {
   const formik = useFormik({
     initialValues: {
-      type: formData.type || '', // Initialize with formData if available
-      line1: formData.line1 || '', // Initialize with formData if available
-      city: formData.city || '', // Initialize with formData if available
-      state: formData.state || '', // Initialize with formData if available
-      country: formData.country || '', // Initialize with formData if available
-      zip_code: formData.zip_code || '', // Initialize with formData if available
+      type: '', 
+      line1: '', 
+      city: '',
+      state: '', 
+      country: '',
+      zip_code: '',
     },
     validationSchema: validationSchema,
-    onSubmit: () => {
-      // No need for onSubmit here since you want to submit all data together
+    onSubmit: (values) => {
+        console.log(values,"values");
+      onFormSubmit(values, employeeId );
     },
-    enableReinitialize: true, // Allow formik to reinitialize with new initialValues
   });
-
-  // Update the shared form data when this form step is changed
-  React.useEffect(() => {
-    onFormDataChange({
-      type: formik.values.type,
-      line1: formik.values.line1,
-      city: formik.values.city,
-      state: formik.values.state,
-      country: formik.values.country,
-      zip_code: formik.values.zip_code,
-      // Don't include other fields in the formData to prevent unnecessary re-renders
-    });
-  }, [
-    formik.values,
-    onFormDataChange,
-  ]);
 
   return (
     <Container>
-      <form>
+      <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <Autocomplete
               fullWidth
-              options={['Parmanent', 'Correspondence']} // Address Type dropdown options
+              options={['home', 'correspondence']} // Address Type dropdown options
               isOptionEqualToValue={(option, value) => option.value === value.value}
               value={formik.values.type}
-              onChange={(event, newValue)=>{
-                onFormDataChange({type: newValue})
-                formik.setFieldValue('type',newValue)
-              } }
+              onChange={(event, newValue) => {
+                formik.setFieldValue('type', newValue);
+                console.log(newValue);
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -129,6 +113,9 @@ function EmployeeAddress({ formData, onFormDataChange }) {
             />
           </Grid>
         </Grid>
+        <Button type="submit" variant="contained" color="primary">
+          Submit
+        </Button>
       </form>
     </Container>
   );

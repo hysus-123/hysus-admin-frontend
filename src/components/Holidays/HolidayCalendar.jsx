@@ -253,7 +253,7 @@ export default function DateCalendarServerRequest() {
 
   React.useEffect(()=>{
     fetchHolidays();
-  },[])
+  },[fetchHolidays])
 
   const base_url = process.env.REACT_APP_BASE_URL;
 
@@ -275,7 +275,6 @@ export default function DateCalendarServerRequest() {
       requestAbortController.current.abort();
     }
 
-    setIsLoading(true);
     // No need to setHighlightedDays here, as we will rely on holidayData
     // fetchHighlightedDays(date);
   };
@@ -308,7 +307,7 @@ export default function DateCalendarServerRequest() {
   // Fetch holidays on component mount
   React.useEffect(() => {
     fetchHolidays();
-  }, []);
+  }, [fetchHolidays]);
 
   return (
     <>
