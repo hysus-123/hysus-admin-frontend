@@ -13,7 +13,7 @@ import EmployeeAddress from '../components/AddressEdit/AddressEdit';
 const FullDetails = () => {
     
   const [data, setData] = useState([]);
-  const [formattedBirthDate, setFormattedBirthDate] = useState('');
+//   const [formattedBirthDate, setFormattedBirthDate] = useState('');
 //   const [formattedJoiningDate, setFormattedJoiningDate] = useState('');
 const [open, setOpen] = useState(false);
 

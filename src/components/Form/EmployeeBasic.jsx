@@ -44,7 +44,7 @@ function EmployeeBasic({ formData, onFormDataChange }) {
       .catch((error) => {
         console.error('Error fetching departments:', error);
       });
-  }, []);
+  }, [base_url]);
 
   const formik = useFormik({
     initialValues: {
