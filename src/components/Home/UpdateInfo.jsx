@@ -11,7 +11,7 @@ const UpdateInfo = () => {
 
   useEffect(()=>{
     fetchMessage();
-  },[fetchMessage])
+  },[])
 
   const fetchMessage=()=>{
     axios.get(`${base_url}/info`)

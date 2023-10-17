@@ -24,36 +24,44 @@ const base_url = process.env.REACT_APP_BASE_URL
 export default function BasicModal(props) {
   const newrow = props.newrow;
   const [open, setOpen] = useState(false);
-  const [includePF, setIncludePF] = useState(false);
-  const [includeESIC, setIncludeESIC] = useState(false);
-  const [gross_salary, setGross_salary] = useState(newrow ? newrow.gross_salary : 0);
-  const [assets, setAssets] = useState(newrow ? newrow.assets : '');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const handleDateChange = (event) => {
-    const newDate = new Date(event.target.value);
-    setSelectedDate(newDate);
+  const [month, setMonth] = useState(0);
+  const [year, setYear] = useState(2023);
+
+  const handleMonthChange = (e) => {
+    setMonth(e.target.value);
+  };
+
+  const handleYearChange = (e) => {
+    setYear(e.target.value);
+
   };
 
   const id = props.passId;
+  const emp_id = props.emp_id;
 
-  const addSalary = (id) =>{
+  const addSalary = (id, emp_id) =>{
     console.log(id);
-    console.log(selectedDate);
-    // const salaryData = {
-        
-    //   }
-    // axios.patch(`${base_url}/payroll/${id}`, salaryData)
-    // .then((response)=>{
-    //     console.log(response);
-    //     setOpen(false);
-    // })
-    // .catch((err)=>{
-    //     console.log(err);
-    // })
-  }
+    console.log(month, year);
+
+    const salaryData = {
+      emp_id,
+      month, 
+      year
+    }
+    axios.post(`${base_url}/salary/${id}`,salaryData)
+    .then((response)=>{
+      console.log(response.data);
+      handleClose();
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+   
+  }   
 
   return (
     <div>
@@ -68,25 +76,24 @@ export default function BasicModal(props) {
       >
         <Box sx={style}>
           
-          <Typography>
-          <TextField
-            id="month-year-picker"
-            label="Month and Year"
-            type="month"
-            value={selectedDate.toISOString().substr(0, 7)}
-            onChange={handleDateChange}
-            InputLabelProps={{
-                shrink: true,
-            }}
-            fullWidth
-            />
-          </Typography>
-          
+        <Typography>
+          <label>
+            Month:
+            <input type="number" value={month} onChange={handleMonthChange} />
+          </label>
+          <br />
+          <label>
+            Year:
+            <input type="number" value={year} onChange={handleYearChange} />
+          </label>
+          <br />
+          <p>You selected: Month {month} and Year {year}</p>
+        </Typography>
           
           <Button
             variant="contained"
             sx={{ display: 'inline-block', float: 'right', mt: 3 }}
-            onClick={()=>addSalary(id)}
+            onClick={()=>addSalary(id, emp_id)}
           >
             Submit
           </Button>
