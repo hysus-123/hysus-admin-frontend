@@ -253,7 +253,7 @@ export default function DateCalendarServerRequest() {
 
   React.useEffect(()=>{
     fetchHolidays();
-  },[fetchHolidays])
+  },[])
 
   const base_url = process.env.REACT_APP_BASE_URL;
 
@@ -304,10 +304,7 @@ export default function DateCalendarServerRequest() {
     // You can perform any other action with these values here
   };
 
-  // Fetch holidays on component mount
-  React.useEffect(() => {
-    fetchHolidays();
-  }, [fetchHolidays]);
+ 
 
   return (
     <>
