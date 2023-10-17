@@ -42,7 +42,7 @@ export default function CustomizedTables() {
 
     useEffect(()=>{
         fetchEmpData();
-    },[fetchEmpData])
+    },[])
     const base_url = process.env.REACT_APP_BASE_URL
     const fetchEmpData = () =>{
         axios.get(`${base_url}/payroll`)
@@ -87,9 +87,9 @@ export default function CustomizedTables() {
               <StyledTableCell align="center">{row.basic_salary}</StyledTableCell>
               <StyledTableCell align="center">{row.hra}</StyledTableCell>
               <StyledTableCell align="center">{row.sp_allowance}</StyledTableCell>
-              <StyledTableCell align="center" ><Button onClick={() => handlePayRollClick(row.id)}><RemoveRedEyeIcon sx={{color:'green'}} /></Button></StyledTableCell>
+              <StyledTableCell align="center" ><Button onClick={() => handlePayRollClick(row.id, row?.as_employee_details?.id)}><RemoveRedEyeIcon sx={{color:'green'}} /></Button></StyledTableCell>
               <StyledTableCell align="center"><PayrollModal passId={row.id} newrow={row}/></StyledTableCell>
-              <StyledTableCell align="center"><SalaryModal passId={row.id} newrow={row}/></StyledTableCell>
+              <StyledTableCell align="center"><SalaryModal passId={row.id} newrow={row} emp_id={row?.as_employee_details?.id}/></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

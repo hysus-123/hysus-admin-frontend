@@ -42,7 +42,7 @@ const Department = () => {
 
   useEffect(() => {
     fetchDepartment();
-  }, [fetchDepartment])
+  }, [])
 
   const fetchDepartment = () => {
     axios.get(`${base_url}/department`)
