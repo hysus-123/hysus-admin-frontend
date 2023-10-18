@@ -3,6 +3,7 @@ import SideBar from '../../pages/Sidebar/Sidebar';
 import { Box } from '@mui/material';
 import {jsPDF} from 'jspdf';
 import 'jspdf-autotable';
+import HysusImage from '../../assets/hysus.png';
 
 const PayrollTable = () => {
 
@@ -27,13 +28,14 @@ const PayrollTable = () => {
         <thead>
           <tr style={{ height: '100px', backgroundColor: '#363636', color: '#ffffff', textAlign: 'center', fontSize: '24px', fontWeight: 600 }}>
             <td colSpan='4'>
-              <img src="../../assets/hysus.png" alt="hysus" />
+              {/* <img src={HysusImage} alt="hysus" width={100}/> */}
+              Hysus Digital Pvt. Ltd.
             </td>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th>Personel NO:</th>
+            <th>Personal NO:</th>
             <td>0123456</td>
             <th>Name</th>
             <td>Chandra</td>
@@ -68,9 +70,7 @@ const PayrollTable = () => {
             <th>Designation</th>
             <td>Designer</td>
           </tr>
-        </tbody>
-      <br />
-        <thead>
+          <thead>
           <tr>
             <th>Earnings</th>
             <th>Amount</th>
@@ -130,6 +130,69 @@ const PayrollTable = () => {
             <td></td>
           </tr>
         </tbody>
+        </tbody>
+
+      <br />
+        {/* <thead>
+          <tr>
+            <th>Earnings</th>
+            <th>Amount</th>
+            <th>Deductions</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Basic</td>
+            <td>29000</td>
+            <td>provident fund</td>
+            <td>1900</td>
+          </tr>
+          <tr>
+            <td>House Rent Allowance</td>
+            <td>2000</td>
+            <td>professional tax</td>
+            <td>600</td>
+          </tr>
+          <tr>
+            <td>special Allowance</td>
+            <td>400</td>
+            <td>Income tax</td>
+            <td>500</td>
+          </tr>
+          <tr>
+            <td>conveyance</td>
+            <td>3000</td>
+          </tr>
+          <tr>
+            <td>ADD Special allowance</td>
+            <td>2000</td>
+          </tr>
+          <tr>
+            <td>shift Allowance</td>
+            <td>1000</td>
+          </tr>
+          <tr>
+            <td>bonus</td>
+            <td>500</td>
+          </tr>
+          <tr>
+            <td>medical Allowance</td>
+            <td>600</td>
+          </tr>
+          <tr>
+            <th>Gross Earnings</th>
+            <td>Rs.38500</td>
+            <th>Gross Deductions</th>
+            <td>Rs.3000</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><strong>NET PAY</strong></td>
+            <td>Rs.35500</td>
+            <td></td>
+          </tr>
+        </tbody> */}
       </table>
     </div>
     </Box>

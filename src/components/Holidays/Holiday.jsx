@@ -12,12 +12,12 @@ const Holiday = () => {
     const [holidayData, setHolidayData] = React.useState([]); // State to store holiday data
 
   React.useEffect(()=>{
-    fetchHolidays();
+    fetchHolidayss();
   },[])
 
   const base_url = process.env.REACT_APP_BASE_URL;
 
-  const fetchHolidays = () => {
+  const fetchHolidayss = () => {
     axios
       .get(`${base_url}/holiday`)
       .then((response) => {
@@ -45,7 +45,7 @@ const Holiday = () => {
                     {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <StaticDatePicker orientation="landscape" />
                     </LocalizationProvider> */}
-                    <HolidayCalendar/>
+                    <HolidayCalendar fetchHolidayss={fetchHolidayss}/>
                     {/* <div style={{margin:'auto', display:'flex', flexDirection:'column', gap:4}}>
                         <Typography>Title</Typography>
                         <TextField placeholder="Enter Title" size='small'/>

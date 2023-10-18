@@ -243,7 +243,7 @@ function ServerDay(props) {
   );
 }
 
-export default function DateCalendarServerRequest() {
+export default function DateCalendarServerRequest({ fetchHolidayss }) {
   const requestAbortController = React.useRef(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [title, setTitle] = React.useState('');
@@ -263,6 +263,7 @@ export default function DateCalendarServerRequest() {
       .then((response) => {
         console.log(response.data);
         setHolidayData(response.data); // Store the holiday data in state
+        fetchHolidayss();
       })
       .catch((err) => {
         console.log(err);

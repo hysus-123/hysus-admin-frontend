@@ -12,6 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeptDropDown from './DeptDropDown';
+import DesigDropDown from './DesigDropDown';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,6 +37,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const Department = () => {
   const base_url = process.env.REACT_APP_BASE_URL
   const [department, setDepartment] = useState([])
+  const [designation, setDesignation] = useState([])
   const [employee, setEmployee] = useState([])
 
   
@@ -56,6 +58,15 @@ const Department = () => {
   }
 
   const fetchByDept = (id) => {
+    axios.get(`${base_url}/designation?department=${id}`)
+    .then((response)=>{
+      console.log(response.data);
+      setDesignation(response.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+
     axios.get(`${base_url}/employee?deptId=${id}`)
       .then((response) => {
         console.log(response.data);
@@ -66,15 +77,16 @@ const Department = () => {
       })
   }
 
+
   return (
     <>
       <Box sx={{ display: 'flex', backgroundColor: '#ded9d9' }}>
         <SideBar />
         <Container sx={{ mt: 2 }}>
           <Card>
-            <Typography sx={{ textAlign: 'center', fontFamily: 'poppins' }} variant='h5'>Departments</Typography>
-            <div style={{ display: 'flex', justifyContent: 'end' }}>
-              {/* Add your DeptDropDown component here */}
+            <Typography sx={{ textAlign: 'center', fontFamily: 'poppins', mt:2 }} variant='h5'>Department</Typography>
+            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+              <DesigDropDown department={department}/>
               <DeptDropDown/>
             </div>
             <div style={{ padding: '4%' }}>
@@ -88,6 +100,16 @@ const Department = () => {
               </div>
             </div>
           </Card>
+          
+          <Card sx={{mt:1, padding:2}} >
+            <div>All Designation</div>
+            <div style={{display:"flex", justifyContent:"start", flexWrap: 'wrap', gap: 20}}>
+            {designation.map((desig)=>(
+              <p>{desig.level}-{desig.position}</p>
+            ))}
+          </div>
+          </Card>
+
           <Card sx={{ mt: 2 }}>
             {Array.isArray(employee) && employee.length > 0 ? (
               <TableContainer component={Paper}>

@@ -226,27 +226,28 @@ const ParticularPayroll = () => {
                                     <Typography sx={{fontWeight:'bold', margin:'20px'}}>Salary Slip</Typography>
                                     </Grid>
                                     <Grid item xs={12}>
-                                        {salary.map((sal_slip)=>(
+                                        {(salary)?(
+                                        salary.map((sal_slip)=>(
                                             <Accordion sx={{border:'2px solid black', }}>
                                             <AccordionSummary
                                             expandIcon={<ExpandMoreIcon />}
                                             aria-controls="panel1a-content"
                                             id="panel1a-header"
                                             >
-                                            <Typography sx={{fontWeight:'bold' }}>Month {sal_slip.month}</Typography>
+                                            <Typography sx={{fontWeight:'bold' }}>Month {sal_slip?.month}</Typography>
                                             </AccordionSummary>
                                             <AccordionDetails>
                                             <Typography>
-                                                LOP: {sal_slip.LOP}
+                                                LOP: {sal_slip?.LOP}
                                             </Typography>
                                             <Typography>
-                                                working_days: {sal_slip.working_days}
+                                                working_days: {sal_slip?.working_days}
                                             </Typography>
                                             <Typography>
-                                                total deduct: {sal_slip.total_deduct}
+                                                total deduct: {sal_slip?.total_deduct}
                                             </Typography>
                                             <Typography>
-                                                Final Salary: {sal_slip.final_salary}
+                                                Final Salary: {sal_slip?.final_salary}
                                             </Typography>
                                             <Typography sx={{display:'inline-block', float:'right', mb:3}}>
                                                 <Button variant='contained' size='small' onClick={()=>handlePrintClick(sal_slip)}>Print</Button>
@@ -254,7 +255,10 @@ const ParticularPayroll = () => {
                                             </Typography>
                                             </AccordionDetails>
                                         </Accordion>
-                                        ))}
+                                        ))
+                                    ):(
+                                        <p>No salary Data Available</p>
+                                    )}
                                         
                                         </Grid>
                                     </Grid>
