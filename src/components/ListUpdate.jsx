@@ -11,7 +11,7 @@ import axios from 'axios';
 import './ListUpdate.css'
 
 
-export default function GutterlessList(props) {
+export default function GutterlessList({fetchMessage}) {
   const base_url = process.env.REACT_APP_BASE_URL;
   const [data, setData] = useState([]);
   useEffect(()=>{
@@ -23,6 +23,7 @@ export default function GutterlessList(props) {
     .then((response)=>{
       console.log(response.data);
       setData(response.data);
+      fetchMessage();
     })
     .catch(err => console.log(err));
   }

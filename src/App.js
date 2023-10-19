@@ -8,7 +8,7 @@ import EmployeeList from './pages/EmployeeList';
 // import Blog from './components/Blog';
 import EmpDashboard from './pages/Dashboard';
 import Form from './pages/Form';
-import EditForm from './pages/EditForm';
+import EditForm from './components/EditForm/EditForm';
 import FullDetails from './pages/FullDetails';
 import NewPage from './pages/NewPage';
 // import EmpPage from './pages/Employee/EmpPage';

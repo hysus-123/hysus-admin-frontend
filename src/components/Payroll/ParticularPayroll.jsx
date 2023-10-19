@@ -223,12 +223,12 @@ const ParticularPayroll = () => {
                                 <Grid container spacing={2}>
                                     <Grid item xs={12}>
 
-                                    <Typography sx={{fontWeight:'bold', margin:'20px'}}>Salary Slip</Typography>
+                                    <Typography sx={{fontWeight:'bold', margin:'20px', textAlign:'center'}}>Salary Slip</Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                         {(salary)?(
                                         salary.map((sal_slip)=>(
-                                            <Accordion sx={{border:'2px solid black', }}>
+                                            <Accordion sx={{border:'2px solid black',mt:2 }}>
                                             <AccordionSummary
                                             expandIcon={<ExpandMoreIcon />}
                                             aria-controls="panel1a-content"

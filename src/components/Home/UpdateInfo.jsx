@@ -55,7 +55,7 @@ const UpdateInfo = () => {
               
               <Container sx={{mt:4}}>
                 {/* <Typography variant='h6' sx={{textDecoration:'underline'}}>All Important Updates</Typography> */}
-                  <ListUpdate value ={data}/>
+                  <ListUpdate value ={data} fetchMessage={fetchMessage}/>
               </Container>
               
               </Container>

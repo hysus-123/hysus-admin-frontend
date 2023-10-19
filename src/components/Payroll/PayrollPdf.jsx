@@ -3,9 +3,17 @@ import SideBar from '../../pages/Sidebar/Sidebar';
 import { Box } from '@mui/material';
 import {jsPDF} from 'jspdf';
 import 'jspdf-autotable';
+import { useParams } from 'react-router';
 import HysusImage from '../../assets/hysus.png';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
 
 const PayrollTable = () => {
+  const [data, setData] = useState([]);
+  const {id} = useParams();
+  console.log(id, "id");
+  const base_url = process.env.REACT_APP_BASE_URL;
 
   const downloadPdf = () =>{
     const doc = new jsPDF({orientation:'landspace'});
@@ -16,6 +24,22 @@ const PayrollTable = () => {
 
     doc.save('data.pdf');
   }
+
+  useEffect(()=>{
+    fetchPayrollData(id);
+  },[id])
+
+  const fetchPayrollData = (id) =>{
+    axios.get(`${base_url}/single-salary/${id}`)
+    .then((response)=>{
+      console.log(response);
+      setData(response.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
   return (
     <Box sx={{display:'flex'}}> 
     <SideBar/>
@@ -35,10 +59,10 @@ const PayrollTable = () => {
         </thead>
         <tbody>
           <tr>
-            <th>Personal NO:</th>
-            <td>0123456</td>
+            <th>Employee Id:</th>
+            <td>HYS-{data?.as_employee?.emp_id}</td>
             <th>Name</th>
-            <td>Chandra</td>
+            <td>{data?.as_employee?.employee_name}</td>
           </tr>
           <tr>
             <th>Bank</th>
@@ -47,22 +71,22 @@ const PayrollTable = () => {
             <td>0x2x6x25x6</td>
           </tr>
           <tr>
-            <th>DOB</th>
-            <td>23/02/xxxx</td>
+            <th>Joining Date</th>
+            <td>{data?.as_employee?.joining_date}</td>
             <th>Lop Days</th>
-            <td>0</td>
+            <td>{data.LOP}</td>
           </tr>
           <tr>
             <th>PF No.</th>
             <td>26123456</td>
             <th>STD days</th>
-            <td>30</td>
+            <td>{data?.std_days}</td>
           </tr>
           <tr>
             <th>Location</th>
             <td>India</td>
             <th>Working Days</th>
-            <td>30</td>
+            <td>{data?.working_days}</td>
           </tr>
           <tr>
             <th>Department</th>
@@ -70,129 +94,52 @@ const PayrollTable = () => {
             <th>Designation</th>
             <td>Designer</td>
           </tr>
-          <thead>
-          <tr>
-            <th>Earnings</th>
-            <th>Amount</th>
-            <th>Deductions</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Basic</td>
-            <td>29000</td>
-            <td>provident fund</td>
-            <td>1900</td>
-          </tr>
-          <tr>
-            <td>House Rent Allowance</td>
-            <td>2000</td>
-            <td>professional tax</td>
-            <td>600</td>
-          </tr>
-          <tr>
-            <td>special Allowance</td>
-            <td>400</td>
-            <td>Income tax</td>
-            <td>500</td>
-          </tr>
-          <tr>
-            <td>conveyance</td>
-            <td>3000</td>
-          </tr>
-          <tr>
-            <td>ADD Special allowance</td>
-            <td>2000</td>
-          </tr>
-          <tr>
-            <td>shift Allowance</td>
-            <td>1000</td>
-          </tr>
-          <tr>
-            <td>bonus</td>
-            <td>500</td>
-          </tr>
-          <tr>
-            <td>medical Allowance</td>
-            <td>600</td>
-          </tr>
-          <tr>
-            <th>Gross Earnings</th>
-            <td>Rs.38500</td>
-            <th>Gross Deductions</th>
-            <td>Rs.3000</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><strong>NET PAY</strong></td>
-            <td>Rs.35500</td>
-            <td></td>
-          </tr>
-        </tbody>
+          
         </tbody>
 
       <br />
-        {/* <thead>
-          <tr>
-            <th>Earnings</th>
-            <th>Amount</th>
-            <th>Deductions</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
+        
         <tbody>
           <tr>
-            <td>Basic</td>
-            <td>29000</td>
+            <td>Gross Salary</td>
+            <td>{data?.as_payroll_details?.gross_salary}</td>
             <td>provident fund</td>
-            <td>1900</td>
+            <td>{data?.as_payroll_details?.deduct_PF}</td>
+          </tr>
+          <tr>
+            <td>Basic Salary</td>
+            <td>{data?.as_payroll_details?.basic_salary}</td>
+            <td>ESIC</td>
+            <td>{data?.as_payroll_details?.deduct_ESIC}</td>
           </tr>
           <tr>
             <td>House Rent Allowance</td>
-            <td>2000</td>
-            <td>professional tax</td>
-            <td>600</td>
+            <td>{data?.as_payroll_details?.hra}</td>
+            <td>Leave Welfare Fund</td>
+            <td>{data?.as_payroll_details?.deduct_LWF}</td>
           </tr>
           <tr>
             <td>special Allowance</td>
-            <td>400</td>
-            <td>Income tax</td>
-            <td>500</td>
+            <td>{data?.as_payroll_details?.sp_allowance}</td>
+            
           </tr>
+          
           <tr>
-            <td>conveyance</td>
-            <td>3000</td>
-          </tr>
-          <tr>
-            <td>ADD Special allowance</td>
-            <td>2000</td>
-          </tr>
-          <tr>
-            <td>shift Allowance</td>
-            <td>1000</td>
-          </tr>
-          <tr>
-            <td>bonus</td>
-            <td>500</td>
-          </tr>
-          <tr>
-            <td>medical Allowance</td>
-            <td>600</td>
-          </tr>
-          <tr>
-            <th>Gross Earnings</th>
-            <td>Rs.38500</td>
+            <th>Net Payable</th>
+            <td>Rs.{data?.as_payroll_details?.net_payable}</td>
             <th>Gross Deductions</th>
-            <td>Rs.3000</td>
+            <td>Rs.{data?.as_payroll_details?.deduct_LWF + data?.as_payroll_details?.deduct_PF +data?.as_payroll_details?.deduct_ESIC + data.total_deduct}</td>
           </tr>
           <tr>
-            <td></td>
+            {/* <td></td>
             <td><strong>NET PAY</strong></td>
             <td>Rs.35500</td>
-            <td></td>
+            <td></td> */}
+            <th>Net Pay</th>
+            <td>{data.final_salary}</td>
           </tr>
-        </tbody> */}
+          
+        </tbody>
       </table>
     </div>
     </Box>
