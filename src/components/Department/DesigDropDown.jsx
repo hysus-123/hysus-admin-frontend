@@ -45,7 +45,7 @@ export default function BasicModal({department}) {
 
       axios.post(`${base_url}/designation`,desigData)
       .then((response)=>{
-        console.log("add new designation")
+        console.log("add new designation");
         console.log(response.data);
       })
       .catch((err)=>{

@@ -1,6 +1,6 @@
 import React from 'react';
 import SideBar from '../../pages/Sidebar/Sidebar';
-import { Box } from '@mui/material';
+import { Box , Container} from '@mui/material';
 import {jsPDF} from 'jspdf';
 import 'jspdf-autotable';
 import { useParams } from 'react-router';
@@ -43,7 +43,7 @@ const PayrollTable = () => {
   return (
     <Box sx={{display:'flex'}}> 
     <SideBar/>
-    
+    <Container>
     <div style={{maxWidth:'100%', overflowX:'auto'}}>
       <button onClick={downloadPdf}>
         print
@@ -103,7 +103,7 @@ const PayrollTable = () => {
           <tr>
             <td>Gross Salary</td>
             <td>{data?.as_payroll_details?.gross_salary}</td>
-            <td>provident fund</td>
+            <td>EPF</td>
             <td>{data?.as_payroll_details?.deduct_PF}</td>
           </tr>
           <tr>
@@ -115,7 +115,7 @@ const PayrollTable = () => {
           <tr>
             <td>House Rent Allowance</td>
             <td>{data?.as_payroll_details?.hra}</td>
-            <td>Leave Welfare Fund</td>
+            <td>LWF</td>
             <td>{data?.as_payroll_details?.deduct_LWF}</td>
           </tr>
           <tr>
@@ -135,13 +135,14 @@ const PayrollTable = () => {
             <td><strong>NET PAY</strong></td>
             <td>Rs.35500</td>
             <td></td> */}
-            <th>Net Pay</th>
-            <td>{data.final_salary}</td>
+            {/* <th>Net Pay</th>
+            <td>{data.final_salary}</td> */}
           </tr>
           
         </tbody>
       </table>
     </div>
+    </Container>
     </Box>
   );
 };

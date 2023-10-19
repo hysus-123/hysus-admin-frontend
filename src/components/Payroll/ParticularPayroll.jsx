@@ -250,7 +250,7 @@ const ParticularPayroll = () => {
                                                 Final Salary: {sal_slip?.final_salary}
                                             </Typography>
                                             <Typography sx={{display:'inline-block', float:'right', mb:3}}>
-                                                <Button variant='contained' size='small' onClick={()=>handlePrintClick(sal_slip)}>Print</Button>
+                                                {/* <Button variant='contained' size='small' onClick={()=>handlePrintClick(sal_slip)}>Print</Button> */}
                                                 <Button variant='contained' size='small' onClick={()=>handleToPdf(sal_slip.id)}>View</Button>
                                             </Typography>
                                             </AccordionDetails>
