@@ -22,6 +22,7 @@ import BookIcon from '@mui/icons-material/Book';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import hysusLogo from '../../assets/hysus.png';
+import PolicyRoundedIcon from '@mui/icons-material/PolicyRounded';
 
 const drawerWidth = 240;
 
@@ -334,7 +335,7 @@ export default function MiniDrawer() {
                   }}
                 >
                   {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                  <PaymentsIcon/> 
+                  <PolicyRoundedIcon/> 
                 </ListItemIcon>
                 <ListItemText primary="Policy" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>

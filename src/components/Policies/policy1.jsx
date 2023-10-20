@@ -3,11 +3,11 @@ import { Box, Container } from '@mui/material'
 import SideBar from '../../pages/Sidebar/Sidebar'
 import { ImArrowRight } from 'react-icons/im'
 
-const policy1 = () => {
+const Policy1 = () => {
     return (
         <>
-            <Box sx={{ display: 'flex' }}>
-                <SideBar />
+            {/* <Box sx={{ display: 'flex' }}>
+                <SideBar /> */}
                 <Container>
                     <div style={{ fontFamily: 'poppins' }}>
                         <h1 style={{ textAlign: 'center', textDecoration: 'underline' }}>General Rules, Regulations and Guidelines</h1>
@@ -395,14 +395,69 @@ When an employee's performance demonstrates that he lacks the ability necessary 
 
 </p>
 <p><div><strong>INDICTMENTS, PROSECUTIONS, ARRESTS: </strong></div>It is the responsibility of the Company to maintain a proper work force. Employees who are arrested, indicted by a Grand Jury, or on whom information has been filed by a prosecuting official, may be given an Administrative Review Hearing to determine the effect said action has on his or her employment with the Company, which may result in disciplinary action, up to and including termination. If an employee is temporarily suspended, pending adjudication of the charges, another Administrative Review Hearing will be held after adjudication of the charges to determine whether to reinstate the employee based on review of the underlying facts, regardless of the outcome of the criminal case. In any case, where an employee is temporarily suspended pending adjudication, the Company shall not be precluded from conducting another Administrative Review Hearing and changing that temporary suspension to some other discipline, including termination prior to adjudication.</p>
-<p><div><strong>GRIEVANCE PROCEDURES: </strong></div></p>
+<p><div><strong>GRIEVANCE PROCEDURES: </strong></div>The Company wishes to ensure that any regular employee complaints or grievances are quickly resolved to the mutual satisfaction of the Company and its employees. Management employees will use the following procedure: 
+</p>
+<div>(An employee on a probationary status is not eligible to use the grievance procedures.) </div>
+<div><strong>Step 1: </strong> Any complaint, problem, or grievance should be raised in the first instance, within three (3) working days, of the occurrence of the event to be reviewed, by the Head of HR who will schedule a meeting for the employee to meet with his/her immediate Supervisor and who will render a decision within 5 working days following the meeting.
+</div>
+<div><strong>Step 2: </strong>If the employee does not consider to have received a satisfactory answer to their Step 1 grievance, within five (5) working days, the employee may submit the grievance in writing to the Head of HR who will schedule a meeting with the Department Director who will investigate the grievance, meet with the employee, and render a decision, within 5 working days, following the Step 2 meeting. 
+</div>
+<div><strong>Step 3: </strong>If the employee does not consider to have received a satisfactory answer at Step 2, within five (5) working days the employee may submit the grievance in writing to the Head of HR who will schedule a meeting with the General Manager & CEO who will investigate the grievance, meet with the employee, and render a decision as soon as possible. Forms for filing a grievance can be obtained in the HR Office. All grievances must be filed with the Head of HR. </div>
+<p>CAREER SERVICE APPEALS:</p>
+<div>A Career Service employee who has been suspended without pay, terminated, given a reduction in pay, or a demotion shall have the right to appeal said action to the Career Service Council by filing a petition with said Council within thirty (30) days following such suspension, termination, reduction in pay, or demotion. However, before an appeal can be filed with the Career Service Council, the employee shall first file a timely grievance under Company’s internal grievance procedures.
+</div>
+<p>Q. TRAVEL POLICY</p>
+<div>  Refer to the Employee Portal.</div>
+<p>R. WORKPLACE VIOLENCE</p>
+<p>The Company’s policy is to strive to maintain a work environment free from intimidation, threats, or violent acts. This includes, but is not limited to, intimidating, threatening or hostile behaviors, physical abuse, vandalism, arson, sabotage, use of weapons, carrying weapons onto Company’s property, or any other act, which, in Management’s opinion, is inappropriate to the workplace. In addition, offensive comments regarding violent events and/or behavior are not tolerated.
+</p>
+<p>Employees who feel subjected to any of the behaviors listed should immediately report the incident to any Supervisor, Director, or HR Office representative. Complaints will receive immediate attention and the situation will be investigated. Based upon the results of the inquiry, disciplinary action may be taken against the alleged offender, at the discretion of Management.
+</p>
+<p>Employees who observe or have knowledge of any violation of this policy should immediately report it to the Management. The Company will act when unforeseen events occur and look to employees for support of this policy. Employees should directly contact proper law enforcement authorities if they believe there is a serious threat to the safety or health of others.
+</p>
+<div>POLICY:</div>
+<div>It is the policy of Company to expressly prohibit any acts or threats of violence by any employee, or former employee, against any other employee, in or about Company’s facilities or elsewhere at any time. Also, the Company will not condone any acts or threats of violence against its employees, customers, or visitors by any individual on work premises at any time, or while they are engaged in business with, or on behalf of Company, on or off work premises.
+</div>
+<p>
+The objective is to provide a safe work environment, and the Company is committed to the following:
+</p>
+<div>1. Take prompt remedial action, up to and including termination, against any employee who engages in any threatening behavior or acts of violence or who uses any obscene, abusive, or threatening language or gestures or otherwise violates this policy.
+</div>
+<div>2. Take appropriate action against customers, former employees, or visitors to Company’s facilities who engage in such behavior. Such action may include notifying the police, or other law enforcement personnel, and/or prosecuting violators of this policy to the maximum extent of the law.
+</div>
+<div>3. Prohibit employees, former employees, customers, and visitors from bringing unauthorized firearms, or other weapons, onto work premises.
+</div>
+<div>4. Establish practical security measures to ensure that Company’s facilities are safe and secure, and to deal properly with access to Company’s facilities by the public, off-duty employees, and former employees.
+</div>
+<p>DUTY TO WARN: </p>
+<p>In furtherance of this policy, employees have a duty to warn their Supervisors, Risk Manager, or the HR Office if they are aware of, or reasonably suspect any problematic or potentially violent workplace activities, situations, or incidents, that involve other employees, former employees, customers, or visitors. This would include, for example, threatening or offensive acts or comments, acts of violence, or acts of aggressive behavior. Employee reports made pursuant to this policy will be held in confidence to the maximum possible extent. The Company will not condone any form of retaliation against any employee for making a report under this policy.
+</p>
+<div>PROCEDURE: </div>
+<div><strong>Crisis Assessment: </strong>Crisis assessment is a response to serious or potentially serious actions or threats against individuals or companies. In the event of such actions or threats, a crisis assessment team will be convened. Whenever possible, the committee will be composed of a representative from Company’s HR Office, Supervisor and the Department Director of the employee involved.
+</div>
+<div><strong>Physical Hostile Actions: </strong> Physical hostile actions that may be considered endangering or life threatening, by or against any employee, or individual, on Company’s property, or while an employee is off-premises engaged in any Company Related business, should be responded to by calling the Police or Security and to the HR Office. Upon such notification to the HR Office, the following procedures will be observed:
+</div>
+<div>1. The HR Office or designee will notify and coordinate its efforts with the Police or Security Department.
+</div>
+<div>2. A representative from the HR will respond to the scene of the incident and immediately convene the crisis-assessment team to decide the appropriate action to take.
+</div>
+<div>3. Physical hostile actions or threats by an employee require immediate attention. In certain circumstances, depending on the seriousness of the reason, an employee can be suspended, “with pay,” until an Administrative Review Hearing is held. (The General Manager & CEO will make this decision.) Disciplinary actions may be recommended following an Administrative Review Hearing, (written warning, written reprimand, suspension “without pay,” or termination). Law enforcement action may also be taken by the Police or Security Department.
+</div>
+
+
 
                         </section>
+                        <section>
+    <p>T. CHANGES IN RULES</p>
+    <div>The information contained in these Rules and Regulations is intended as a general guide for employees. It does not constitute any form of employment contract or guarantee. The Company, of course, may change rules, regulations, and policies at any time and such changes may not be reflected in these rules at the time they are read. Existing rules and policies, as determined from time to time by management, shall supersede any written information previously distributed.
+</div>
+<strong>For ___________________  Private Limited.</strong>
+</section>
                     </div>
                 </Container>
-            </Box>
+            {/* </Box> */}
         </>
     )
 }
 
-export default policy1
+export default Policy1

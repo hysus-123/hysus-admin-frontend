@@ -25,7 +25,7 @@ import Payroll from './components/Payroll/Payroll';
 import ParticularPayroll from './components/Payroll/ParticularPayroll';
 import LeaveStatus from './components/Leave/LeaveStatus';
 import PayrollPdf from './components/Payroll/PayrollPdf';
-import Policy from './components/Policies/policy1';
+import Policy from './components/Policies/Policies';
 // import HorizontalDropdown from './components/HorizontalDropDown';
 // import NewCalendar from './components/NewCalendar';
 

@@ -131,12 +131,7 @@ const PayrollTable = () => {
             <td>Rs.{data?.as_payroll_details?.deduct_LWF + data?.as_payroll_details?.deduct_PF +data?.as_payroll_details?.deduct_ESIC + data.total_deduct}</td>
           </tr>
           <tr>
-            {/* <td></td>
-            <td><strong>NET PAY</strong></td>
-            <td>Rs.35500</td>
-            <td></td> */}
-            {/* <th>Net Pay</th>
-            <td>{data.final_salary}</td> */}
+            
           </tr>
           
         </tbody>
