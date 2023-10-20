@@ -121,7 +121,7 @@ export default function BasicModal(props) {
             onChange={(e) => setIncludeESIC(e.target.checked)}
             /> 
             }
-            label="want to include EXIC" />
+            label="want to include ESIC" />
           </FormGroup>
 
           <Button

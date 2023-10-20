@@ -22,6 +22,7 @@ import BookIcon from '@mui/icons-material/Book';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import hysusLogo from '../../assets/hysus.png';
+import PolicyRoundedIcon from '@mui/icons-material/PolicyRounded';
 
 const drawerWidth = 240;
 
@@ -313,6 +314,30 @@ export default function MiniDrawer() {
                   <PaymentsIcon/> 
                 </ListItemIcon>
                 <ListItemText primary="PayRoll" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem primary="Policy" disablePadding sx={{ display: 'block' }} onClick={()=>{
+              // setMenudata('Blog');
+              navigate('/policy');
+            }}>
+              <ListItemButton 
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                  <PolicyRoundedIcon/> 
+                </ListItemIcon>
+                <ListItemText primary="Policy" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           {/* ))} */}

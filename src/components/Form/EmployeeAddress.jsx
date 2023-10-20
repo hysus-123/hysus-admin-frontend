@@ -55,7 +55,7 @@ function EmployeeAddress({ formData, onFormDataChange }) {
           <Grid item xs={12} sm={6}>
             <Autocomplete
               fullWidth
-              options={['Parmanent', 'Correspondence']} // Address Type dropdown options
+              options={["Home", "corresponding", "permanent"]} // Address Type dropdown options
               isOptionEqualToValue={(option, value) => option.value === value.value}
               value={formik.values.type}
               onChange={(event, newValue)=>{

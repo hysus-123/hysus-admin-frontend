@@ -64,7 +64,7 @@ function EmployeeDetails({ formData, onFormDataChange, onImageChange}) {
     // axios.get('/api/reporttos').then((response) => {
     //   setReportToOptions(response.data);
     // });
-  }, [getDesignation]);
+  }, []);
 
   const [selectedimg, setSelectedImg] = useState(null);
 

@@ -8,7 +8,7 @@ import EmployeeList from './pages/EmployeeList';
 // import Blog from './components/Blog';
 import EmpDashboard from './pages/Dashboard';
 import Form from './pages/Form';
-import EditForm from './pages/EditForm';
+import EditForm from './components/EditForm/EditForm';
 import FullDetails from './pages/FullDetails';
 import NewPage from './pages/NewPage';
 // import EmpPage from './pages/Employee/EmpPage';
@@ -25,6 +25,7 @@ import Payroll from './components/Payroll/Payroll';
 import ParticularPayroll from './components/Payroll/ParticularPayroll';
 import LeaveStatus from './components/Leave/LeaveStatus';
 import PayrollPdf from './components/Payroll/PayrollPdf';
+import Policy from './components/Policies/Policies';
 // import HorizontalDropdown from './components/HorizontalDropDown';
 // import NewCalendar from './components/NewCalendar';
 
@@ -56,6 +57,7 @@ function App() {
           <Route path="/payroll/:id" element={<ParticularPayroll />} />
           <Route path="/payrollpdf/:id" element={<PayrollPdf />} />
           <Route path="/employee-form" element={<EmpForm />} />
+          <Route path="/policy" element={<Policy />} />
           {/* <Route path="/emp-page" element={<EmpPage />} />
           <Route path="/employee-page" element={<EmployeePage />} /> */}
           <Route path="/country-api" element={<CountryApi />} />

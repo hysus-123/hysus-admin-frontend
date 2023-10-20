@@ -9,7 +9,7 @@ import axios from 'axios';
 import {Select, MenuItem, InputLabel, FormControl} from '@mui/material';
 
 const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
-const qualification = ['10', '10+2','Graduation', 'Post Graduation','others']
+const qualification = ["10", "10+2", "graduate", "undergraduate", "postgraduate", "pHD", "others"]
 
 const validationSchema = yup.object({
   name: yup.string().required('Name is required'),
@@ -44,7 +44,7 @@ function EmployeeBasic({ formData, onFormDataChange }) {
       .catch((error) => {
         console.error('Error fetching departments:', error);
       });
-  }, [base_url]);
+  },[]);
 
   const formik = useFormik({
     initialValues: {
