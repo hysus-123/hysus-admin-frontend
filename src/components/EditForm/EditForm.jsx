@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Container } from '@mui/material';
 import SideBar from '../../pages/Sidebar/Sidebar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import EditBankDetails from './EditBankDetails'
 import EditEmployeeAddress from './EditEmployeeAddress'
 import EditBasicDetails from './EditEmployeeBasic';
 import EditEmployeeDetails from './EditEmployeeDetails';
+import {Typography} from '@mui/material';
 
 const EditForm = () => {
 
@@ -24,6 +25,7 @@ const EditForm = () => {
         axios.get(`${base_url}/employee/${id}`)
         .then((response)=>{
             console.log(response);
+            setEmployeeData(response.data);
         })
         .catch((err)=>{
             console.log(err);
@@ -34,26 +36,35 @@ const EditForm = () => {
         setEditSection(section);
       };
     
-      const handleSave = (editedData) => {
+      const handleSave = (editedData, id) => {
         // Send editedData to the server for updating the employee's information
         // You can make an axios PUT request here
+        console.log(editedData, "editedData");
+        // axios.patch(`${base_url}/employee/${id}`,editedData)
+        // .then((response)=>{
+        //   console.log(response);
+        // })
+        // .catch((err)=>{
+        //   console.log(err);
+        // })
       };
   return (
     <>
     <Box sx={{display:'flex'}}>
         <SideBar/>
-        <p>Edit Form</p>
-        <div>
-        <p>Edit Form</p>
-        <Button onClick={() => handleEditSection('basic')}>Edit Basic Details</Button>
-        <Button onClick={() => handleEditSection('bank')}>Edit Bank Details</Button>
-        <Button onClick={() => handleEditSection('employee')}>Edit Employee Details</Button>
-        <Button onClick={() => handleEditSection('address')}>Edit Address</Button>
-        {editSection === 'basic' && <EditBasicDetails data={employeeData} onSave={handleSave} />}
+        <Container>
+        <Typography variant="h4" sx={{textAlign:'center', padding:'2vh', fontFamily:'poppins', textDecoration:'underline'}}>EDIT FORM</Typography>
+        <Container sx={{textAlign:'center'}}>
+        <Button onClick={() => handleEditSection('basic')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Basic Details</Button>
+        <Button onClick={() => handleEditSection('bank')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Bank Details</Button>
+        <Button onClick={() => handleEditSection('employee')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Employee Details</Button>
+        <Button onClick={() => handleEditSection('address')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Address</Button>
+        {editSection === 'basic' && <EditBasicDetails data={employeeData} id={id}  onSave={handleSave} />}
         {editSection === 'bank' && <EditBankDetails data={employeeData} onSave={handleSave} />}
         {editSection === 'employee' && <EditEmployeeDetails data={employeeData} onSave={handleSave} />}
         {editSection === 'address' && <EditEmployeeAddress data={employeeData} onSave={handleSave} />}
-      </div>
+        </Container>
+      </Container>
     </Box>
     </>
   );

@@ -10,6 +10,8 @@ import {Paper, Button, MenuItem, Select, Typography} from '@mui/material';
 import HorizontalDropdown from './HorizontalDropDown';
 import './HorizontalDropDown.css';
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,6 +37,7 @@ export default function CustomizedTables() {
   const base_url = process.env.REACT_APP_BASE_URL;
   const [rows, setRows] = useState([]);
   const [presentStatus, setPresentStatus] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   // const [selectedClass, setSelectedClass] = useState(""); 
   const currentDate = new Date();
 
@@ -91,15 +94,15 @@ export default function CustomizedTables() {
 
   return (
     <>
-    <div style={{textAlign:'center', padding:'6px'}}>
-      Employee Attendance
-    </div>
+    <Typography variant='h5' sx={{textAlign:'center', padding:'6px'}}>Employee Attendance</Typography>
+    <Typography>Select Date - <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} /></Typography>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell>{new Date(currentDate.getTime()).toLocaleDateString()}</StyledTableCell>
+            {/* <StyledTableCell>{new Date(currentDate.getTime()).toLocaleDateString()}</StyledTableCell> */}
+            <StyledTableCell>{selectedDate.toLocaleDateString()}</StyledTableCell>
             <StyledTableCell>Action</StyledTableCell>
           </TableRow>
         </TableHead>
