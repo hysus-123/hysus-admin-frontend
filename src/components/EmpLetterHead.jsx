@@ -34,7 +34,7 @@ const EmpLetterHead = () => {
                     Purpose: {data.purpose}
                 </Typography>
                 <Typography>
-                    IssuedBY: {data.issued_by?.name}
+                    IssuedBY: {data.issued_by?.employee_name}
                 </Typography>
         </Paper>
             </Container>

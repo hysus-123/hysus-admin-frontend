@@ -56,8 +56,8 @@ const EditForm = () => {
         <Typography variant="h4" sx={{textAlign:'center', padding:'2vh', fontFamily:'poppins', textDecoration:'underline'}}>EDIT FORM</Typography>
         <Container sx={{textAlign:'center'}}>
         <Button onClick={() => handleEditSection('basic')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Basic Details</Button>
-        <Button onClick={() => handleEditSection('bank')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Bank Details</Button>
         <Button onClick={() => handleEditSection('employee')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Employee Details</Button>
+        <Button onClick={() => handleEditSection('bank')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Bank Details</Button>
         <Button onClick={() => handleEditSection('address')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Address</Button>
         {editSection === 'basic' && <EditBasicDetails data={employeeData} id={id}  onSave={handleSave} />}
         {editSection === 'bank' && <EditBankDetails data={employeeData} onSave={handleSave} />}

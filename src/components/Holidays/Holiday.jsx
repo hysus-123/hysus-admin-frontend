@@ -60,13 +60,34 @@ const Holiday = () => {
             </Card>
 
             <Card>
-            <ul>
+            <Container>
+                        <table style={{tableLayout:'fixed'}}>
+                            <thead>
+                                <tr style={{border:"2px solid black"}}>
+                                <th  style={{padding:2,width:'25%', border:"2px solid black"}}>Title</th>
+                                <th  style={{padding:2,width:'25%', border:"2px solid black"}}>Comment</th>
+                                <th  style={{padding:2,width:'25%', border:"2px solid black"}}>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                {holidayData.map((data)=>(
+                                    <tr >
+                                    <td style={{padding:2,width:'25%', border:"2px solid black"}}>{data.title}</td>
+                                    <td style={{padding:2,width:'25%', border:"2px solid black"}}>{data.comment}</td>
+                                    <td style={{padding:2,width:'25%', border:"2px solid black"}}>{data.date}</td>
+                                    </tr>
+                                ))}
+                                
+                            </tbody>
+                        </table>
+                        </Container>
+            {/* <ul>
               {holidayData.map((holiday) => (
                 <li key={holiday.id}>
                   <strong>{holiday.title}</strong> - {holiday.comment}, Date: {holiday.date}
                 </li>
               ))}
-            </ul>
+            </ul> */}
             </Card>
         </Container>
         </Box>

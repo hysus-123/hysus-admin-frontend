@@ -6,6 +6,8 @@ import BankDetails from './BankDetails';
 import EmployeeAddress from './EmployeeAddress';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const steps = ['Basic Information', 'Employee Details', 'Bank Details', 'Employee Address'];
 
@@ -13,6 +15,7 @@ export default function HorizontalLinearStepper() {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
+  const [alertErr, setAlertErr] = useState([]);
   const [formData, setFormData] = useState({
     // Initialize an empty object to store form data
     name: '',
@@ -138,6 +141,9 @@ export default function HorizontalLinearStepper() {
     })
     .catch((err)=>{
       console.log(err);
+      console.log(err.response.data, "err.data");
+      setAlertErr(err.response.data)
+
     })
     // You can use Axios, fetch, or any other method to send the data to your API
     // Reset the form or perform any other necessary actions
@@ -168,8 +174,25 @@ export default function HorizontalLinearStepper() {
         </Stepper>
         {activeStep === steps.length ? (
           <React.Fragment>
+            <Typography>
+              <Stack sx={{width:'100%'}} spacing={2}>
+                <Alert severity='error'>{alertErr.error}</Alert>
+              </Stack>
+            </Typography>
             <Typography sx={{ mt: 2, mb: 1 }}>
               All steps completed - you&apos;re finished
+            </Typography>
+            
+            <Typography>
+            <Stack sx={{ width: '100%' }} spacing={2}>
+              {alertErr.map((altErr) => (
+                Object.values(altErr?.constraints || {}).map((error, index) => (
+                  <Alert key={index} severity="error">
+                    {error}
+                  </Alert>
+                ))
+              ))}
+            </Stack>
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />

@@ -127,13 +127,14 @@ const [open, setOpen] = useState(false);
                                         <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>Report To:</Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={8}>
-                                        {data?.as_reported ? (
+                                        {/* {data?.as_reported ? (
                                             data.as_reported.map((item) => (
                                             <Typography variant='body1'>{item.employee_name}</Typography>
                                             ))
                                         ) : (
                                             <Typography variant='body1'>No data available</Typography>
-                                        )}
+                                        )} */}
+                                        {data?.as_reported?.employee_name}
                                         </Grid>
                                 </Grid>
                             </Container>

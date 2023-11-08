@@ -23,6 +23,9 @@ import DraftsIcon from '@mui/icons-material/Drafts';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import hysusLogo from '../../assets/hysus.png';
 import PolicyRoundedIcon from '@mui/icons-material/PolicyRounded';
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const drawerWidth = 240;
 
@@ -79,6 +82,7 @@ export default function MiniDrawer() {
   const [open, setOpen] = useState(true);
   // const [menudata, setMenudata] = useState('Home');
   const navigate = useNavigate();
+  const [logo, setLogo] = useState([]);
 
   // const handleDrawerOpen = () => {
   //   setOpen(true);
@@ -87,6 +91,23 @@ export default function MiniDrawer() {
   // const handleDrawerClose = () => {
   //   setOpen(false);
   // };
+
+  useEffect(()=>{
+    gettingLogo();
+  },[])
+
+  const base_url = process.env.REACT_APP_BASE_URL
+
+  const gettingLogo = () =>{
+    axios.get(`${base_url}/company/1`)
+    .then((response)=>{
+      console.log(response.data);
+      setLogo(response.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
 
   return (
     <Box sx={{ display: 'flex', }}>
@@ -116,12 +137,13 @@ export default function MiniDrawer() {
           <div style={{display:'flex'}}>
             
             <div style={{textAlign:'center', width:'100%'}}>
-            <img src={hysusLogo} alt='hysus logo'width={150} />
+            {/* <img src={hysusLogo} alt='hysus logo'width={150} height={80} /> */}
+            <img src={logo.logo} alt='hysus logo'width={150} height={80} />
             </div>
             <IconButton onClick={()=>setOpen(!open)}>
               {theme.direction === 'rtl' ? <MenuIcon /> : <MenuIcon />}
             </IconButton>
-          
+        
           </div>
         </DrawerHeader>
 
@@ -338,6 +360,30 @@ export default function MiniDrawer() {
                   <PolicyRoundedIcon/> 
                 </ListItemIcon>
                 <ListItemText primary="Policy" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem primary="Setting" disablePadding sx={{ display: 'block' }} onClick={()=>{
+              // setMenudata('Blog');
+              navigate('/setting');
+            }}>
+              <ListItemButton 
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                  <SettingsSuggestIcon/> 
+                </ListItemIcon>
+                <ListItemText primary="Setting" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           {/* ))} */}

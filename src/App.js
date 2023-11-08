@@ -26,6 +26,7 @@ import ParticularPayroll from './components/Payroll/ParticularPayroll';
 import LeaveStatus from './components/Leave/LeaveStatus';
 import PayrollPdf from './components/Payroll/PayrollPdf';
 import Policy from './components/Policies/Policies';
+import Setting from './components/CompanyDetail/Company';
 // import HorizontalDropdown from './components/HorizontalDropDown';
 // import NewCalendar from './components/NewCalendar';
 
@@ -52,12 +53,14 @@ function App() {
           <Route path="/emp-letterhead/:id" element={<EmpLetterHead />} />
           <Route path="/holidays" element={<Holiday />} />
           <Route path="/department" element={<Department />} />
-          <Route path="/leave" element={<LeaveStatus />} />
+          <Route path="/leaves" element={<LeaveStatus />} />
           <Route path="/payroll" element={<Payroll />} />
           <Route path="/payroll/:id" element={<ParticularPayroll />} />
           <Route path="/payrollpdf/:id" element={<PayrollPdf />} />
           <Route path="/employee-form" element={<EmpForm />} />
+          
           <Route path="/policy" element={<Policy />} />
+          <Route path="/setting" element={<Setting />} />
           {/* <Route path="/emp-page" element={<EmpPage />} />
           <Route path="/employee-page" element={<EmployeePage />} /> */}
           <Route path="/country-api" element={<CountryApi />} />

@@ -7,8 +7,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {Paper, Button, MenuItem, Select, Typography, Container} from '@mui/material';
-import HorizontalDropdown from './HorizontalDropDown';
-import './HorizontalDropDown.css';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -46,7 +44,7 @@ export default function CustomizedTables() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'data');
-        setRows(data);
+        // setRows(data);
       })
       .catch((error) => {
         console.error('Error fetching data: ', error);
@@ -58,8 +56,8 @@ export default function CustomizedTables() {
   },[])
 
   const fetchAllAttend = () =>{
-    const currentDate = new Date();
-
+    const currentDate = selectedDate;
+    console.log(currentDate, "currentDate");
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const day = String(currentDate.getDate()).padStart(2, '0');
@@ -70,32 +68,63 @@ export default function CustomizedTables() {
 
     axios.get(`${base_url}/attendance?date=${formattedDate}`)
     .then((response)=>{
-      console.log(response);
+      console.log(response.data);
+      setRows(response.data);
     })
     .catch((err)=>console.log(err));
   }
 
-  const submitAttend = (id, index) => {
-    const attendData = {
-      presentStatus: presentStatus[index],
-      employee: id,
-    };
+//   const submitAttend = (id, index) => {
+//     const attendData = {
+//       presentStatus: presentStatus[index],
+//       employee: id,
+//     };
   
-    axios
-      .post(`${base_url}/attendance`, attendData)
-      .then((response) => {
-        console.log(response, "response");
-        console.log(response.data.presentStatus, "response.data.presentStatus");
-      })
-      .catch((err) => console.log(err));
-  };
+//     axios
+//       .post(`${base_url}/attendance`, attendData)
+//       .then((response) => {
+//         console.log(response, "response");
+//         console.log(response.data.presentStatus, "response.data.presentStatus");
+//       })
+//       .catch((err) => console.log(err));
+//   };
+
+  const submitAttend = (id, index , employee) =>{
+    console.log(id);
+    console.log(employee, "employee");
+    const updateAttend = {
+        presentStatus: presentStatus[index],
+        employee: employee,
+        comment:"done"
+    }
+
+    const currentDate = selectedDate;
+    console.log(currentDate, "currentDate");
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}`;
+
+    console.log(formattedDate);
+
+    axios.patch(`${base_url}/attendance/${id}?date=${formattedDate}`,updateAttend)
+    .then((response)=>{
+        console.log(response);
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+  }
   
-
-
   return (
     <>
     <Container>
+        <div style={{display:'flex'}}>
     <Typography>Select Date - <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} /></Typography>
+    <Typography><Button variant='contained' size='small' color='secondary' onClick={fetchAllAttend}>Search</Button></Typography>
+    
+    </div>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
@@ -103,16 +132,17 @@ export default function CustomizedTables() {
             <StyledTableCell>Name</StyledTableCell>
             {/* <StyledTableCell>{new Date(currentDate.getTime()).toLocaleDateString()}</StyledTableCell> */}
             <StyledTableCell>{selectedDate.toLocaleDateString()}</StyledTableCell>
+            <StyledTableCell>Status</StyledTableCell>
             <StyledTableCell>Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
         {rows.map((row, index) => (
           <StyledTableRow key={row.id} size="small">
-            <StyledTableCell>{row?.as_basicInfo.name}</StyledTableCell>
+            <StyledTableCell>{row?.employee_details?.employee_name}</StyledTableCell>
             <StyledTableCell>
               <Select
-                value={presentStatus[index] || ""}
+                value={ presentStatus[index] || row.presentStatus}
                 onChange={(e) => {
                   const newValue = e.target.value;
                   setPresentStatus((prevState) => {
@@ -129,10 +159,11 @@ export default function CustomizedTables() {
                 <MenuItem value="leave">Leave</MenuItem>
               </Select>
             </StyledTableCell>
+            <StyledTableCell>{row.presentStatus}</StyledTableCell>
             <StyledTableCell>
               <Button
                 variant="contained"
-                onClick={() => submitAttend(row.id, index)}
+                onClick={() => submitAttend(row.id, index, row.employee)}
                 size="small"
               >
                 Submit

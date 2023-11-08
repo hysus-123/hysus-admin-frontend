@@ -41,7 +41,7 @@ export default function BasicModal() {
 
       const getAllL2Employee = () => {
         
-        axios.get(`${base_url}/employee`)
+        axios.get(`${base_url}/employee?level=4`)
           .then((response) => {
             console.log(response.data, 'letterhead response');
             const names = response.data.map((employee) => {

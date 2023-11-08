@@ -5,7 +5,7 @@ import axios from 'axios';
 const EditBasicDetails = ({ data, onSave, id }) => {
   const [basicInfo, setBasicInfo] = useState({ ...data });
   const new_id = id;
-  console.log(new_id);
+  console.log(data.as_basicInfo.id, "new id");
 
   const handleInputChange = (event) => {
     event.preventDefault();
@@ -13,28 +13,25 @@ const EditBasicDetails = ({ data, onSave, id }) => {
     // const { name, value } = event.target;
     // setBasicInfo({ ...basicInfo?.as_basicInfo, [name]: value });
     const { name, value } = event.target;
-  setBasicInfo((prevBasicInfo) => ({
-    ...prevBasicInfo,
-    as_basicInfo: {
-      ...prevBasicInfo.as_basicInfo,
-      [name]: value,
-    },
-  }));
+    setBasicInfo((prevBasicInfo) => ({
+        ...prevBasicInfo.as_basicInfo,
+        [name]: value,
+    }));
   };
 
   const base_url = process.env.REACT_APP_BASE_URL
 
   const handleSave = () => {
     onSave(basicInfo?.as_basicInfo);
-    console.log(basicInfo, "basicInfo");
+    console.log(basicInfo.id, "basicInfo");
 
-    axios.patch(`${base_url}/employee/${id}?base_id=${basicInfo.emp_id}`, basicInfo)
-    .then((response)=>{
-      console.log(response);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
+    axios.patch(`${base_url}/employee/${id}?base_id=${data.as_basicInfo.id}`, basicInfo)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
 
   };
 
@@ -129,7 +126,7 @@ const EditBasicDetails = ({ data, onSave, id }) => {
                   {blood_group}
                 </MenuItem>
               ))}
-              
+
             </Select>
           </FormControl>
         </Grid>
@@ -158,7 +155,7 @@ const EditBasicDetails = ({ data, onSave, id }) => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-        <FormControl fullWidth variant='outlined'>
+          <FormControl fullWidth variant='outlined'>
             <InputLabel id="qualification">Qualification</InputLabel>
             <Select
               fullWidth
