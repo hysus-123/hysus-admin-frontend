@@ -33,9 +33,9 @@ function EmployeeBasic({ formData, onFormDataChange }) {
 
   const base_url = process.env.REACT_APP_BASE_URL
   
-  // Fetch departments from your backend API when the component mounts
+  
   useEffect(() => {
-    // Replace 'yourApiEndpoint' with the actual API endpoint to fetch departments
+    
     axios.get(`${base_url}/department`)
       .then((response) =>{
         console.log(response.data);

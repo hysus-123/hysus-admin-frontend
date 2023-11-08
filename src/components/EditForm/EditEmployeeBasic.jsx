@@ -1,17 +1,42 @@
 import React, { useState } from 'react';
-import { TextField, Button, Grid, Paper, Typography, Divider } from '@mui/material';
+import { TextField, Button, Grid, Paper, Typography, Divider, MenuItem, FormControl, Select, InputLabel } from '@mui/material';
+import axios from 'axios';
 
-const EditBasicDetails = ({ data, onSave }) => {
+const EditBasicDetails = ({ data, onSave, id }) => {
   const [basicInfo, setBasicInfo] = useState({ ...data });
+  const new_id = id;
+  console.log(data.as_basicInfo.id, "new id");
 
   const handleInputChange = (event) => {
+    event.preventDefault();
+    console.log(event.target.value);
+    // const { name, value } = event.target;
+    // setBasicInfo({ ...basicInfo?.as_basicInfo, [name]: value });
     const { name, value } = event.target;
-    setBasicInfo({ ...basicInfo, [name]: value });
+    setBasicInfo((prevBasicInfo) => ({
+        ...prevBasicInfo.as_basicInfo,
+        [name]: value,
+    }));
   };
 
+  const base_url = process.env.REACT_APP_BASE_URL
+
   const handleSave = () => {
-    onSave(basicInfo);
+    onSave(basicInfo?.as_basicInfo);
+    console.log(basicInfo.id, "basicInfo");
+
+    axios.patch(`${base_url}/employee/${id}?base_id=${data.as_basicInfo.id}`, basicInfo)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
   };
+
+  const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+  const qualification = ["10", "10+2", "graduate", "undergraduate", "postgraduate", "pHD", "others"];
 
   return (
     <Paper elevation={3} sx={{ padding: '20px' }}>
@@ -26,8 +51,11 @@ const EditBasicDetails = ({ data, onSave }) => {
             name="name"
             label="Name"
             fullWidth
-            value={basicInfo.name}
+            value={basicInfo?.as_basicInfo?.name}
             onChange={handleInputChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -35,8 +63,11 @@ const EditBasicDetails = ({ data, onSave }) => {
             name="personal_email"
             label="Personal Email"
             fullWidth
-            value={basicInfo.personal_email}
+            value={basicInfo?.as_basicInfo?.personal_email}
             onChange={handleInputChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -44,8 +75,11 @@ const EditBasicDetails = ({ data, onSave }) => {
             name="spouse_name"
             label="Spouse Name"
             fullWidth
-            value={basicInfo.spouse_name}
+            value={basicInfo?.as_basicInfo?.spouse_name}
             onChange={handleInputChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -53,37 +87,59 @@ const EditBasicDetails = ({ data, onSave }) => {
             name="alternative_number"
             label="Alternative Number"
             fullWidth
-            value={basicInfo.alternative_number}
+            value={basicInfo?.as_basicInfo?.alternative_number}
             onChange={handleInputChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="birth_date"
-            label="Birth Date"
-            // placeholder='Birth Date'
             type="date"
+            label="Birth Date"
+            name="birth_date"
             fullWidth
-            value={basicInfo.birth_date}
+            value={basicInfo?.as_basicInfo?.birth_date}
             onChange={handleInputChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            name="blood_group"
-            label="Blood Group"
-            fullWidth
-            value={basicInfo.blood_group}
-            onChange={handleInputChange}
-          />
+          <FormControl fullWidth variant='outlined'>
+            <InputLabel id="bloodgroup">Blood Group</InputLabel>
+            <Select
+              fullWidth
+              label="Blood Group"
+              name="blood_group"
+              value={basicInfo?.as_basicInfo?.blood_group}
+              onChange={handleInputChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            >
+              {bloodGroups.map((blood_group) => (
+
+                <MenuItem value={blood_group} key={blood_group}>
+                  {blood_group}
+                </MenuItem>
+              ))}
+
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             name="linkedin_link"
             label="LinkedIn Profile"
             fullWidth
-            value={basicInfo.linkedin_link}
+            value={basicInfo?.as_basicInfo?.linkedin_link}
             onChange={handleInputChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -91,18 +147,34 @@ const EditBasicDetails = ({ data, onSave }) => {
             name="phone"
             label="Phone Number"
             fullWidth
-            value={basicInfo.phone}
+            value={basicInfo?.as_basicInfo?.phone}
             onChange={handleInputChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            name="qualification"
-            label="Qualification"
-            fullWidth
-            value={basicInfo.qualification}
-            onChange={handleInputChange}
-          />
+          <FormControl fullWidth variant='outlined'>
+            <InputLabel id="qualification">Qualification</InputLabel>
+            <Select
+              fullWidth
+              label="Qualification"
+              name="qualification"
+              value={basicInfo?.as_basicInfo?.qualification}
+              onChange={handleInputChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            >
+              {qualification.map((qual) => (
+
+                <MenuItem value={qual} key={qual}>
+                  {qual}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
 

@@ -10,6 +10,7 @@ import CustomizedSwitches from '../components/switch';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar/Sidebar';
 import {Box} from '@mui/material';
+import ReportToDialoge from '../components/ReportTo/ReportToDialoge';
 
 const EmpDashboard = () => {
   const {id} = useParams();
@@ -55,13 +56,14 @@ const EmpDashboard = () => {
         <Grid item xs={12} md={4} >
           <Card>
             <CardContent>
-              <div style={{display:"flex",flexDirection:"column", alignItems:"center", textAlign:"center"}}>
+              <div style={{display:"flex",flexDirection:"column",gap:'10', alignItems:"center", textAlign:"center"}}>
                 <img src={data.img} alt='Profile' style={{ height: '300px' }} />
               {/* </div> */}
                 <div style={{ textAlign: 'center' }}>
                   <Typography variant='h4'>{data?.as_basicInfo?.name}</Typography>
                   <Typography variant='body1'>HYS-{data.emp_id}</Typography>
                   <Typography variant='body1'>{data.as_designation?.position}</Typography>
+                  <ReportToDialoge level={data.as_designation?.level} deptId={data.as_designation?.as_department?.id} id={data.id}/>
                   {/* <Typography variant='body1'>{data.as_department?.department}</Typography> */}
                   
                 </div>

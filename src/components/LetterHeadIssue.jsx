@@ -136,15 +136,15 @@ export default function App() {
                   >
                   <Box sx={style}>
                   <Container>
-                  <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                    <Button disabled>HYS</Button>
-                    {/* <Button>Two</Button> */}
+                  
+                    <Typography variant='body1'>
+                    Enter Unique NO:
+                    </Typography>
                     <TextField  
                     value ={value}
                     required
                     onChange={(e)=>setValue(e.target.value)}
                     />
-                  </ButtonGroup>
                   <Button sx={{display:'inline-block',float:'right', m:2}}variant="contained" onClick={handleSubmit}>Submit</Button>
                 </Container>
                   </Box>

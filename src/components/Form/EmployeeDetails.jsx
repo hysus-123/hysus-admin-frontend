@@ -30,7 +30,7 @@ function EmployeeDetails({ formData, onFormDataChange, onImageChange}) {
   const [designationOptions, setDesignationOptions] = useState([]);
   const [reportToOptions, setReportToOptions] = useState([]);
   const department = formData.department || '';
-
+  
   const formik = useFormik({
     initialValues: {
       employee_name: formData.employee_name || '',
@@ -227,7 +227,7 @@ function EmployeeDetails({ formData, onFormDataChange, onImageChange}) {
               error={formik.touched.reported_to && Boolean(formik.errors.reported_to)}
               helperText={formik.touched.reported_to && formik.errors.reported_to}
             >
-              {[5, 4].map((type) => (
+              {[1,5, 4].map((type) => (
                 <MenuItem key={type} value={type}>
                   {type}
                 </MenuItem>

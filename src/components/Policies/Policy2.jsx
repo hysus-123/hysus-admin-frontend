@@ -68,8 +68,84 @@ const policy2 = () => {
       <li>Casual leave not availed during the year will lapse at the end of year.</li>
     </ul>
 
-    <div style={{fontWeight:'bold', fontSize:'2vh'}}>Process for Casual Leave</div>
+    <div style={{fontWeight:'bold', fontSize:'2.3vh'}}>Process for Casual Leave</div>
     <div>Casual leave applied by an employee on Employee Portal l. For approval the leave notification will reach the immediate reporting manager. Once approved, approval notification will reach to employee and HR. Leave are deducted from leave balance from the employees account and latest balance updated on Employee Portal.</div>
+    </section>
+
+    <section>
+      <h3>Earned Leave</h3>
+      <ul>
+        <li>Leave application for Earned leave must reach reporting manager 3 days in advance.</li>
+        <li>For new joiners joining during the mid of year privilege leave will be credited on pro rata basis.</li>
+        <li>For existing employees leaves will be credited in the beginning of the year, entitlement however will be based on number of months worked. For every month completed 1.75 of privilege leave will be credited to employees account.</li>
+        <li>Privilege leave can be carried forward to next year up to a maximum of 9 days. However for existing employees who are into service for more than 5 years a maximum of 45 days can be carried forward. Leave above 45 days will lapse automatically.</li>
+        <li>Employees who have resigned from their duties privilege leave entitlement would be calculated on pro rata basis till their last working day.</li>
+        <li>For the calculation of LTA, 5 days leave are compulsory to be availed by an employee (inclusive of holidays).</li>
+
+      </ul>
+      <div style={{fontWeight:'bold', fontSize:'2.3vh'}}>Process for Earned Leave</div>
+      <div>Employee must apply for earned leave 3 days in advance. Once applied, notification will reach immediate reporting manager. Once approved leave notification will reach employee and HR. Leave balance after deduction will be updated on Employee Portal.</div>
+
+    </section>
+
+    <section>
+      <h3>Maternity Leave/ Paternity Leave</h3>
+      <li>All confirmed female/Male employees shall be entitled for Maternity leave as per Maternity Benefit Act, 2016.</li>
+      <div style={{fontWeight:'bold', fontSize:'2.3vh'}}>Leave in case of adoption of child.</div>
+      <li>Child adoption benefits are provided in accordance with the Indian child adoption guidelines or The Maternity Benefit Act (1961).</li>
+      <div>All legal certificate and required documents must be submitted to HR.</div>
+    </section>
+
+    <section>
+      <h3>Leave Without Pay</h3>
+      <li>An employee can avail leave without pay in case existing leave balance is exhausted and employee is in need of leave due to unforeseen circumstances.</li>
+      <li>In case no approval taken for leave without pay, such absence of employee will be considered as Leave of absence from work.</li>
+      <li>Disciplinary action will be taken in case of absence without approval.</li>
+      <li>No salary would be given to employee for the days leave without pay is availed.</li>
+      <li>A maximum of 3 months of leave without pay can be availed by an employee.</li>
+      <li>Loss of pay can be availed by an employee by applying on Employee Portal for approval from immediate reporting manager and head of department.</li>
+      <li>Once approved by immediate reporting manager and department head, Leave can be availed by employee.</li>
+      <li>Leave will be updated as loss of pay on Employee Portal. </li>
+       <div style={{fontWeight:'bold', fontSize:'2.3vh', marginTop:'1vh'}}>Process for availing leave without pay</div>
+       <li>Loss of Pay can be availed by an employee by applying on for approval from immediate reporting manager and head of department.</li>
+       <li>Once approved by immediate reporting manager and department head, leave can be availed by employee.</li>
+       <li>Leave will be updated as loss of pay on Employee Portal.</li>
+
+    </section>
+
+    <section>
+      <h3>Compensatory OFF</h3>
+      <li>An employee is eligible for compensatory off when he/she has worked on an important assignment on any of the national/festival/declared off day.</li>
+      <li>Approval to work on any such day i.e. national/festival/declared off day must be taken by senior management</li>
+      <li>Compensatory off must be availed within a period of 1 month else it will lapse.</li>
+      
+        <div style={{fontWeight:'bold', fontSize:'2.3vh', marginTop:'1vh'}}>Process to avail compensatory loss</div>
+        <div>Approval of senior management is must for compensatory off. Employee who has worked on national/festival/declared off day can avail leave in lieu of work done on above mentioned days. The day employee is taking compensatory off he/she must inform immediate reporting manager, once approved, it is immediate managers responsibility to inform HR about the same. </div>
+        <div><strong>Leave of absence policy:  </strong>The leave of absence policy is defined as an unpaid duly approved absence from work for a limited period of time for medical or personal reasons. </div>
+      
+    </section>
+
+    <section>
+      <h3>Process of Leave of Absense Policy</h3>
+      <div><strong>Medical reasons: </strong>A request for leave of absence from work must be raised on Employee Portal. The request will reach the immediate supervisor and Head of department for approval. An employee is supposed to take approval from Leave of absence from work at least 20 days in advance when the need for leave is foreseeable. In case of leave of absence from work due to medical reasons a certificate from physician need to be submitted to HR.</div>
+      <div><strong>Personal reason: </strong> An employee can apply for Leave of absence from work when in need due to some unforeseen reasons. The maximum days of leave of absence  can be applied for six weeks</div>
+      <h3>Cancellation of leave</h3>
+      <li>Approved leave can be cancelled depending upon the business demand.</li>
+      <li>Leave once cancelled by reporting manager an automatic notification will reach to the employee and the HR.</li>
+      <li>Leave balance will be updated accordingly by HR</li>
+      <h3>Extension Of Leave</h3>
+      <li>In case of extension of leave due to any unforeseen circumstances the employee must inform reporting manager in advance; once extension of leave is approved by reporting manager it is manager’s duty to inform HR. This is the case when leave extension has been told verbally or over the phone. It is employee responsibility to regularize leave on Employee Portal once employee has resumed back on duty.</li>
+      <li>The extended leave must be applied on Employee Policy in case of planned extension so that both the reporting manager and HR are informed automatically.</li>
+      <li>Leave balance is updated on Employee Portal by HR.</li>
+      <li>In case employee overstays without approval it will be treated as absence from duty and disciplinary action will be taken against the employee.</li>
+      <li>Leave extended without permission will be treated as loss of pay.    </li>
+      <h3>Leave calculation on resignation/termination</h3>
+      <div>In case employee has resigned from the services or on termination of employee privilege leave will be calculated till the last working day of the employee and will be paid in full and final settlement of the employee</div>
+      <div style={{fontWeight:'bold', fontSize:'2.3vh'}}>Revision of the policy</div>
+      <div>The company reserves the right to revise, modify any or all clauses of this policy depending upon demand of business.</div>
+      <div style={{fontWeight:'bold', fontSize:'2.3vh'}}>Explation of Leave Policy</div>
+      <div>Corporate HR department will be sole authority to interpret the content of this policy.</div>
+
     </section>
 
 
