@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import {Modal, TextField} from '@mui/material';
 import Add from '@mui/icons-material/Add';
 import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const style = {
   position: 'absolute',
@@ -26,6 +28,17 @@ export default function BasicModal() {
   const [dept, setDept] = useState('');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnackbarOpen(false);
+  };
   
   const addDepartment = () =>{
     const deptData = {
@@ -34,15 +47,37 @@ export default function BasicModal() {
     axios.post(`${base_url}/department`, deptData)
     .then((response)=>{
         console.log(response);
+        deptData={
+          department: ''
+        }
         setOpen(false);
+        setSnackbarMessage('Department created successfully');
+        setSnackbarOpen(true);
     })
     .catch((err)=>{
         console.log(err);
+          setSnackbarMessage('Error submitting department');
+          setSnackbarOpen(true);
     })
   }
 
   return (
     <div>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity={snackbarMessage.includes('successfully') ? 'success' : 'error'}
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
       <Button onClick={handleOpen} variant="contained" sx={{backgroundColor:'#2E3B55',borderRadius:'20px', marginRight:'10px'}}>
       <Add/>Add Department
       </Button>

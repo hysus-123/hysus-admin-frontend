@@ -7,6 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {Paper, Button, MenuItem, Select, Typography, Container} from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import HorizontalDropdown from './HorizontalDropDown';
 import './HorizontalDropDown.css';
 import axios from 'axios';
@@ -40,6 +42,17 @@ export default function CustomizedTables() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   // const [selectedClass, setSelectedClass] = useState(""); 
   const currentDate = new Date();
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+  
+    setSnackbarOpen(false);
+  };
 
   useEffect(() => {
     fetch(`${base_url}/employee`)
@@ -86,8 +99,14 @@ export default function CustomizedTables() {
       .then((response) => {
         console.log(response, "response");
         console.log(response.data.presentStatus, "response.data.presentStatus");
+        setSnackbarMessage('Attendance submitted successfully');
+        setSnackbarOpen(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setSnackbarMessage('Error submitting attendance');
+        setSnackbarOpen(true);
+      });
   };
   
 
@@ -95,7 +114,22 @@ export default function CustomizedTables() {
   return (
     <>
     <Container>
-    <Typography>Select Date - <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} /></Typography>
+    <Snackbar
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={snackbarOpen}
+      autoHideDuration={6000}
+      onClose={handleSnackbarClose}
+    >
+      <MuiAlert
+        elevation={6}
+        variant="filled"
+        onClose={handleSnackbarClose}
+        severity={snackbarMessage.includes('successfully') ? 'success' : 'error'}
+      >
+        {snackbarMessage}
+      </MuiAlert>
+    </Snackbar>
+    {/* <Typography>Select Date - <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} /></Typography> */}
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>

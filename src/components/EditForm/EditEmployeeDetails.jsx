@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { TextField, Button, Grid, Paper, Typography, Divider } from '@mui/material';
 
 const EditBasicDetails = ({ data, onSave }) => {
-  const [basicInfo, setBasicInfo] = useState({ ...data });
+  const [empInfo, setEmpInfo] = useState({ ...data });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setBasicInfo({ ...basicInfo, [name]: value });
+    setEmpInfo({ ...empInfo, [name]: value });
   };
 
   const handleSave = () => {
-    onSave(basicInfo);
+    onSave(empInfo);
   };
 
   return (
@@ -23,29 +23,33 @@ const EditBasicDetails = ({ data, onSave }) => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="name"
-            label="Name"
+            name="employee_name"
+            label="Employee Name"
             fullWidth
-            value={basicInfo.name}
+            value={empInfo.employee_name}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="personal_email"
-            label="Personal Email"
+            name="email"
+            label="Hysus Email"
             fullWidth
-            value={basicInfo.personal_email}
+            value={empInfo.email}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="spouse_name"
-            label="Spouse Name"
+            type="date"
+            label="Joining Date"
+            name="joining_date"
             fullWidth
-            value={basicInfo.spouse_name}
+            value={empInfo?.joining_date}
             onChange={handleInputChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -53,7 +57,7 @@ const EditBasicDetails = ({ data, onSave }) => {
             name="alternative_number"
             label="Alternative Number"
             fullWidth
-            value={basicInfo.alternative_number}
+            value={empInfo.alternative_number}
             onChange={handleInputChange}
           />
         </Grid>
@@ -64,7 +68,7 @@ const EditBasicDetails = ({ data, onSave }) => {
             // placeholder='Birth Date'
             type="date"
             fullWidth
-            value={basicInfo.birth_date}
+            value={empInfo.birth_date}
             onChange={handleInputChange}
           />
         </Grid>
@@ -73,7 +77,7 @@ const EditBasicDetails = ({ data, onSave }) => {
             name="blood_group"
             label="Blood Group"
             fullWidth
-            value={basicInfo.blood_group}
+            value={empInfo.blood_group}
             onChange={handleInputChange}
           />
         </Grid>
@@ -82,7 +86,7 @@ const EditBasicDetails = ({ data, onSave }) => {
             name="linkedin_link"
             label="LinkedIn Profile"
             fullWidth
-            value={basicInfo.linkedin_link}
+            value={empInfo.linkedin_link}
             onChange={handleInputChange}
           />
         </Grid>
@@ -91,7 +95,7 @@ const EditBasicDetails = ({ data, onSave }) => {
             name="phone"
             label="Phone Number"
             fullWidth
-            value={basicInfo.phone}
+            value={empInfo.phone}
             onChange={handleInputChange}
           />
         </Grid>
@@ -100,7 +104,7 @@ const EditBasicDetails = ({ data, onSave }) => {
             name="qualification"
             label="Qualification"
             fullWidth
-            value={basicInfo.qualification}
+            value={empInfo.qualification}
             onChange={handleInputChange}
           />
         </Grid>

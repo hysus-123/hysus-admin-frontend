@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Container, Typography, Button} from '@mui/material';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import GroupsIcon from '@mui/icons-material/Groups';
+import { useEffect } from 'react';
+import axios from 'axios';
 
-const TotalEmployee = () => {
+const TotalEmployee = ({dash}) => {
+
+    
 
     const cardStyle = {
         opacity:'0.75',
@@ -20,7 +24,7 @@ const TotalEmployee = () => {
             {/* <Button size='large' sx={{height:'100%', width:'100%'}}> */}
             <Typography sx={{display:'flex', justifyContent:'space-around' }}>
                 <div style={{fontSize:'13vh'}}>
-                    20
+                    {dash.employee}
 
                 </div>
                 <div >

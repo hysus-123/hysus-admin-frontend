@@ -10,8 +10,6 @@ const EditBasicDetails = ({ data, onSave, id }) => {
   const handleInputChange = (event) => {
     event.preventDefault();
     console.log(event.target.value);
-    // const { name, value } = event.target;
-    // setBasicInfo({ ...basicInfo?.as_basicInfo, [name]: value });
     const { name, value } = event.target;
     setBasicInfo((prevBasicInfo) => ({
         ...prevBasicInfo.as_basicInfo,
