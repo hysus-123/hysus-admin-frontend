@@ -16,7 +16,7 @@ const EditBasicDetails = ({ data, onSave }) => {
   return (
     <Paper elevation={3} sx={{ padding: '20px' }}>
       <Typography variant="h5" gutterBottom>
-        Edit Basic Details
+        Edit Bank Details
       </Typography>
       <Divider sx={{ marginY: '20px' }} />
 
