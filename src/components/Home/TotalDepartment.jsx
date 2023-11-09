@@ -3,7 +3,7 @@ import { Card, Container, Typography, Button} from '@mui/material';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import GroupsIcon from '@mui/icons-material/Groups';
 
-const TotalDepartment = () => {
+const TotalDepartment = ({dash}) => {
 
     const cardStyle = {
         opacity:'0.75',
@@ -20,7 +20,7 @@ const TotalDepartment = () => {
             {/* <Button size='large' sx={{height:'100%', width:'100%'}}> */}
             <Typography sx={{display:'flex', justifyContent:'space-around' }}>
                 <div style={{fontSize:'13vh'}}>
-                    4
+                    {dash.department}
                 </div>
                 <div >
                     <GroupsIcon sx={{fontSize:'13vh'}}/>
