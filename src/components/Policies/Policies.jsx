@@ -4,9 +4,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Policy1 from './Policy1';
 import Policy2 from './Policy2';
 import SideBar from '../../pages/Sidebar/Sidebar';
+import GeneralPolicy from './GeneralPolicy';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,7 +62,7 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <Policy1/>
+        <GeneralPolicy/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <Policy2/>
