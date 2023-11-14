@@ -8,6 +8,8 @@ import Policy2 from './Policy2';
 import SideBar from '../../pages/Sidebar/Sidebar';
 import GeneralPolicy from './GeneralPolicy';
 import NonDisclosure from './NonDisclosure';
+import NonCompetence from './NonCompetence';
+import SingleEmployment from './SingleEmployment';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,7 +61,7 @@ export default function BasicTabs() {
           <Tab label="Leave Policies" {...a11yProps(1)} />
           <Tab label="Non Disclosure" {...a11yProps(2)} />
           <Tab label="Non Competence" {...a11yProps(3)} />
-          <Tab label="Dual Employment" {...a11yProps(4)} />
+          <Tab label="Single Employment" {...a11yProps(4)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -72,10 +74,10 @@ export default function BasicTabs() {
         <NonDisclosure/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        Non Competence
+        <NonCompetence/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
-        Dual Employment
+        <SingleEmployment/>
       </CustomTabPanel>
     </Box>
     </Box>
