@@ -55,8 +55,9 @@ const [snackbarMessage, setSnackbarMessage] = useState('');
         setSnackbarOpen(true);
     })
     .catch((err)=>{
-        console.log(err);
-          setSnackbarMessage('Error submitting department');
+          console.log(err, "error");
+          console.log(err.error, "err.error")
+          setSnackbarMessage('error');
           setSnackbarOpen(true);
     })
   }

@@ -25,7 +25,7 @@ const EmpLetterHead = () => {
         <Container>
         <Paper>
                 <Typography>
-                    Serial No: HYS-{data.random5DigitValue}
+                    Serial No: {data.unique_id}
                 </Typography>
                 <Typography>
                     Name: {data.name}
@@ -34,7 +34,7 @@ const EmpLetterHead = () => {
                     Purpose: {data.purpose}
                 </Typography>
                 <Typography>
-                    IssuedBY: {data.issued_by?.employee_name}
+                    IssuedBy: {data.issued_by?.employee_name}
                 </Typography>
         </Paper>
             </Container>

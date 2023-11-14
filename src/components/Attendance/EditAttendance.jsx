@@ -10,6 +10,8 @@ import {Paper, Button, MenuItem, Select, Typography, Container} from '@mui/mater
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -37,6 +39,17 @@ export default function CustomizedTables() {
   const [presentStatus, setPresentStatus] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   // const [selectedClass, setSelectedClass] = useState(""); 
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+  
+    setSnackbarOpen(false);
+  };
+
   const currentDate = new Date();
 
   useEffect(() => {
@@ -111,14 +124,33 @@ export default function CustomizedTables() {
     axios.patch(`${base_url}/attendance/${id}?date=${formattedDate}`,updateAttend)
     .then((response)=>{
         console.log(response);
+        setSnackbarMessage('Attendance edited successfully');
+        setSnackbarOpen(true);
     })
     .catch((err)=>{
         console.log(err);
+        setSnackbarMessage('error in edit');
+        setSnackbarOpen(true);
     })
   }
   
   return (
     <>
+    <Snackbar
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={snackbarOpen}
+      autoHideDuration={6000}
+      onClose={handleSnackbarClose}
+    >
+      <MuiAlert
+        elevation={6}
+        variant="filled"
+        onClose={handleSnackbarClose}
+        severity={snackbarMessage.includes('successfully') ? 'success' : 'error'}
+      >
+        {snackbarMessage}
+      </MuiAlert>
+    </Snackbar>
     <Container>
         <div style={{display:'flex'}}>
     <Typography>Select Date - <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} /></Typography>

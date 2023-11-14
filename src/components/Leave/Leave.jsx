@@ -4,10 +4,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Policy2 from './Policy2';
 import SideBar from '../../pages/Sidebar/Sidebar';
-import GeneralPolicy from './GeneralPolicy';
-import NonDisclosure from './NonDisclosure';
+import LeaveStatus from './LeaveStatus';
+import LeaveBalance from './LeaveBalance';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,7 +41,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function AttendanceTabs() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -55,27 +54,15 @@ export default function BasicTabs() {
     <Box sx={{ width: '100%'}}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Policies" {...a11yProps(0)} />
-          <Tab label="Leave Policies" {...a11yProps(1)} />
-          <Tab label="Non Disclosure" {...a11yProps(2)} />
-          <Tab label="Non Competence" {...a11yProps(3)} />
-          <Tab label="Dual Employment" {...a11yProps(4)} />
+          <Tab label="Leave Types" {...a11yProps(0)} />
+          <Tab label="Leave Overview" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <GeneralPolicy/>
+        <LeaveStatus/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <Policy2/>
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        <NonDisclosure/>
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
-        Non Competence
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={4}>
-        Dual Employment
+        <LeaveBalance/>
       </CustomTabPanel>
     </Box>
     </Box>

@@ -60,9 +60,9 @@ const NewPage = () => {
             <Grid item xs={12} sm={4}>
                 <Container>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start' }}>
-                        <div style={{ marginBottom: '20px',  }} >
+                        <div style={{ marginBottom: '20px' }} >
                             {/* <div style={{border:'2px solid black', borderRadius:'240px', width:'280px' }}> */}
-                                <img src={data.img} alt="" width="100%" style={{ maxWidth: '200px' , filter: 'drop-shadow(5px 5px 4px gray)'}} />
+                                <img src={data.img} alt="" width="100%" style={{ maxWidth: '200px' ,objectFit:'contain', filter: 'drop-shadow(5px 5px 4px gray)'}} />
 
                             {/* </div> */}
                         </div>

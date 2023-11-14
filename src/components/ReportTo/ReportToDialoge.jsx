@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Modal, FormControl, InputLabel, Select, MenuItem} from '@mui/material';
 import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const style = {
   position: 'absolute',
@@ -27,6 +29,17 @@ export default function BasicModal({level, deptId,id}) {
 //   useEffect(()=>{
 //     fetchReportTo(level, deptId);
 //   },[level, deptId])
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+  
+    setSnackbarOpen(false);
+  };
+
 
   const base_url = process.env.REACT_APP_BASE_URL
 
@@ -37,9 +50,11 @@ export default function BasicModal({level, deptId,id}) {
     .then((response)=>{
         console.log(response, "from level and dept");
         setReportData(response.data);
+        
     })
     .catch((err)=>{
         console.log(err);
+          
     })
   }
 
@@ -50,14 +65,37 @@ export default function BasicModal({level, deptId,id}) {
     axios.patch(`${base_url}/employee/${id}`, reportObj)
     .then((response)=>{
         console.log(response);
+        handleClose();
+        setSnackbarMessage('Successfully Report To done.');
+        setSnackbarOpen(true);
+
     })
     .catch((err)=>{
         console.log(err);
+        setSnackbarMessage('Error in report to manager');
+        setSnackbarOpen(true);
     })
   }
 
   return (
+    <>
+    
     <div>
+    <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity={snackbarMessage.includes('successfully') ? 'success' : 'error'}
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
       <Button color='secondary' variant='contained' onClick={()=>fetchReportTo(level,deptId)}>Report To</Button>
       <Modal
         open={open}
@@ -90,5 +128,6 @@ export default function BasicModal({level, deptId,id}) {
         </Box>
       </Modal>
     </div>
+    </>
   );
 }
