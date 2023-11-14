@@ -104,12 +104,12 @@ export default function CustomizedTables() {
       })
       .catch((err) => {
         console.log(err);
-        setSnackbarMessage('Error submitting attendance');
+        setSnackbarMessage(err.response?.data.message);
         setSnackbarOpen(true);
       });
   };
   
-
+  const activeEmployee = rows.filter(item => item.status === 'active');
 
   return (
     <>
@@ -141,9 +141,9 @@ export default function CustomizedTables() {
           </TableRow>
         </TableHead>
         <TableBody>
-        {rows.map((row, index) => (
+        {activeEmployee.map((row, index) => (
           <StyledTableRow key={row.id} size="small">
-            <StyledTableCell>{row?.as_basicInfo.name}</StyledTableCell>
+            <StyledTableCell>{row?.employee_name}</StyledTableCell>
             <StyledTableCell>
               <Select
                 value={presentStatus[index] || ""}

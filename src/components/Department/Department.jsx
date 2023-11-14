@@ -121,7 +121,7 @@ const Department = () => {
                       <StyledTableCell align="right">Report To</StyledTableCell>
                       <StyledTableCell align="right">Joining Date</StyledTableCell>
                       {/* <StyledTableCell align="right">Provision Period End</StyledTableCell> */}
-                      <StyledTableCell align="right">Details</StyledTableCell>
+                      <StyledTableCell align="right">Active</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -134,7 +134,7 @@ const Department = () => {
                         <StyledTableCell align="right">{row.reported_to}</StyledTableCell>
                         <StyledTableCell align="right">{row.joining_date}</StyledTableCell>
                         {/* <StyledTableCell align="right">{row.protein}</StyledTableCell> */}
-                        <StyledTableCell align="right">-</StyledTableCell>
+                        <StyledTableCell align="right">{row.status}</StyledTableCell>
                       </StyledTableRow>
                     ))}
                   </TableBody>

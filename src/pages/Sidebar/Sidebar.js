@@ -222,7 +222,7 @@ export default function MiniDrawer() {
                 <ListItemText primary="Issue LetterHead" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
-            {/* <ListItem primary="leave Status" disablePadding sx={{ display: 'block' }} onClick={()=>{
+            <ListItem primary="leave Status" disablePadding sx={{ display: 'block' }} onClick={()=>{
               navigate('/leaves');
             }}>
               <ListItemButton 
@@ -243,7 +243,7 @@ export default function MiniDrawer() {
                 </ListItemIcon>
                 <ListItemText primary="Leave Status" sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
-            </ListItem> */}
+            </ListItem>
             <ListItem primary="Holidays" disablePadding sx={{ display: 'block' }} onClick={()=>{
               navigate('/holidays');
             }}>

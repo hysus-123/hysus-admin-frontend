@@ -23,7 +23,7 @@ import Holiday from './components/Holidays/Holiday';
 import Department from './components/Department/Department';
 import Payroll from './components/Payroll/Payroll';
 import ParticularPayroll from './components/Payroll/ParticularPayroll';
-import LeaveStatus from './components/Leave/LeaveStatus';
+import LeaveStatus from './components/Leave/Leave';
 import PayrollPdf from './components/Payroll/PayrollPdf';
 import Policy from './components/Policies/Policies';
 import Setting from './components/CompanyDetail/Company';
