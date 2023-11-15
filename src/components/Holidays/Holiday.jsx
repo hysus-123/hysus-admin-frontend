@@ -1,15 +1,25 @@
-import React from 'react'
-import { Box, Container, Typography, Card, TextField, Button } from '@mui/material'
+import React, {useState} from 'react'
+import { Box, Container, Typography, Card, TextField, Button, Dialog,
+  DialogTitle,
+  DialogContent,} from '@mui/material'
 import SideBar from '../../pages/Sidebar/Sidebar'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import HolidayCalendar from './HolidayCalendar';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import axios from 'axios';
 
 const Holiday = () => {
 
     const [holidayData, setHolidayData] = React.useState([]); // State to store holiday data
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [editedHoliday, setEditedHoliday] = useState({
+      id: null,
+      title: '',
+      comment: '',
+      date: null,
+    });
 
   React.useEffect(()=>{
     fetchHolidayss();
@@ -29,6 +39,32 @@ const Holiday = () => {
         setHolidayData([]); // Reset the state if there's an error
       });
   };
+
+  const openEditModal = (holiday) => {
+    setEditedHoliday(holiday);
+    setEditModalOpen(true);
+  };
+  
+  const closeEditModal = () => {
+    setEditModalOpen(false);
+  };
+  
+  const handleEditInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedHoliday((prevHoliday) => ({
+      ...prevHoliday,
+      [name]: value,
+    }));
+  };
+  
+  const handleEditSubmit = () => {
+    // Implement the logic to update the edited holiday data using an API call
+    // You may use axios.put() or another appropriate method
+    // After successful update, close the edit modal and refresh the holiday data
+    setEditModalOpen(false);
+    fetchHolidayss(); // Assuming fetchHolidayss fetches the updated data
+  };
+  
   return (
     <>
       <Box sx={{display: 'flex', backgroundColor:'#ded9d9'}}>
@@ -75,6 +111,8 @@ const Holiday = () => {
                                     <td style={{padding:2,width:'25%', border:"2px solid black"}}>{data.title}</td>
                                     <td style={{padding:2,width:'25%', border:"2px solid black"}}>{data.comment}</td>
                                     <td style={{padding:2,width:'25%', border:"2px solid black"}}>{data.date}</td>
+                                    {/* <td style={{padding:2,width:'25%', border:"2px solid black"}} ><ModeEditIcon/></td> */}
+                                    <Button onClick={()=>openEditModal(data)}><ModeEditIcon/></Button>
                                     </tr>
                                 ))}
                                 
@@ -90,6 +128,31 @@ const Holiday = () => {
             </ul> */}
             </Card>
         </Container>
+        <Dialog open={editModalOpen} onClose={closeEditModal}>
+      <DialogTitle>Edit Holiday</DialogTitle>
+      <DialogContent>
+        <TextField
+          sx={{mt:2}}
+          label="Title"
+          name="title"
+          value={editedHoliday.title}
+          onChange={handleEditInputChange}
+          fullWidth
+        />
+        <TextField
+          sx={{mt:2}}
+          label="Comment"
+          name="comment"
+          value={editedHoliday.comment}
+          onChange={handleEditInputChange}
+          fullWidth
+        />
+        {/* Add more fields as needed for editing */}
+        <Button variant="contained" onClick={handleEditSubmit} sx={{mt:2}}>
+          Save
+        </Button>
+      </DialogContent>
+    </Dialog>
         </Box>
     </>
   )

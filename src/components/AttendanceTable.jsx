@@ -45,6 +45,7 @@ export default function CustomizedTables() {
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -68,6 +69,7 @@ export default function CustomizedTables() {
 
   useEffect(()=>{
     fetchAllAttend();
+    
   },[])
 
   const fetchAllAttend = () =>{
@@ -88,6 +90,12 @@ export default function CustomizedTables() {
     .catch((err)=>console.log(err));
   }
 
+  useEffect(() => {
+    // Load the submitted IDs from localStorage
+    const submittedIds = JSON.parse(localStorage.getItem('submittedIds')) || [];
+    setIsSubmitted(submittedIds);
+  }, []);
+
   const submitAttend = (id, index) => {
     const attendData = {
       presentStatus: presentStatus[index],
@@ -101,6 +109,11 @@ export default function CustomizedTables() {
         console.log(response.data.presentStatus, "response.data.presentStatus");
         setSnackbarMessage('Attendance submitted successfully');
         setSnackbarOpen(true);
+        // setIsSubmitted(true);
+        setIsSubmitted((prevSubmitted) => [...prevSubmitted, id]);
+
+        // Update the submitted IDs in localStorage
+        localStorage.setItem('submittedIds', JSON.stringify([...isSubmitted, id]));
       })
       .catch((err) => {
         console.log(err);
@@ -168,8 +181,9 @@ export default function CustomizedTables() {
                 variant="contained"
                 onClick={() => submitAttend(row.id, index)}
                 size="small"
+                disabled={isSubmitted.includes(row.id)}
               >
-                Submit
+                {isSubmitted.includes(row.id) ? "Submitted" : "Submit"}
               </Button>
             </StyledTableCell>
           </StyledTableRow>
