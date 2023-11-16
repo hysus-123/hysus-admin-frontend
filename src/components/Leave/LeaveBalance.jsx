@@ -12,6 +12,8 @@ const LeaveBalance = () => {
     const [selectedEmployee, setSelectedEmployee] = useState('');
   const [selectedLeaveType, setSelectedLeaveType] = useState('');
   const [balance, setBalance] = useState('');
+  const [balanceData , setBalaneData] = useState([]);
+  const [employeeName, setEmployeeName] = useState('');
 
     useEffect(()=>{
         fetchEmployee();
@@ -52,6 +54,7 @@ const LeaveBalance = () => {
 
       const handleEmployeeChange = (event) => {
         setSelectedEmployee(event.target.value);
+        setEmployeeName(event.target.name);
       };
     
       const handleLeaveTypeChange = (event) => {
@@ -84,6 +87,17 @@ const LeaveBalance = () => {
         })
 
       };
+
+      const fetchLeaveBalance = () =>{
+        axios.get(`${base_url}/leave-balance?id=${selectedEmployee}`)
+        .then((response)=>{
+           console.log(response);
+           setBalaneData(response.data);
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }
 
   return (
     <>
@@ -141,22 +155,37 @@ const LeaveBalance = () => {
       </Modal>
     </Card> 
 
-    <Card>
-        <FormControl fullWidth sx={{ mb: 2 }}>
+    <Card sx={{mt:2}}>
+      <Typography  sx={{ mb: 2, m:4}}>
+        <FormControl >
                 <InputLabel id='employee-label'>Select Employee</InputLabel>
                 <Select
                   labelId='employee-label'
                   id='employee-select'
                   value={selectedEmployee}
                   onChange={handleEmployeeChange}
+                  sx={{width:'15vw'}}
+                  name={employeeName}
                 >
                   {employee.map((emp) => (
-                    <MenuItem key={emp.id} value={emp.id}>
+                    <MenuItem key={emp.id} value={emp.id} name={emp.employee_name}>
                       {emp.employee_name}
                     </MenuItem>
                   ))}
                 </Select>
-              </FormControl>
+          </FormControl>
+          <Button variant='contained' size='small' sx={{ml:'10px'}} onClick={fetchLeaveBalance}>Search</Button>
+          </Typography>
+          <div style={{display:'flex'}}>
+            {balanceData.map((bal_data)=>(
+              <div>
+              <Typography>{employeeName}</Typography>
+              <Typography>{bal_data.balance}</Typography>
+              </div>
+            ))}
+            
+          </div>
+          
     </Card>
     </>
   );

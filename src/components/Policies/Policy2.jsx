@@ -148,6 +148,69 @@ const policy2 = () => {
 
     </section>
 
+    <section>
+      <h2 >Consequences of ALWP, ULWP, NCNS</h2>
+      <h4 style={{textDecoration:'underline'}}>Unapproved leave without pay (ULWP)</h4>
+      <ul>
+        <li>Salary Deductions: Employees taking ULWP may face deductions in their salary for the days of unauthorized absence.</li>
+        <li>Disciplinary Actions: Continuous unapproved leave without pay could lead to disciplinary actions, including warnings, suspension, or termination.</li>
+        <li>Impact on Benefits: Extended ULWP may affect benefits, including health insurance, and may impact salary increments, appraisals, and other allowances.</li>
+      </ul>
+
+      <h4 style={{textDecoration:'underline'}}>Approved Leave Without Pay (ALWP)</h4>
+      <ul>
+        <li>1. Agreed Absence: ALWP is taken with the employer's approval, usually after a formal request. The absence is agreed upon between the employer and the employee.</li>
+        <li>2. Salary Impact: Employees on ALWP typically do not receive salary for the duration of the approved leave, but their absence is sanctioned.</li>
+        <li>3. Benefit Considerations: While on ALWP, certain benefits like health insurance, may need to be managed or continued, depending on current policies.</li>
+      </ul>
+
+      <h4 style={{textDecoration:'underline'}}>No Call, No Show (NCNS)</h4>
+      <p>"No Call, No Show" refers to an employee's failure to report to work for a scheduled shift without providing advance notice to the employer. The consequences of a "No Call, No Show" </p>
+
+      <h4>1. Disciplinary Action:</h4>
+      <div>Employees who engage in a "No Call, No Show" may face disciplinary action, such as verbal or written warnings, suspension, or even termination, depending on the severity and frequency of the offense.</div>
+
+      <h4>2. Salary Deductions:</h4>
+      <div>Salary deductions for the hours missed during/full day "No Call, No Show."</div>
+
+      <h4>3. Impact on Employment Record:</h4>
+      <div> Unexcused absences can negatively impact an employee's work record and may be considered during performance evaluations or when considering promotions. </div>
+
+      <h4>4. Loss of Benefits:</h4>
+      <div>NCNS affects benefits, including health insurance, and impacts salary increments, appraisals, and other allowances. Continuous, unexcused absences may result in the loss or reduction of certain benefits, such as paid time off.</div>
+
+      <h4>5. Termination of Employment:</h4>
+      <div>  Persistent and unexcused absenteeism may lead to termination of employment, particularly if The behavior continues despite previous warnings or corrective actions.</div>
+
+      <h4>6. Legal Consequences:</h4>
+      <div>"No Call, No Show" instances can result in legal consequences, including potential termination as per employment contracts and company policies. Employers have the right to enforce disciplinary actions, including salary deductions, and may follow legal procedures outlined in labor laws to address unexcused absenteeism.</div>
+      
+    </section>
+
+    <section>
+      <h3>Sandwich Policy</h3>
+      <h4>Understanding the Sandwich Policy</h4>
+      <p>The Sandwich Policy is applied when an employee chooses to take leave days directly preceding and following a public holiday or a weekly off, thereby extending their absence from work. In this arrangement, the days between the leave and the non-working day(s) are not compensated as paid time off.
+To avoid getting stuck in the Sandwich Policy, either take leave before the week off or after the week off to enjoy the benefits of weekly or public holidays.</p>
+      <p>For example, if an organization, like Manish, observes a weekly off only on Sundays and Manish takes leave on Saturday and Monday, mistakenly assuming Sunday as a part of the weekly off, this situation qualifies as a sandwich policy. In such cases, three days of leave balance would be deducted. In scenarios where there is no leave balance, all three days are considered unpaid.</p>
+    </section>  
+
+    <section>
+      <h3>Weekly Off</h3>
+      <p>How Many Working Days Are Required to Earn a Weekly Off?</p>
+      <p>In a week, 4 full days (36 hours) of attendance are required to earn a weekly off. Hysus Week starts on Monday and ends on Sunday.</p>
+      <h4>Example:</h4>
+      <div>1. Monday: You work a full day.</div>
+      <div>2. Tuesday: Another full day of work.</div>
+      <div>3. Wednesday: Yet another full day.</div>
+      <div>4. Thursday: Your fourth full day of work.</div>
+      <div>5. Friday: Absent</div>
+      <p>
+      <div>Now, according to the policy, since you have completed four full days of work, From Monday to Thursday, you are eligible for a weekly off.</div>
+      <div>The consideration for a half-day that we are offering is only on a monthly basis, not for weekly offs. There is no provision for taking a half-day to earn a weekly off.</div>
+      </p>
+    </section>
+
 
     </div>
     </>
