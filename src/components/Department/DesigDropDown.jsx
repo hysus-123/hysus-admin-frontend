@@ -47,22 +47,20 @@ export default function BasicModal({department}) {
     setLevel(newLevel);
   };
 
-  console.log(department, "setDepartment");
+  
   const addDesignation = () =>{
     const desigData = {
         department: deptt,
         position,
-        level,
+        level
       }
 
       axios.post(`${base_url}/designation`,desigData)
       .then((response)=>{
-        console.log(response.data);
-        desigData={
-          department: '',
-          position:'',
-          level:''
-        }
+        console.log(response);
+        setDeptt('');
+        setPosition('');
+        setLevel('');
         handleClose();
         setSnackbarMessage('Designation created successfully');
         setSnackbarOpen(true);
@@ -70,7 +68,7 @@ export default function BasicModal({department}) {
       })
       .catch((err)=>{
         console.log(err);
-          setSnackbarMessage('Designation create failed, Try again');
+          setSnackbarMessage('Designation create failed');
           setSnackbarOpen(true);
       })
     

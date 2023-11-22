@@ -15,6 +15,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { useNavigate } from 'react-router-dom';
 import SalaryModal from './SalaryModal';
 
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#2E3B55",
@@ -88,7 +89,7 @@ export default function CustomizedTables() {
               <StyledTableCell align="center">{row.hra}</StyledTableCell>
               <StyledTableCell align="center">{row.sp_allowance}</StyledTableCell>
               <StyledTableCell align="center" ><Button onClick={() => handlePayRollClick(row.id, row?.as_employee_details?.id)}><RemoveRedEyeIcon sx={{color:'green'}} /></Button></StyledTableCell>
-              <StyledTableCell align="center"><PayrollModal passId={row.id} newrow={row}/></StyledTableCell>
+              <StyledTableCell align="center"><PayrollModal passId={row.id} newrow={row} fetchEmpData={fetchEmpData}/></StyledTableCell>
               <StyledTableCell align="center"><SalaryModal passId={row.id} newrow={row} emp_id={row?.as_employee_details?.id}/></StyledTableCell>
             </StyledTableRow>
           ))}

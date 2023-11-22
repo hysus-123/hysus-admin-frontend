@@ -47,6 +47,15 @@ export default function CustomizedTables() {
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const isDateChanged = (storedDate) => {
+    const today = new Date();
+    return (
+      today.getDate() !== storedDate.getDate() ||
+      today.getMonth() !== storedDate.getMonth() ||
+      today.getFullYear() !== storedDate.getFullYear()
+    );
+  };
+
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -56,6 +65,17 @@ export default function CustomizedTables() {
   };
 
   useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem('attendanceData')) || {};
+    const { date = new Date(), submittedIds = [] } = storedData;
+
+    if (isDateChanged(new Date(date))) {
+      // If the date has changed, reset the submitted status
+      setIsSubmitted([]);
+    } else {
+      // Otherwise, set the submitted IDs from the stored data
+      setIsSubmitted(submittedIds);
+    }
+
     fetch(`${base_url}/employee`)
       .then((response) => response.json())
       .then((data) => {
@@ -90,11 +110,11 @@ export default function CustomizedTables() {
     .catch((err)=>console.log(err));
   }
 
-  useEffect(() => {
-    // Load the submitted IDs from localStorage
-    const submittedIds = JSON.parse(localStorage.getItem('submittedIds')) || [];
-    setIsSubmitted(submittedIds);
-  }, []);
+  // useEffect(() => {
+  //   // Load the submitted IDs from localStorage
+  //   const submittedIds = JSON.parse(localStorage.getItem('submittedIds')) || [];
+  //   setIsSubmitted(submittedIds);
+  // }, []);
 
   const submitAttend = (id, index) => {
     const attendData = {
@@ -109,11 +129,15 @@ export default function CustomizedTables() {
         console.log(response.data.presentStatus, "response.data.presentStatus");
         setSnackbarMessage('Attendance submitted successfully');
         setSnackbarOpen(true);
-        // setIsSubmitted(true);
-        setIsSubmitted((prevSubmitted) => [...prevSubmitted, id]);
-
+        setIsSubmitted([...isSubmitted, id]);
+        // setIsSubmitted((prevSubmitted) => [...prevSubmitted, id]);
+        const storedData = {
+          date: currentDate,
+          submittedIds: [...isSubmitted, id],
+        };
+        localStorage.setItem('attendanceData', JSON.stringify(storedData));
         // Update the submitted IDs in localStorage
-        localStorage.setItem('submittedIds', JSON.stringify([...isSubmitted, id]));
+        // localStorage.setItem('submittedIds', JSON.stringify([...isSubmitted, id]));
       })
       .catch((err) => {
         console.log(err);
@@ -174,6 +198,8 @@ export default function CustomizedTables() {
                 <MenuItem value="present">Present</MenuItem>
                 <MenuItem value="halfday">Half Day</MenuItem>
                 <MenuItem value="leave">Leave</MenuItem>
+                <MenuItem value="leave">ALWP</MenuItem>
+                <MenuItem value="leave">ULWP</MenuItem>
               </Select>
             </StyledTableCell>
             <StyledTableCell>

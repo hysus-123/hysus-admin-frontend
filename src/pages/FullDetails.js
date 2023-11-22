@@ -200,7 +200,7 @@ const [open, setOpen] = useState(false);
                                         </Button>
                                         <Dialog open={open} onClose={handleClose}>
                                             <DialogContent>
-                                            <EmployeeAddress  onFormSubmit={handleFormSubmit} employeeId={data.id}/>
+                                            <EmployeeAddress  onFormSubmit={handleFormSubmit} employeeId={data.id} existingAddress={data?.as_basicInfo?.employee_addresses}/>
                                             <Button variant="contained" color="primary" onClick={handleClose}>
                                                 Close
                                             </Button>

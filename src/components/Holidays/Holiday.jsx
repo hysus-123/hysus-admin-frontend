@@ -9,6 +9,9 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import HolidayCalendar from './HolidayCalendar';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 
 const Holiday = () => {
 
@@ -26,6 +29,17 @@ const Holiday = () => {
   },[])
 
   const base_url = process.env.REACT_APP_BASE_URL;
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnackbarOpen(false);
+  };
 
   const fetchHolidayss = () => {
     axios
@@ -56,17 +70,54 @@ const Holiday = () => {
       [name]: value,
     }));
   };
+
   
   const handleEditSubmit = () => {
-    // Implement the logic to update the edited holiday data using an API call
-    // You may use axios.put() or another appropriate method
-    // After successful update, close the edit modal and refresh the holiday data
-    setEditModalOpen(false);
-    fetchHolidayss(); // Assuming fetchHolidayss fetches the updated data
+
+    console.log(editedHoliday);
+
+    const editSubmitHoliday={
+      title: editedHoliday.title,
+      comment: editedHoliday.comment
+    }
+
+    console.log(editSubmitHoliday, "editsubmitHOliday");
+
+    axios.patch(`${base_url}/holiday/${editedHoliday.id}`,editSubmitHoliday)
+    .then((response)=>{
+      console.log(response);
+      setEditModalOpen(false);
+      fetchHolidayss(); 
+      setSnackbarMessage('Holidays edited successfully');
+      setSnackbarOpen(true);
+    })
+    .catch((err)=>{
+      console.log(err);
+      setSnackbarMessage('error');
+      setSnackbarOpen(true);
+    })
+    
+    
+
   };
   
   return (
     <>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity={snackbarMessage.includes('successfully') ? 'success' : 'error'}
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
       <Box sx={{display: 'flex', backgroundColor:'#ded9d9'}}>
         <SideBar/>
         <Container sx={{mt:2}}>

@@ -60,8 +60,8 @@ const EditForm = () => {
         <Button onClick={() => handleEditSection('bank')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Bank Details</Button>
         <Button onClick={() => handleEditSection('address')} sx={{fontWeight:'bold', backgroundColor:'#acdfdf', color:'black'}}>Edit Address</Button>
         {editSection === 'basic' && <EditBasicDetails data={employeeData} id={id}  onSave={handleSave} />}
-        {editSection === 'bank' && <EditBankDetails data={employeeData} onSave={handleSave} />}
-        {editSection === 'employee' && <EditEmployeeDetails data={employeeData} onSave={handleSave} />}
+        {editSection === 'bank' && <EditBankDetails data={employeeData} id={id} onSave={handleSave} />}
+        {editSection === 'employee' && <EditEmployeeDetails id={id} data={employeeData} onSave={handleSave} />}
         {editSection === 'address' && <EditEmployeeAddress data={employeeData} onSave={handleSave} />}
         </Container>
       </Container>

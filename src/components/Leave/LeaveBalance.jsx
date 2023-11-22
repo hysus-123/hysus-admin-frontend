@@ -53,8 +53,9 @@ const LeaveBalance = () => {
       }
 
       const handleEmployeeChange = (event) => {
-        setSelectedEmployee(event.target.value);
-        setEmployeeName(event.target.name);
+        const { value, name } = event.target;
+        setSelectedEmployee(value);
+        setEmployeeName(name);
       };
     
       const handleLeaveTypeChange = (event) => {
@@ -118,7 +119,7 @@ const LeaveBalance = () => {
                   onChange={handleEmployeeChange}
                 >
                   {employee.map((emp) => (
-                    <MenuItem key={emp.id} value={emp.id}>
+                    <MenuItem key={emp.id} value={emp.id} name={emp.employee_name}>
                       {emp.employee_name}
                     </MenuItem>
                   ))}
@@ -155,7 +156,7 @@ const LeaveBalance = () => {
       </Modal>
     </Card> 
 
-    <Card sx={{mt:2}}>
+    <Card sx={{mt:2, height:'50vh'}}>
       <Typography  sx={{ mb: 2, m:4}}>
         <FormControl >
                 <InputLabel id='employee-label'>Select Employee</InputLabel>
@@ -176,16 +177,37 @@ const LeaveBalance = () => {
           </FormControl>
           <Button variant='contained' size='small' sx={{ml:'10px'}} onClick={fetchLeaveBalance}>Search</Button>
           </Typography>
-          <div style={{display:'flex'}}>
-            {balanceData.map((bal_data)=>(
-              <div>
-              <Typography>{employeeName}</Typography>
-              <Typography>{bal_data.balance}</Typography>
-              </div>
-            ))}
-            
-          </div>
-          
+
+          {balanceData.length === 0 ? (
+    <Typography variant='body1' sx={{ m: 2 }}>
+      No credit balance
+    </Typography>
+  ) : (
+          <table style={{marginLeft:'10px', width: '80%',textAlign:'center', borderCollapse: 'collapse' }}>
+    <thead>
+      <tr>
+        <th style={{ border: '1px solid black', padding: '8px' }}>Employee Name</th>
+        <th style={{ border: '1px solid black', padding: '8px' }}>Leave Balance</th>
+        <th style={{ border: '1px solid black', padding: '8px' }}>Leave Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      {balanceData.map((bal_data, index) => (
+        <tr key={index}>
+          <td style={{ border: '1px solid black', padding: '8px' }}>
+            {bal_data?.employee[0]?.employee_name}
+          </td>
+          <td style={{ border: '1px solid black', padding: '8px' }}>
+            {bal_data.balance}
+          </td>
+          <td style={{ border: '1px solid black', padding: '8px' }}>
+            {bal_data?.leave_types.type}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  )}
     </Card>
     </>
   );

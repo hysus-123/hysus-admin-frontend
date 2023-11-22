@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import { TextField, Button, Grid, Paper, Typography, Divider } from '@mui/material';
+import axios from 'axios';
 
-const EditBasicDetails = ({ data, onSave }) => {
+const EditBasicDetails = ({ data, onSave, id }) => {
   const [empInfo, setEmpInfo] = useState({ ...data });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setEmpInfo({ ...empInfo, [name]: value });
   };
-
+  const base_url = process.env.REACT_APP_BASE_URL
   const handleSave = () => {
     onSave(empInfo);
+    console.log(id, "id");
+    console.log(empInfo, "empInfo");
+    axios.patch(`${base_url}/employee/${id}`, empInfo)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   };
 
   return (
@@ -54,57 +64,52 @@ const EditBasicDetails = ({ data, onSave }) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="alternative_number"
-            label="Alternative Number"
-            fullWidth
-            value={empInfo.alternative_number}
-            onChange={handleInputChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            name="birth_date"
-            label="Birth Date"
-            // placeholder='Birth Date'
             type="date"
+            label="Provision End Date"
+            name="end_date"
             fullWidth
-            value={empInfo.birth_date}
+            value={empInfo?.end_date}
+            onChange={handleInputChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            name="skype_id"
+            label="Skype Id"
+            fullWidth
+            value={empInfo.skype_id}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="blood_group"
-            label="Blood Group"
+            name="office_number"
+            label="Office Number"
             fullWidth
-            value={empInfo.blood_group}
+            value={empInfo.office_number}
             onChange={handleInputChange}
           />
         </Grid>
+        
         <Grid item xs={12} sm={6}>
           <TextField
-            name="linkedin_link"
-            label="LinkedIn Profile"
+            name="skills"
+            label="Skills"
             fullWidth
-            value={empInfo.linkedin_link}
+            value={empInfo.skills}
             onChange={handleInputChange}
           />
         </Grid>
+        
         <Grid item xs={12} sm={6}>
           <TextField
-            name="phone"
-            label="Phone Number"
+            name="Employee Type"
+            label="employee_type"
             fullWidth
-            value={empInfo.phone}
-            onChange={handleInputChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            name="qualification"
-            label="Qualification"
-            fullWidth
-            value={empInfo.qualification}
+            value={empInfo.employee_type}
             onChange={handleInputChange}
           />
         </Grid>

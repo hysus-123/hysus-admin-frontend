@@ -63,6 +63,7 @@ export default function BasicModal(props) {
         setOpen(false);
         setSnackbarMessage('Payroll Salary Added successfully');
         setSnackbarOpen(true);
+        props.fetchEmpData();
     })
     .catch((err)=>{
           console.log(err);
