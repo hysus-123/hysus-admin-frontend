@@ -6,6 +6,8 @@ import {Modal, FormControlLabel, FormGroup, Checkbox} from '@mui/material';
 import Add from '@mui/icons-material/Add';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const style = {
   position: 'absolute',
@@ -30,6 +32,16 @@ export default function BasicModal(props) {
 
   const [month, setMonth] = useState(0);
   const [year, setYear] = useState(2023);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+  
+    setSnackbarOpen(false);
+  };
 
   const handleMonthChange = (e) => {
     setMonth(e.target.value);

@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
 import { TextField, Button, Grid, Paper, Typography, Divider } from '@mui/material';
+import axios from 'axios';
 
-const EditBasicDetails = ({ data, onSave }) => {
-  const [basicInfo, setBasicInfo] = useState({ ...data });
+const EditBasicDetails = ({ data, onSave , id}) => {
+  const [bankInfo, setBankInfo] = useState({ ...data });
 
   const handleInputChange = (event) => {
+    event.preventDefault();
     const { name, value } = event.target;
-    setBasicInfo({ ...basicInfo, [name]: value });
+    setBankInfo((prevBankInfo)=>({
+      ...prevBankInfo.bank_details,
+      [name]: value,
+    }));
   };
 
+  const base_url = process.env.REACT_APP_BASE_URL
   const handleSave = () => {
-    onSave(basicInfo);
+    onSave(bankInfo);
+    console.log(bankInfo, "bankInfo");
+
+    axios.patch(`${base_url}/employee/${id}?bank_id=${data.bank_details.id}`, bankInfo)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   };
 
   return (
@@ -23,84 +38,46 @@ const EditBasicDetails = ({ data, onSave }) => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="name"
-            label="Name"
+            name="applicant_name"
+            label="Applicant Name"
             fullWidth
-            value={basicInfo.name}
+            value={bankInfo?.bank_details?.applicant_name}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="personal_email"
-            label="Personal Email"
+            name="bank_name"
+            label="Bank Name"
             fullWidth
-            value={basicInfo.personal_email}
+            value={bankInfo?.bank_details?.bank_name}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="spouse_name"
-            label="Spouse Name"
+            name="branch_name"
+            label="Branch Name"
             fullWidth
-            value={basicInfo.spouse_name}
+            value={bankInfo?.bank_details?.branch_name}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="alternative_number"
-            label="Alternative Number"
+            name="ifsc_num"
+            label="IFSC Number"
             fullWidth
-            value={basicInfo.alternative_number}
+            value={bankInfo?.bank_details?.ifsc_num}
             onChange={handleInputChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            name="birth_date"
-            label="Birth Date"
-            // placeholder='Birth Date'
-            type="date"
+            name="account_num"
+            label="Account Number"
             fullWidth
-            value={basicInfo.birth_date}
-            onChange={handleInputChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            name="blood_group"
-            label="Blood Group"
-            fullWidth
-            value={basicInfo.blood_group}
-            onChange={handleInputChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            name="linkedin_link"
-            label="LinkedIn Profile"
-            fullWidth
-            value={basicInfo.linkedin_link}
-            onChange={handleInputChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            name="phone"
-            label="Phone Number"
-            fullWidth
-            value={basicInfo.phone}
-            onChange={handleInputChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            name="qualification"
-            label="Qualification"
-            fullWidth
-            value={basicInfo.qualification}
+            value={bankInfo?.bank_details?.account_num}
             onChange={handleInputChange}
           />
         </Grid>

@@ -15,15 +15,15 @@ const validationSchema = yup.object({
   zip_code: yup.string().required('Zip Code is required'),
 });
 
-function EmployeeAddress({onFormSubmit, employeeId }) {
+function EmployeeAddress({onFormSubmit, employeeId, existingAddress }) {
   const formik = useFormik({
     initialValues: {
-      type: '', 
-      line1: '', 
-      city: '',
-      state: '', 
-      country: '',
-      zip_code: '',
+      type: existingAddress ? existingAddress[0].type : '', 
+      line1: existingAddress ? existingAddress[0].line1 : '', 
+      city: existingAddress ? existingAddress[0].city : '',
+      state: existingAddress ? existingAddress[0].state : '', 
+      country: existingAddress ? existingAddress[0].country : '',
+      zip_code: existingAddress ? existingAddress[0].zip_code : '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {

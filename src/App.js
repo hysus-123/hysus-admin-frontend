@@ -20,6 +20,7 @@ import CountryApi from './components/countries/country';
 import Attendance from './pages/Attendance';
 import EmpForm from './pages/EmployeeForm/EmpForm';
 import Holiday from './components/Holidays/Holiday';
+import BreakTimer from './components/BreakTimer/BreakTimer';
 import Department from './components/Department/Department';
 import Payroll from './components/Payroll/Payroll';
 import ParticularPayroll from './components/Payroll/ParticularPayroll';
@@ -52,6 +53,7 @@ function App() {
           <Route path="/attendance" element={<Attendance/>} />
           <Route path="/emp-letterhead/:id" element={<EmpLetterHead />} />
           <Route path="/holidays" element={<Holiday />} />
+          <Route path="/breaks" element={<BreakTimer />} />
           <Route path="/department" element={<Department />} />
           <Route path="/leaves" element={<LeaveStatus />} />
           <Route path="/payroll" element={<Payroll />} />

@@ -197,7 +197,7 @@ function EmployeeDetails({ formData, onFormDataChange, onImageChange}) {
             <TextField
               fullWidth
               type="date"
-              label="End Date"
+              label="Provision End Date"
               name="end_date"
               value={formik.values.end_date}
               onChange={formik.handleChange}
