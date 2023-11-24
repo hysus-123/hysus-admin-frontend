@@ -142,7 +142,7 @@ export default function HorizontalLinearStepper() {
     .catch((err)=>{
       console.log(err);
       console.log(err.response.data, "err.data");
-      setAlertErr(err.response.data)
+      setAlertErr(err?.response?.data)
 
     })
     // You can use Axios, fetch, or any other method to send the data to your API
@@ -176,7 +176,7 @@ export default function HorizontalLinearStepper() {
           <React.Fragment>
             <Typography>
               <Stack sx={{width:'100%'}} spacing={2}>
-                <Alert severity='error'>{alertErr.error}</Alert>
+                <Alert severity='error'>{alertErr?.error}</Alert>
               </Stack>
             </Typography>
             <Typography sx={{ mt: 2, mb: 1 }}>
